@@ -1,4 +1,4 @@
 [core]
-    remote = storage
-['remote "storage"']
-    url = gdrive://1WBURBtekt_v-EYF15Noog4SyidLzj3te
+    remote = myremote
+['remote "myremote"']
+    url = gs://mlopsbuckett/dvcstorage
