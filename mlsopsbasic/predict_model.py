@@ -2,8 +2,8 @@ import sys
 from matplotlib import pyplot as plt
 import torch
 
-from mlsopsbasic.models.model import MyAwesomeModel
-from mlsopsbasic.train_model import DEVICE
+from models.model import MyAwesomeModel
+from train_model import DEVICE
 
 def predict(
     model: torch.nn.Module,
