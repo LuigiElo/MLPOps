@@ -1,2 +1,2 @@
-from mlsopsbasic.models.model import MyAwesomeModel
-from mlsopsbasic.predict_model import predict
+from models.model import MyAwesomeModel
+from predict_model import predict

@@ -5,7 +5,7 @@ from sklearn.manifold import TSNE
 import torch
 
 
-from mlsopsbasic.models.model import MyAwesomeModel
+from models.model import MyAwesomeModel
 
 
 @click.command()
