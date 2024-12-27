@@ -6,8 +6,6 @@ import numpy as np
 from PIL import Image
 from mlsopsbasic.config import DATA_DIR
 
-# TODO: Add coverage report commands to some script
-
 class FootballDataset:
     def __init__(self, root_dir: str):
         self.root_dir = Path(root_dir)
