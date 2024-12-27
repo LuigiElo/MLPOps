@@ -16,6 +16,7 @@ DEVICE = (
 
 # Hyperparameters
 BATCH_SIZE = 8
+
 LEARNING_RATE = 1e-3                    
 EPOCHS = 10
 NUM_WORKERS = os.cpu_count() - 1

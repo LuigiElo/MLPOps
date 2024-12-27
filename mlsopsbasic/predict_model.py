@@ -1,51 +1,82 @@
-import sys
-from matplotlib import pyplot as plt
+import os
+import logging
 import torch
-
+import hydra
+from omegaconf import DictConfig
 from models.model import MyAwesomeModel
 from train_model import DEVICE
+
+# We set up the logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.StreamHandler(),  # Log to the console
+        logging.FileHandler("prediction.log")  # Log to a file named "prediction.log"
+    ]
+)
+logger = logging.getLogger(__name__)
+
 
 def predict(
     model: torch.nn.Module,
     dataloader: torch.utils.data.DataLoader
-) -> None:
+) -> torch.Tensor:
     """Run prediction for a given model and dataloader.
-    . Recommended interface is that users can give this file either a folder with raw images that gets loaded in or a numpy or pickle file with already loaded images e.g. something like this
     
     Args:
-        model: model to use for prediction
-        dataloader: dataloader with batches
+        model: Model to use for prediction.
+        dataloader: DataLoader with batches.
     
-    Returns
-        Tensor of shape [N, d] where N is the number of samples and d is the output dimension of the model
+    Returns:
+        Tensor of shape [N, d] where N is the number of samples and d is the output dimension of the model.
+    """
+    logger.info("Starting predictions...")
+    predictions = []
+    for i, batch in enumerate(dataloader):
+        batch = batch.to(DEVICE)
+        preds = model(batch)
+        predictions.append(preds)
+        logger.info(f"Processed batch {i+1}/{len(dataloader)}")
+    logger.info("Predictions complete.")
+    return torch.cat(predictions, 0)
 
-    """   
-    return torch.cat([model(batch) for batch in dataloader], 0)
 
-if __name__ == "__main__":
-    # retrieve model and dataloader from the arguments, the first one being model and the second one being dataloader, example:
-    # python <project_name>/models/predict_model.py \
-    # models/my_trained_model.pt \  # file containing a pretrained model
-    # data/example_images.npy  # file containing just 10 images for prediction
-    model_arg = sys.argv[1]
-    images_arg = sys.argv[2]
+@hydra.main(config_path=".", config_name="config")
+def main(cfg: DictConfig) -> None:
+    """Main function to run predictions."""
+    # Obtain model and dataset paths from the Hydra configuration
+    model_path = cfg.logging.model_path  # Path to the trained model
+    images_path = cfg.directories.data_dir  # Path to the dataset
 
-    print(f"Model: {model_arg}")
-    print(f"Dataloader: {images_arg}")
+    logger.info(f"Model: {model_path}")
+    logger.info(f"Images: {images_path}")
 
+    # Loading model
     model = MyAwesomeModel().to(DEVICE)
-    model.load_state_dict(torch.load(model_arg))
+    model.load_state_dict(torch.load(model_path))
+    model.eval()
+    logger.info("Model loaded successfully.")
 
-    # load images
-    images = torch.load(images_arg)
+    # Loading images
+    images = torch.load(images_path)
+    logger.info(f"Loaded {len(images)} images for prediction.")
 
-    # create dataloader
-    dataloader = torch.utils.data.DataLoader(images, batch_size=32)
+    # Creating dataloader
+    dataloader = torch.utils.data.DataLoader(
+        images, 
+        batch_size=cfg.hyperparameters.batch_size
+    )
+    logger.info(f"DataLoader created with batch size {cfg.hyperparameters.batch_size}.")
 
-    # run prediction
+    # Run prediction
     predictions = predict(model, dataloader)
 
-    #for each prediction, print the class with the highest probability and show image
-    for pred in predictions:
-        print(f"Predicted class: {pred.argmax()}")
-    print("Prediction complete")
+    # For each prediction, we print the class with the highest probability
+    for i, pred in enumerate(predictions):
+        logger.info(f"Image {i+1}: Predicted class: {pred.argmax().item()}")
+    logger.info("Prediction process complete.")
+
+
+if __name__ == "__main__":
+    main()
