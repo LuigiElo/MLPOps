@@ -8,12 +8,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-	os: ["ubuntu-latest", "macos-latest", "windows-latest"]
-	python-version: ["3.10", "3.12", "3.12"]
+	      os: [ubuntu-latest, macos-latest, windows-latest]
+	      python-version: ["3.10", "3.12", "3.12"]
 
     steps:
     - name: Checkout
@@ -30,3 +29,5 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -v
+        coverage report -m 
+        coverage html
