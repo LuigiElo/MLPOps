@@ -1,2 +1,2 @@
-from models.model import MyAwesomeModel
-from predict_model import predict
+from .models.unet import UNet
+#from .predict_model import predict

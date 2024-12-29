@@ -190,7 +190,7 @@ curriculum in this course. Therefore, we do not expect at all that you have chec
 ### Question 8
 
 > **What is the total code coverage (in percentage) of your code? If you code had an code coverage of 100% (or close** > **to), would you still trust it to be error free? Explain you reasoning.**
->
+> 
 > Recommended answer length: 100-200 words.
 >
 > Example:
