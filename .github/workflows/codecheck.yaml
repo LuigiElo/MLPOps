@@ -1,0 +1,35 @@
+name: "Ruff codecheck"
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: ['*']
+
+jobs:
+  format:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        python-version: ["3.10", "3.11", "3.12"]
+      
+    steps:
+      -name: Checkout code
+        uses: actions/checkout@v4
+      -name: Set up Python Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+          cache-dependency-path: setup.py
+      -name: Install Ruff
+        run: |
+          pip install ruff
+          pip list
+      -name: Ruff check
+        run:
+          ruff check .
+      -name: Ruff format
+        run:
+          ruff format .
