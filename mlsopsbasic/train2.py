@@ -60,20 +60,20 @@ class FootballSegmentationDataset(Dataset):
         # Paths for original image and mask
         original_path = os.path.join(self.root_dir, base_file)
         mask_path = os.path.join(self.root_dir, f"{base_name}.jpg___{self.use_mask_type}.png")
-        print(mask_path)
 
         # Load original image
         original_image = Image.open(original_path).convert("RGB")
 
         # Load segmentation mask
         if os.path.exists(mask_path):
-            mask = Image.open(mask_path).convert("L")  # Convert to grayscale (1 channel)
+            mask = Image.open(mask_path).convert("L")
         else:
             raise FileNotFoundError(f"Mask file not found: {mask_path}")
 
         # Apply transformations
         if self.transform:
             original_image = self.transform(original_image)
+            mask = self.transform(mask)
         if self.target_transform:
             mask = self.target_transform(mask)
         else:
@@ -83,7 +83,7 @@ class FootballSegmentationDataset(Dataset):
 
 # Mask transformations (optional)
 def mask_transform(mask):
-    mask = np.array(mask, dtype=np.int64)  # Convert to NumPy array
+    mask = np.asarray(mask, dtype=np.int64) # Convert to numpy array
     return torch.tensor(mask)  # Convert to tensor with class indices
 
 # Training Loop
@@ -92,6 +92,7 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
     total_loss = 0
     for images, masks in loader:
         images, masks = images.to(device), masks.to(device)
+        masks = masks.squeeze(1)  # Remove channel dimension
 
         optimizer.zero_grad()
         outputs = model(images)["out"]  # Get predictions
@@ -102,26 +103,71 @@ def train_one_epoch(model, loader, optimizer, criterion, device):
         total_loss += loss.item()
     return total_loss / len(loader)
 
-def evaluate(model, loader, criterion, device):
-    model.eval()
-    total_loss = 0
-    with torch.no_grad():
-        for images, masks in loader:
-            images, masks = images.to(device), masks.to(device)
-            outputs = model(images)["out"]
-            loss = criterion(outputs, masks)
-            total_loss += loss.item()
-    return total_loss / len(loader)
-
 def adapt_model(model, num_classes):
     model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=1)
     return model
 
+# Metrics Calculation
+def compute_metrics(predictions, targets, num_classes):
+    """Computes mIoU, Pixel Accuracy, and Dice Coefficient."""
+    predictions = torch.argmax(predictions, dim=1)  # Get predicted class per pixel
+    intersection = torch.zeros(num_classes, device=predictions.device)
+    union = torch.zeros(num_classes, device=predictions.device)
+    dice = torch.zeros(num_classes, device=predictions.device)
+    correct_pixels = (predictions == targets).sum().item()
+    total_pixels = targets.numel()
+
+    for cls in range(num_classes):
+        pred_cls = (predictions == cls)
+        true_cls = (targets == cls)
+
+        intersection[cls] = (pred_cls & true_cls).sum().item()
+        union[cls] = (pred_cls | true_cls).sum().item()
+        dice[cls] = (2 * intersection[cls]) / (2 * intersection[cls] + union[cls] - intersection[cls] + 1e-6)
+
+    miou = (intersection / (union + 1e-6)).mean().item()  # Avoid division by zero
+    pixel_accuracy = correct_pixels / total_pixels
+    dice_score = dice.mean().item()
+
+    return miou, pixel_accuracy, dice_score
+
+
+def evaluate(model, loader, criterion, device, num_classes):
+    """Evaluate model and compute loss and metrics."""
+    model.eval()
+    total_loss = 0
+    total_miou, total_pa, total_dice = 0, 0, 0
+    count = 0
+
+    with torch.no_grad():
+        for images, masks in loader:
+            images, masks = images.to(device), masks.to(device)
+            masks = masks.squeeze(1)  # Remove channel dimension
+            outputs = model(images)["out"]
+
+            loss = criterion(outputs, masks)
+            total_loss += loss.item()
+
+            # Compute Metrics
+            miou, pa, dice = compute_metrics(outputs, masks, num_classes)
+            total_miou += miou
+            total_pa += pa
+            total_dice += dice
+            count += 1
+
+    avg_loss = total_loss / len(loader)
+    avg_miou = total_miou / count
+    avg_pa = total_pa / count
+    avg_dice = total_dice / count
+
+    return avg_loss, avg_miou, avg_pa, avg_dice
+
+
 def main():
     # Input image transformations
-    image_transform = transforms.Compose([
+    image_transform = transforms.Compose([        
+        transforms.Resize((256, 256)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
     ])
 
     train_dataset = FootballSegmentationDataset(
@@ -138,8 +184,9 @@ def main():
         target_transform=mask_transform
     )
 
-    train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True, num_workers=0)
-    val_loader = DataLoader(val_dataset, batch_size=8, shuffle=False, num_workers=0)
+    num_workers = os.cpu_count() - 1
+    train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True, num_workers=num_workers)
+    val_loader = DataLoader(val_dataset, batch_size=8, shuffle=False, num_workers=num_workers)
 
     # Initialize WandB
     wandb.init(project="football_segmentation")
@@ -153,19 +200,42 @@ def main():
 
     # Loss and Optimizer
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    optimizer = optim.Adam(model.parameters(), lr=0.0001, weight_decay=1e-4)
 
     # Main Training Loop
     for epoch in range(10):  # Change epochs as needed
         train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device)
-        val_loss = evaluate(model, val_loader, criterion, device)
+        val_loss, val_miou, val_pa, val_dice = evaluate(model, val_loader, criterion, device, num_classes=11)
 
-        wandb.log({"epoch": epoch, "train_loss": train_loss, "val_loss": val_loss})
+        # Log metrics to WandB
+        wandb.log({
+            "epoch": epoch,
+            "train_loss": train_loss,
+            "val_loss": val_loss,
+            "val_mIoU": val_miou,
+            "val_Pixel_Accuracy": val_pa,
+            "val_Dice_Score": val_dice
+        })
+
         print(f"Epoch {epoch+1}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
+        print(f"Val Metrics - mIoU: {val_miou:.4f}, Pixel Accuracy: {val_pa:.4f}, Dice Score: {val_dice:.4f}")
 
     # Save the Model
-    torch.save(model.state_dict(), "football_segmentation_model.pth")
+    torch.save(model.state_dict(), "models/football_segmentation_model.pth")
     wandb.save("football_segmentation_model.pth")
+
+    # test the model
+    test_dataset = FootballSegmentationDataset(
+        root_dir="data/processed/test",
+        use_mask_type="fuse",
+        transform=image_transform,
+        target_transform=mask_transform
+    )
+
+    test_loader = DataLoader(test_dataset, batch_size=8, shuffle=False, num_workers=num_workers)
+    test_loss, test_miou, test_pa, test_dice = evaluate(model, test_loader, criterion, device, num_classes=11)
+
+    print(f"Test Metrics - mIoU: {test_miou:.4f}, Pixel Accuracy: {test_pa:.4f}, Dice Score: {test_dice:.4f}")
 
 if __name__ == "__main__":
     main()
