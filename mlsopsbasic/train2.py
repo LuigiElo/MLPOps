@@ -1,192 +1,171 @@
+import glob
 from typing import Dict, List, Tuple
 import torch
 import torch.nn.functional as F
 import torchvision
 from tqdm.auto import tqdm
+import hydra
+from omegaconf import DictConfig
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torchvision.models.segmentation import deeplabv3_resnet50
+import wandb
 
-from config import (BATCH_SIZE, CHANNELS, DEVICE, EPOCHS, LEARNING_RATE, LOG_PATH, MODEL_PATH, NUM_CLASSES, NUM_WORKERS, OUT_CHANNELS, WEIGHT_DECAY)
+from config import (BATCH_SIZE, CHANNELS, DEVICE, LEARNING_RATE, LOG_PATH, MODEL_PATH, NUM_CLASSES, OUT_CHANNELS, WEIGHT_DECAY)
 from models.unet import UNet
+from torchvision import transforms
+from torch.utils.data import DataLoader
+import os
+import torch
 
+# Suppress warnings
 torchvision.disable_beta_transforms_warning()
 
-model = UNet(in_channels=CHANNELS, out_channels=OUT_CHANNELS)
-model.to(DEVICE)
+import os
+from PIL import Image
+from torch.utils.data import Dataset
+from torchvision import transforms
+import numpy as np
 
-def unet_loss(outputs, targets, alpha=0.5, beta=1.5):
-    """"
-        U-Net loss function with per-pixel weights to balance the classes and an extra to penalize joining two bits of the segmentation
+class FootballSegmentationDataset(Dataset):
     """
+    Dataset for football segmentation task using triplets (original, fuse, save).
 
-    weights = alpha * targets = beta * (1 - targets)
-    loss = F.binary_cross_entropy_with_logits(outputs, targets, weights, reduction="none")
-    intersection = torch.sum(outputs * targets * weights)
-    union = torch.sum(outputs * weights) = torch.sum(targets * weights)
-    loss += 1 - 2 * (intersection + 1) / (union + 1)
-    return torch.mean(loss)
+    Args:
+        root_dir (str): Path to the dataset directory (train/val/test folder).
+        use_mask_type (str): Use either 'fuse' or 'save' as the segmentation mask.
+        transform (callable, optional): Transformations to apply to the input images.
+        target_transform (callable, optional): Transformations to apply to the segmentation masks.
+    """
+    def __init__(self, root_dir, use_mask_type="fuse", transform=None, target_transform=None):
+        self.root_dir = root_dir
+        self.use_mask_type = use_mask_type
+        self.transform = transform
+        self.target_transform = target_transform
 
+        # Build the dataset by finding all base image files
+        self.base_files = []
+        for file_name in sorted(os.listdir(root_dir)):
+            if file_name.endswith(".jpg") and "___fuse" not in file_name and "___save" not in file_name:
+                self.base_files.append(file_name)
 
-def accuracy(outputs, targets):
-    outputs = torch.sigmoid(outputs)
-    outputs = (outputs > 0.5).float()
-    return torch.mean((outputs == targets).float())
+    def __len__(self):
+        return len(self.base_files)
 
+    def __getitem__(self, idx):
+        base_file = self.base_files[idx]
+        base_name = os.path.splitext(base_file)[0]
 
-"""
-    - Args:
-        - model: torch.nn.Module: The model to train.
-        - train_loader: torch.utils.data.DataLoader: The training data loader.
-        - optimizer: torch.optim.Optimizer: The optimizer to use for training.
-        - loss_fn: torch.nn.Module: The loss function to use for training.
+        # Paths for original image and mask
+        original_path = os.path.join(self.root_dir, base_file)
+        mask_path = os.path.join(self.root_dir, f"{base_name}.jpg___{self.use_mask_type}.png")
+        print(mask_path)
 
-    - Returns:
-        A tuple of training loss and training accuracy metrics.
-        In the form (train_loss, train_accuracy). For example: (0.1112, 0.8743)
-"""
-def train_step(model, dataloader, loss_fn, optimizer):
-    # Trains the model for one epoch.
+        # Load original image
+        original_image = Image.open(original_path).convert("RGB")
+
+        # Load segmentation mask
+        if os.path.exists(mask_path):
+            mask = Image.open(mask_path).convert("L")  # Convert to grayscale (1 channel)
+        else:
+            raise FileNotFoundError(f"Mask file not found: {mask_path}")
+
+        # Apply transformations
+        if self.transform:
+            original_image = self.transform(original_image)
+        if self.target_transform:
+            mask = self.target_transform(mask)
+        else:
+            mask = torch.tensor(np.array(mask, dtype=np.int64))  # Convert to tensor with class indices
+
+        return original_image, mask
+
+# Mask transformations (optional)
+def mask_transform(mask):
+    mask = np.array(mask, dtype=np.int64)  # Convert to NumPy array
+    return torch.tensor(mask)  # Convert to tensor with class indices
+
+# Training Loop
+def train_one_epoch(model, loader, optimizer, criterion, device):
     model.train()
+    total_loss = 0
+    for images, masks in loader:
+        images, masks = images.to(device), masks.to(device)
 
-    train_loss, train_acc = 0, 0
-
-    # Loop through data loader data batches
-    for batch, (X, y) in enumerate(dataloader):
-        X, y = X.to(DEVICE), y.to(DEVICE)
-        
-        # 1. Forward pass
-        y_pred = model(X)
-
-        # 2. Calculate and accumulate loss
-        loss = loss_fn(y_pred, y)
-        train_loss += loss.item()
-
-        # 3. Optimizer zero grad
         optimizer.zero_grad()
-
-        # 4. Loss backward
+        outputs = model(images)["out"]  # Get predictions
+        loss = criterion(outputs, masks)
         loss.backward()
-
-        # 5. Optimizer step
         optimizer.step()
 
-        # Calculate and accumulate accuracy metric accross all batches
-        train_acc += accuracy(y_pred, y).item()
-    
-    # Adjust metrics to get average loss and accuracy per batch
-    train_loss = train_loss / len(dataloader)
-    train_acc = train_acc / len(dataloader)
+        total_loss += loss.item()
+    return total_loss / len(loader)
 
-    return train_loss, train_acc
-
-""""
-    Turns a target Pytorch model to "eval" mode and then performs a forward pass on a testing dataset
-    - Args:
-        - model: torch.nn.Module: The model to evaluate.
-        - dataloader: torch.utils.data.DataLoader: The evaluation data loader.
-        - loss_fn: torch.nn.Module: The loss function to use for evaluation.
-    
-    - Returns:
-        - Tuple[float, float]
-            A tuple of testing loss and testing accuracy metrics.
-            In the form (val_loss, val_accuracy). For example: (0.0223, 0.8985)
-"""
-def val_step(model, dataloader, loss_fn):
+def evaluate(model, loader, criterion, device):
     model.eval()
+    total_loss = 0
+    with torch.no_grad():
+        for images, masks in loader:
+            images, masks = images.to(device), masks.to(device)
+            outputs = model(images)["out"]
+            loss = criterion(outputs, masks)
+            total_loss += loss.item()
+    return total_loss / len(loader)
 
-    val_loss, val_acc = 0, 0
+def adapt_model(model, num_classes):
+    model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=1)
+    return model
 
-    # Turn on inference context manager
-    with torch.inference_model():
-        for batch, (X, y) in enumerate(dataloader):
-            # Send data to target device
-            X, y = X.to(DEVICE), y.to(DEVICE)
+def main():
+    # Input image transformations
+    image_transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
+    ])
 
-            # 1. Forward pass
-            val_pred_logits = model(X)
+    train_dataset = FootballSegmentationDataset(
+        root_dir="data/processed/train",
+        use_mask_type="fuse",  # Use 'fuse' masks (or 'save' as needed)
+        transform=image_transform,
+        target_transform=mask_transform
+    )
 
-            # 2. Calculate and accumulate loss
-            loss = loss_fn(val_pred_logits, y)
-            val_loss += loss.item()
+    val_dataset = FootballSegmentationDataset(
+        root_dir="data/processed/val",
+        use_mask_type="fuse",
+        transform=image_transform,
+        target_transform=mask_transform
+    )
 
-            # Calculate and accumulate accuracy
-            val_acc += accuracy(val_pred_logits, y).item()
-        
-        # Adjust metrics to get average loss and accuracy per batch
-        val_loss = val_loss / len(dataloader)
-        val_acc = val_acc / len(dataloader)
+    train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True, num_workers=0)
+    val_loader = DataLoader(val_dataset, batch_size=8, shuffle=False, num_workers=0)
 
-        return val_loss, val_acc
-    
+    # Initialize WandB
+    wandb.init(project="football_segmentation")
 
-"""
-    Trains and tests a Pytorch model.
-    Passes a target Pytorch model through train_step() and val_step() functions for a number of epochs, training and testing the model in the same epoch loop.
-    Calculates, prints and stores evaluation metrics throughtout.
-    - Args:
-        - model: torch.nn.Module: The model to train.
-        - train_dataloader: torch.utils.data.DataLoader: The training data loader.
-        - val_dataloader: torch.utils.data.DataLoader: The testing data loader.
-        - optimizer: torch.optim.Optimizer: The optimizer to use for training.
-        - loss_fn: torch.nn.Module: The loss function to use for training.
-        - epochs: int: The number of epochs to train the model for.
+    # Load Pretrained Model
+    model = deeplabv3_resnet50(pretrained=True)
+    model = adapt_model(model, num_classes=11)
 
-    - Returns:
-        - Dict[str, List]
-            A dictionary of training and validation metrics.
-            In the form {"train_loss": [0.1112, 0.1093, ...], "train_accuracy": [0.8743, 0.8874, ...], "val_loss": [0.1112, 0.1093, ...], "val_accuracy": [0.8743, 0.8874, ...]}
-            For example: {"train_loss": [0.1112, 0.1093, ...], "train_accuracy": [0.8743, 0.8874, ...], "val_loss": [0.1112, 0.1093, ...], "val_accuracy": [0.8743, 0.8874, ...]}
-"""
-def train(model, train_dataloader, val_dataloader, optimizer, loss_fn, epochs):
-    results = {
-        "train_loss": [], 
-        "train_acc": [],
-        "val_loss": [],
-        "val_acc": []
-    }
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
 
-    # Loop through training and testing steps for a number of epochs
-    for epoch in tdqm(range(epochs), desc="Epochs"):
-        train_loss, train_acc = train_step(
-            model=model,
-            dataloader=train_dataloader,
-            loss_fn=loss_fn,
-            optimizer=optimizer
-        )
-        val_loss, val_acc = val_step(
-            model=model,
-            dataloader=val_dataloader,
-            loss_fn=loss_fn
-        )
+    # Loss and Optimizer
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-        # Prints
-        print(
-            f"Epochs: {epoch+1} |" 
-            f"train_loss: {train_loss:.4f} |" 
-            f"train_acc: {train_acc:.4f} |"
-            f"val_loss: {val_loss: .4f} |" 
-            f"val_acc: {val_acc: .4f}"
-        )
+    # Main Training Loop
+    for epoch in range(10):  # Change epochs as needed
+        train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device)
+        val_loss = evaluate(model, val_loader, criterion, device)
 
-        # Update results dictionary
-        results["train_loss"].append(train_loss)
-        results["train_acc"].append(train_acc)
-        results["val_loss"].append(val_loss)
-        results["val_acc"].append(val_acc)
+        wandb.log({"epoch": epoch, "train_loss": train_loss, "val_loss": val_loss})
+        print(f"Epoch {epoch+1}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
 
-    # Return the filled results at the end of the epochs
-    torch.save(model.state_dict(), MODEL_PATH)
-    print(f"Model saved at {MODEL_PATH}")
-    
-    return results
-
+    # Save the Model
+    torch.save(model.state_dict(), "football_segmentation_model.pth")
+    wandb.save("football_segmentation_model.pth")
 
 if __name__ == "__main__":
-    loss_fn = torch.nn.BCEWithLogitsLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
-    train(
-        model=model,
-        train_dataloader=train_dataloader,
-        val_dataloader=val_dataloader,
-        optimizer=optimizer,
-        loss_fn=loss_fn,
-        epochs=NUM_EPOCHS
-    )
+    main()
