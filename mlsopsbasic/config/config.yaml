@@ -1,35 +1,33 @@
-# Directories
-directories:
-  root_dir: "."
-  data_dir: "${directories.root_dir}/data/archive/images"
-  model_dir: "${directories.root_dir}/models"
-  log_dir: "${directories.root_dir}/logs"
+# config.yaml
 
-# Device
-device:
-  type: "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+defaults:
+  - override hydra/job_logging: disabled
 
-# Hyperparameters
-hyperparameters:
-  batch_size: 8
-  learning_rate: 0.001
-  epochs: 10
-  num_workers: ${oc.env:NUM_WORKERS, os.cpu_count() - 1}
-  weight_decay: 0.0001  # L2 regularization
+# Data settings
+data:
+  train_dir: "data/processed/train"
+  val_dir: "data/processed/val"
+  test_dir: "data/processed/test"
+  use_mask_type: "fuse"
+  num_workers: 2
 
-# Image Parameters
-image:
-  size: 256
-
-# Model Parameters
+# Model settings
 model:
-  num_classes: 1  # Change to 11 for multi-class classification
-  channels: [1, 64, 128, 256, 512, 1024]
-  out_channels: 1
+  num_classes: 11
+  pretrained: true
 
-# Logging
-logging:
-  model_name: "unet_${now:%Y-%m-%d-%H-%M-%S}"  # model name is set up based on timestamp
-  model_path: "${directories.model_dir}/${logging.model_name}.pt"
-  log_path: "${directories.log_dir}/${logging.model_name}.log"
+# Training settings
+training:
+  epochs: 10
+  batch_size: 8
+  learning_rate: 0.0001
+  weight_decay: 1e-4
+  image_size: 256
 
+# WandB settings
+wandb:
+  project_name: "football_segmentation"
+
+# Misc
+misc:
+  save_path: "models/football_segmentation_model.pth"

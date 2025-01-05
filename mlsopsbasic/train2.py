@@ -1,34 +1,37 @@
+import os
 import glob
 from typing import Dict, List, Tuple
-import torch
-import torch.nn.functional as F
-import torchvision
-from tqdm.auto import tqdm
-import hydra
-from omegaconf import DictConfig
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torchvision.models.segmentation import deeplabv3_resnet50
-import wandb
-
-from config import (BATCH_SIZE, CHANNELS, DEVICE, LEARNING_RATE, LOG_PATH, MODEL_PATH, NUM_CLASSES, OUT_CHANNELS, WEIGHT_DECAY)
-from models.unet import UNet
+import torch.nn.functional as F
+import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
-import os
-import torch
 
-# Suppress warnings
-torchvision.disable_beta_transforms_warning()
-
-import os
+from torchvision.models.segmentation import deeplabv3_resnet50
 from PIL import Image
-from torch.utils.data import Dataset
-from torchvision import transforms
 import numpy as np
 
-class FootballSegmentationDataset(Dataset):
+# Hydra imports
+import hydra
+from omegaconf import DictConfig
+
+# Progress bar
+from tqdm.auto import tqdm
+
+# Weights & Biases
+import wandb
+
+# Suppress warnings for beta transforms
+torchvision.disable_beta_transforms_warning()
+
+
+##############################################
+# Datasets
+##############################################
+class FootballSegmentationDataset(torch.utils.data.Dataset):
     """
     Dataset for football segmentation task using triplets (original, fuse, save).
 
@@ -77,37 +80,46 @@ class FootballSegmentationDataset(Dataset):
         if self.target_transform:
             mask = self.target_transform(mask)
         else:
-            mask = torch.tensor(np.array(mask, dtype=np.int64))  # Convert to tensor with class indices
+            # Default conversion to tensor with class indices
+            mask = torch.tensor(np.array(mask, dtype=np.int64))
 
         return original_image, mask
 
-# Mask transformations (optional)
-def mask_transform(mask):
-    mask = np.asarray(mask, dtype=np.int64) # Convert to numpy array
-    return torch.tensor(mask)  # Convert to tensor with class indices
 
-# Training Loop
+##############################################
+# Helper Functions
+##############################################
+def mask_transform(mask):
+    """Convert PIL mask to torch tensor of class indices."""
+    mask = np.asarray(mask, dtype=np.int64)
+    return torch.tensor(mask)
+
+
+def adapt_model(model, num_classes):
+    """Adapt DeepLabV3 output layer to the desired number of classes."""
+    model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=1)
+    return model
+
+
 def train_one_epoch(model, loader, optimizer, criterion, device):
+    """One epoch of training."""
     model.train()
     total_loss = 0
     for images, masks in loader:
         images, masks = images.to(device), masks.to(device)
-        masks = masks.squeeze(1)  # Remove channel dimension
+        masks = masks.squeeze(1)  # remove channel dimension if needed
 
         optimizer.zero_grad()
-        outputs = model(images)["out"]  # Get predictions
+        outputs = model(images)["out"]
         loss = criterion(outputs, masks)
         loss.backward()
         optimizer.step()
 
         total_loss += loss.item()
+
     return total_loss / len(loader)
 
-def adapt_model(model, num_classes):
-    model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=1)
-    return model
 
-# Metrics Calculation
 def compute_metrics(predictions, targets, num_classes):
     """Computes mIoU, Pixel Accuracy, and Dice Coefficient."""
     predictions = torch.argmax(predictions, dim=1)  # Get predicted class per pixel
@@ -123,6 +135,7 @@ def compute_metrics(predictions, targets, num_classes):
 
         intersection[cls] = (pred_cls & true_cls).sum().item()
         union[cls] = (pred_cls | true_cls).sum().item()
+        # dice coefficient for each class
         dice[cls] = (2 * intersection[cls]) / (2 * intersection[cls] + union[cls] - intersection[cls] + 1e-6)
 
     miou = (intersection / (union + 1e-6)).mean().item()  # Avoid division by zero
@@ -142,7 +155,7 @@ def evaluate(model, loader, criterion, device, num_classes):
     with torch.no_grad():
         for images, masks in loader:
             images, masks = images.to(device), masks.to(device)
-            masks = masks.squeeze(1)  # Remove channel dimension
+            masks = masks.squeeze(1)  # remove channel dimension
             outputs = model(images)["out"]
 
             loss = criterion(outputs, masks)
@@ -163,51 +176,79 @@ def evaluate(model, loader, criterion, device, num_classes):
     return avg_loss, avg_miou, avg_pa, avg_dice
 
 
-def main():
-    # Input image transformations
-    image_transform = transforms.Compose([        
-        transforms.Resize((256, 256)),
+##############################################
+# Main with Hydra
+##############################################
+@hydra.main(version_base=None, config_path="config", config_name="config")  
+def main(cfg: DictConfig):
+    """
+    Main training function, parameterized by Hydra config.
+    """
+    # 1) Define transformations
+    image_transform = transforms.Compose([
+        transforms.Resize((cfg.training.image_size, cfg.training.image_size)),
         transforms.ToTensor(),
     ])
 
+    # 2) Create datasets and data loaders
     train_dataset = FootballSegmentationDataset(
-        root_dir="data/processed/train",
-        use_mask_type="fuse",  # Use 'fuse' masks (or 'save' as needed)
+        root_dir=cfg.data.train_dir,
+        use_mask_type=cfg.data.use_mask_type,
         transform=image_transform,
         target_transform=mask_transform
     )
-
     val_dataset = FootballSegmentationDataset(
-        root_dir="data/processed/val",
-        use_mask_type="fuse",
+        root_dir=cfg.data.val_dir,
+        use_mask_type=cfg.data.use_mask_type,
+        transform=image_transform,
+        target_transform=mask_transform
+    )
+    test_dataset = FootballSegmentationDataset(
+        root_dir=cfg.data.test_dir,
+        use_mask_type=cfg.data.use_mask_type,
         transform=image_transform,
         target_transform=mask_transform
     )
 
-    num_workers = os.cpu_count() - 1
-    train_loader = DataLoader(train_dataset, batch_size=8, shuffle=True, num_workers=num_workers)
-    val_loader = DataLoader(val_dataset, batch_size=8, shuffle=False, num_workers=num_workers)
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=cfg.training.batch_size,
+        shuffle=True,
+        num_workers=cfg.data.num_workers
+    )
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=cfg.training.batch_size,
+        shuffle=False,
+        num_workers=cfg.data.num_workers
+    )
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=cfg.training.batch_size,
+        shuffle=False,
+        num_workers=cfg.data.num_workers
+    )
 
-    # Initialize WandB
-    wandb.init(project="football_segmentation")
+    # 3) Initialize Weights and Biases
+    wandb.init(project=cfg.wandb.project_name)
 
-    # Load Pretrained Model
-    model = deeplabv3_resnet50(pretrained=True)
-    model = adapt_model(model, num_classes=11)
+    # 4) Load or create your model
+    model = deeplabv3_resnet50(pretrained=cfg.model.pretrained)
+    model = adapt_model(model, num_classes=cfg.model.num_classes)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
 
-    # Loss and Optimizer
+    # 5) Define loss and optimizer
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.0001, weight_decay=1e-4)
+    optimizer = optim.Adam(model.parameters(), lr=cfg.training.learning_rate, weight_decay=cfg.training.weight_decay)
 
-    # Main Training Loop
-    for epoch in range(10):  # Change epochs as needed
+    # 6) Main training loop
+    for epoch in range(cfg.training.epochs):
         train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device)
-        val_loss, val_miou, val_pa, val_dice = evaluate(model, val_loader, criterion, device, num_classes=11)
+        val_loss, val_miou, val_pa, val_dice = evaluate(model, val_loader, criterion, device, cfg.model.num_classes)
 
-        # Log metrics to WandB
+        # Log metrics to wandb
         wandb.log({
             "epoch": epoch,
             "train_loss": train_loss,
@@ -217,25 +258,24 @@ def main():
             "val_Dice_Score": val_dice
         })
 
-        print(f"Epoch {epoch+1}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
-        print(f"Val Metrics - mIoU: {val_miou:.4f}, Pixel Accuracy: {val_pa:.4f}, Dice Score: {val_dice:.4f}")
+        print(f"Epoch {epoch+1}/{cfg.training.epochs}, "
+              f"Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, "
+              f"Val mIoU: {val_miou:.4f}, Val Pixel Acc: {val_pa:.4f}, Val Dice: {val_dice:.4f}")
 
-    # Save the Model
-    torch.save(model.state_dict(), "models/football_segmentation_model.pth")
-    wandb.save("football_segmentation_model.pth")
+    # 7) Save the model
+    save_path = cfg.misc.save_path
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    torch.save(model.state_dict(), save_path)
+    wandb.save(save_path)
 
-    # test the model
-    test_dataset = FootballSegmentationDataset(
-        root_dir="data/processed/test",
-        use_mask_type="fuse",
-        transform=image_transform,
-        target_transform=mask_transform
+    # 8) Evaluate on test set
+    test_loss, test_miou, test_pa, test_dice = evaluate(
+        model, test_loader, criterion, device, cfg.model.num_classes
     )
 
-    test_loader = DataLoader(test_dataset, batch_size=8, shuffle=False, num_workers=num_workers)
-    test_loss, test_miou, test_pa, test_dice = evaluate(model, test_loader, criterion, device, num_classes=11)
+    print(f"Test Metrics - Loss: {test_loss:.4f}, mIoU: {test_miou:.4f}, "
+          f"Pixel Accuracy: {test_pa:.4f}, Dice Score: {test_dice:.4f}")
 
-    print(f"Test Metrics - mIoU: {test_miou:.4f}, Pixel Accuracy: {test_pa:.4f}, Dice Score: {test_dice:.4f}")
 
 if __name__ == "__main__":
     main()
