@@ -24,9 +24,12 @@ from tqdm.auto import tqdm
 # Weights & Biases
 import wandb
 
+# cProfile for profiling
+import cProfile
+import pstats
+
 # Suppress warnings for beta transforms
 torchvision.disable_beta_transforms_warning()
-
 
 ##############################################
 # Datasets
@@ -177,13 +180,19 @@ def evaluate(model, loader, criterion, device, num_classes):
 
 
 ##############################################
-# Main with Hydra
+# Main with Hydra and Profiling
 ##############################################
-@hydra.main(version_base=None, config_path="config", config_name="config")  
+@hydra.main(version_base=None, config_path="config", config_name="config")
 def main(cfg: DictConfig):
     """
     Main training function, parameterized by Hydra config.
+    We optionally enable cProfile if cfg.profiling.enable is True.
     """
+    # Check if profiling is enabled
+    if cfg.profiling.enable:
+        profiler = cProfile.Profile()
+        profiler.enable()
+
     # 1) Define transformations
     image_transform = transforms.Compose([
         transforms.Resize((cfg.training.image_size, cfg.training.image_size)),
@@ -229,7 +238,7 @@ def main(cfg: DictConfig):
         num_workers=cfg.data.num_workers
     )
 
-    # 3) Initialize Weights and Biases
+    # 3) Initialize Weights & Biases
     wandb.init(project=cfg.wandb.project_name)
 
     # 4) Load or create your model
@@ -241,7 +250,11 @@ def main(cfg: DictConfig):
 
     # 5) Define loss and optimizer
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=cfg.training.learning_rate, weight_decay=cfg.training.weight_decay)
+    optimizer = optim.Adam(
+        model.parameters(),
+        lr=cfg.training.learning_rate,
+        weight_decay=cfg.training.weight_decay
+    )
 
     # 6) Main training loop
     for epoch in range(cfg.training.epochs):
@@ -258,9 +271,11 @@ def main(cfg: DictConfig):
             "val_Dice_Score": val_dice
         })
 
-        print(f"Epoch {epoch+1}/{cfg.training.epochs}, "
-              f"Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}, "
-              f"Val mIoU: {val_miou:.4f}, Val Pixel Acc: {val_pa:.4f}, Val Dice: {val_dice:.4f}")
+        print(
+            f"Epoch {epoch+1}/{cfg.training.epochs} | "
+            f"Train Loss: {train_loss:.4f} | Val Loss: {val_loss:.4f} | "
+            f"Val mIoU: {val_miou:.4f} | Val Pixel Acc: {val_pa:.4f} | Val Dice: {val_dice:.4f}"
+        )
 
     # 7) Save the model
     save_path = cfg.misc.save_path
@@ -272,9 +287,19 @@ def main(cfg: DictConfig):
     test_loss, test_miou, test_pa, test_dice = evaluate(
         model, test_loader, criterion, device, cfg.model.num_classes
     )
+    print(
+        f"Test Metrics | Loss: {test_loss:.4f} | mIoU: {test_miou:.4f} | "
+        f"Pixel Accuracy: {test_pa:.4f} | Dice Score: {test_dice:.4f}"
+    )
 
-    print(f"Test Metrics - Loss: {test_loss:.4f}, mIoU: {test_miou:.4f}, "
-          f"Pixel Accuracy: {test_pa:.4f}, Dice Score: {test_dice:.4f}")
+    # If profiling was enabled, print or save results
+    if cfg.profiling.enable:
+        profiler.disable()
+        stats = pstats.Stats(profiler).sort_stats(cfg.profiling.sort_key)
+        # Print top 30 lines by default
+        stats.print_stats(30)
+        # Optionally, you can dump stats to a file for further analysis:
+        # stats.dump_stats("profile_results.pstat")
 
 
 if __name__ == "__main__":

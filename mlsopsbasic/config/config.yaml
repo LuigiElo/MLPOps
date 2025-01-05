@@ -28,6 +28,11 @@ training:
 wandb:
   project_name: "football_segmentation"
 
+# Profiling
+profiling:
+  enable: false     # set to true to enable cProfile
+  sort_key: "time"  # how to sort profiling results
+
 # Misc
 misc:
   save_path: "models/football_segmentation_model.pth"
