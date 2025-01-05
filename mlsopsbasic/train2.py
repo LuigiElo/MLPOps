@@ -1,5 +1,6 @@
 import glob
 from typing import Dict, List, Tuple
+import cv2
 import torch
 import torch.nn.functional as F
 import torchvision
@@ -18,6 +19,8 @@ from torchvision import transforms
 from torch.utils.data import DataLoader
 import os
 import torch
+import albumentations as A
+from albumentations.pytorch import ToTensorV2
 
 # Suppress warnings
 torchvision.disable_beta_transforms_warning()
@@ -61,23 +64,17 @@ class FootballSegmentationDataset(Dataset):
         original_path = os.path.join(self.root_dir, base_file)
         mask_path = os.path.join(self.root_dir, f"{base_name}.jpg___{self.use_mask_type}.png")
 
-        # Load original image
-        original_image = Image.open(original_path).convert("RGB")
-
-        # Load segmentation mask
-        if os.path.exists(mask_path):
-            mask = Image.open(mask_path).convert("L")
-        else:
-            raise FileNotFoundError(f"Mask file not found: {mask_path}")
+        original_image = cv2.cvtColor(cv2.imread(original_path), cv2.COLOR_BGR2RGB)
+        mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)
 
         # Apply transformations
         if self.transform:
-            original_image = self.transform(original_image)
-            mask = self.transform(mask)
-        if self.target_transform:
-            mask = self.target_transform(mask)
-        else:
-            mask = torch.tensor(np.array(mask, dtype=np.int64))  # Convert to tensor with class indices
+            data = self.transform(image=original_image,mask=mask)
+            original_image = data["image"]
+            mask = data["mask"]
+        
+        original_image=torch.Tensor(np.transpose(original_image,(2,0,1))) / 255.0 
+        mask=torch.Tensor(np.transpose(mask,(2,0,1))) / 255.0
 
         return original_image, mask
 
@@ -107,13 +104,16 @@ def adapt_model(model, num_classes):
     model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=1)
     return model
 
-# Metrics Calculation
 def compute_metrics(predictions, targets, num_classes):
-    """Computes mIoU, Pixel Accuracy, and Dice Coefficient."""
-    predictions = torch.argmax(predictions, dim=1)  # Get predicted class per pixel
-    intersection = torch.zeros(num_classes, device=predictions.device)
-    union = torch.zeros(num_classes, device=predictions.device)
-    dice = torch.zeros(num_classes, device=predictions.device)
+    """Computes per-class and overall mIoU, Pixel Accuracy, and Dice Coefficient."""
+    # predictions shape: (N, H, W)
+    # targets shape: (N, H, W)
+    predictions = torch.argmax(predictions, dim=1)
+
+    intersection = torch.zeros(num_classes, device=predictions.device, dtype=torch.float)
+    union = torch.zeros(num_classes, device=predictions.device, dtype=torch.float)
+    dice_per_class = torch.zeros(num_classes, device=predictions.device, dtype=torch.float)
+
     correct_pixels = (predictions == targets).sum().item()
     total_pixels = targets.numel()
 
@@ -121,23 +121,78 @@ def compute_metrics(predictions, targets, num_classes):
         pred_cls = (predictions == cls)
         true_cls = (targets == cls)
 
-        intersection[cls] = (pred_cls & true_cls).sum().item()
-        union[cls] = (pred_cls | true_cls).sum().item()
-        dice[cls] = (2 * intersection[cls]) / (2 * intersection[cls] + union[cls] - intersection[cls] + 1e-6)
+        inter = (pred_cls & true_cls).sum().float()
+        union_ = (pred_cls | true_cls).sum().float()
+        intersection[cls] = inter
+        union[cls] = union_
 
-    miou = (intersection / (union + 1e-6)).mean().item()  # Avoid division by zero
+        # Dice for class 'cls'
+        # dice_per_class[cls] = 2 * inter / (pred_cls.sum() + true_cls.sum() + 1e-6)
+        # Alternatively, using the formula from your code:
+        dice_per_class[cls] = (2.0 * inter) / (2.0 * inter + union_ - inter + 1e-6)
+
+    # Per-class IoU
+    iou_per_class = intersection / (union + 1e-6)
+
+    # Overall means
+    miou = iou_per_class.mean().item()
     pixel_accuracy = correct_pixels / total_pixels
-    dice_score = dice.mean().item()
+    dice_score = dice_per_class.mean().item()
 
-    return miou, pixel_accuracy, dice_score
+    return iou_per_class, dice_per_class, miou, pixel_accuracy, dice_score
+
+class DiceLoss(nn.Module):
+    """
+    Implementation of Dice Loss for multi-class segmentation.
+    
+    inputs:  (N, C, H, W) -> raw logits
+    targets: (N, H, W)    -> class indices [0..C-1]
+    """
+    def __init__(self, smooth=1.0):
+        super(DiceLoss, self).__init__()
+        self.smooth = smooth
+
+    def forward(self, inputs, targets):
+        # Step 1: Apply softmax to get class probabilities
+        inputs = F.softmax(inputs, dim=1)  # shape: (N, C, H, W)
+        
+        # Step 2: Convert target from (N, H, W) to one-hot: (N, C, H, W)
+        # NOTE: F.one_hot returns (N, H, W, C), so we permute to (N, C, H, W).
+        num_classes = inputs.shape[1]
+        targets_one_hot = F.one_hot(targets, num_classes=num_classes)  # (N, H, W, C)
+        targets_one_hot = targets_one_hot.permute(0, 3, 1, 2).float()  # (N, C, H, W)
+
+        # Step 3: Calculate intersection and union for each class
+        # intersection = sum of elementwise multiplication over spatial dims
+        intersection = (inputs * targets_one_hot).sum(dim=(2, 3))
+        # sums for each
+        inputs_sum = inputs.sum(dim=(2, 3))
+        targets_sum = targets_one_hot.sum(dim=(2, 3))
+        
+        # Dice Coefficient for each sample & each class
+        dice_per_class = (2.0 * intersection + self.smooth) / (
+            inputs_sum + targets_sum + self.smooth
+        )  # shape: (N, C)
+
+        # Average over classes, then average over batch
+        dice_score = dice_per_class.mean()
+
+        # Dice loss is 1 - mean dice coefficient
+        dice_loss = 1.0 - dice_score
+        return dice_loss
+
 
 
 def evaluate(model, loader, criterion, device, num_classes):
-    """Evaluate model and compute loss and metrics."""
+    """Evaluate model and compute loss and metrics (including per-class)."""
     model.eval()
     total_loss = 0
-    total_miou, total_pa, total_dice = 0, 0, 0
+    total_miou, total_pa, total_dice = 0.0, 0.0, 0.0
     count = 0
+
+    # For accumulating per-class IoU/Dice across the dataset
+    iou_sums = torch.zeros(num_classes, device=device, dtype=torch.float)
+    dice_sums = torch.zeros(num_classes, device=device, dtype=torch.float)
 
     with torch.no_grad():
         for images, masks in loader:
@@ -149,7 +204,10 @@ def evaluate(model, loader, criterion, device, num_classes):
             total_loss += loss.item()
 
             # Compute Metrics
-            miou, pa, dice = compute_metrics(outputs, masks, num_classes)
+            iou_per_class, dice_per_class, miou, pa, dice = compute_metrics(outputs, masks, num_classes)
+            iou_sums += iou_per_class
+            dice_sums += dice_per_class
+
             total_miou += miou
             total_pa += pa
             total_dice += dice
@@ -160,19 +218,32 @@ def evaluate(model, loader, criterion, device, num_classes):
     avg_pa = total_pa / count
     avg_dice = total_dice / count
 
-    return avg_loss, avg_miou, avg_pa, avg_dice
+    # Average per-class IoU/Dice over the dataset
+    iou_per_class_avg = iou_sums / count
+    dice_per_class_avg = dice_sums / count
+
+    return (
+        avg_loss,
+        avg_miou,
+        avg_pa,
+        avg_dice,
+        iou_per_class_avg,
+        dice_per_class_avg
+    )
 
 
 def main():
+    mean, std, im_h, im_w = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225], 256, 256
     # Input image transformations
-    image_transform = transforms.Compose([        
-        transforms.Resize((256, 256)),
-        transforms.ToTensor(),
+    image_transform = A.Compose([
+        A.Resize(im_h, im_w),
+        A.Normalize(mean=mean, std=std),
+        ToTensorV2()
     ])
 
     train_dataset = FootballSegmentationDataset(
         root_dir="data/processed/train",
-        use_mask_type="fuse",  # Use 'fuse' masks (or 'save' as needed)
+        use_mask_type="fuse",
         transform=image_transform,
         target_transform=mask_transform
     )
@@ -191,30 +262,55 @@ def main():
     # Initialize WandB
     wandb.init(project="football_segmentation")
 
-    # Load Pretrained Model
-    model = deeplabv3_resnet50(pretrained=True)
-    model = adapt_model(model, num_classes=11)
+    # Suppose we have 11 classes and want to set custom weights for each class.
+    # Example: background has weight=0.2, a rare class might have weight=2.0, etc.
+    class_weights = torch.tensor([
+        0.1,  # class 0
+        3.0,  # class 1
+        3.5,  # class 2
+        3.0,  # class 3
+        3.0,  # class 4
+        3.0,  # class 5
+        3.0,  # class 6
+        3.0,  # class 7
+        3.0,  # class 8
+        3.0,  # class 9
+        3.0
+    ])
 
+    # Move weights to the same device as your model/tensors
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = model.to(device)
+    class_weights = class_weights.to(device)
 
-    # Loss and Optimizer
-    criterion = nn.CrossEntropyLoss()
+    # CWE
+    criterion = nn.CrossEntropyLoss(weight=class_weights)
+
+    # Initialize model
+    model = deeplabv3_resnet50(pretrained=True)
+    model = adapt_model(model, num_classes=11).to(device)
+
     optimizer = optim.Adam(model.parameters(), lr=0.0001, weight_decay=1e-4)
 
-    # Main Training Loop
-    for epoch in range(10):  # Change epochs as needed
+    # Training loop
+    for epoch in range(60):
         train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device)
-        val_loss, val_miou, val_pa, val_dice = evaluate(model, val_loader, criterion, device, num_classes=11)
+        (val_loss, val_miou, val_pa, val_dice, val_iou_per_class, val_dice_per_class
+        ) = evaluate(model, val_loader, criterion, device, num_classes=11)
 
-        # Log metrics to WandB
+        # Prepare per-class logging
+        val_iou_dict = {f"val_IoU_class_{i}": val_iou_per_class[i].item() for i in range(11)}
+        val_dice_dict = {f"val_Dice_class_{i}": val_dice_per_class[i].item() for i in range(11)}
+
+        # Log to WandB
         wandb.log({
             "epoch": epoch,
             "train_loss": train_loss,
             "val_loss": val_loss,
             "val_mIoU": val_miou,
             "val_Pixel_Accuracy": val_pa,
-            "val_Dice_Score": val_dice
+            "val_Dice_Score": val_dice,
+            **val_iou_dict,
+            **val_dice_dict
         })
 
         print(f"Epoch {epoch+1}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
@@ -224,7 +320,7 @@ def main():
     torch.save(model.state_dict(), "models/football_segmentation_model.pth")
     wandb.save("football_segmentation_model.pth")
 
-    # test the model
+    # Test the model
     test_dataset = FootballSegmentationDataset(
         root_dir="data/processed/test",
         use_mask_type="fuse",
@@ -233,9 +329,18 @@ def main():
     )
 
     test_loader = DataLoader(test_dataset, batch_size=8, shuffle=False, num_workers=num_workers)
-    test_loss, test_miou, test_pa, test_dice = evaluate(model, test_loader, criterion, device, num_classes=11)
+    (
+        test_loss,
+        test_miou,
+        test_pa,
+        test_dice,
+        test_iou_per_class,
+        test_dice_per_class
+    ) = evaluate(model, test_loader, criterion, device, num_classes=11)
 
     print(f"Test Metrics - mIoU: {test_miou:.4f}, Pixel Accuracy: {test_pa:.4f}, Dice Score: {test_dice:.4f}")
+    print("Per-class IoU:", test_iou_per_class)
+    print("Per-class Dice:", test_dice_per_class)
 
 if __name__ == "__main__":
     main()
