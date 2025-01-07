@@ -1,192 +1,306 @@
+import os
+import glob
 from typing import Dict, List, Tuple
+
 import torch
+import torch.nn as nn
+import torch.optim as optim
 import torch.nn.functional as F
 import torchvision
+from torchvision import transforms
+from torch.utils.data import DataLoader
+
+from torchvision.models.segmentation import deeplabv3_resnet50
+from PIL import Image
+import numpy as np
+
+# Hydra imports
+import hydra
+from omegaconf import DictConfig
+
+# Progress bar
 from tqdm.auto import tqdm
 
-from config import (BATCH_SIZE, CHANNELS, DEVICE, EPOCHS, LEARNING_RATE, LOG_PATH, MODEL_PATH, NUM_CLASSES, NUM_WORKERS, OUT_CHANNELS, WEIGHT_DECAY)
-from models.unet import UNet
+# Weights & Biases
+import wandb
 
+# cProfile for profiling
+import cProfile
+import pstats
+
+# Suppress warnings for beta transforms
 torchvision.disable_beta_transforms_warning()
 
-model = UNet(in_channels=CHANNELS, out_channels=OUT_CHANNELS)
-model.to(DEVICE)
-
-def unet_loss(outputs, targets, alpha=0.5, beta=1.5):
-    """"
-        U-Net loss function with per-pixel weights to balance the classes and an extra to penalize joining two bits of the segmentation
+##############################################
+# Datasets
+##############################################
+class FootballSegmentationDataset(torch.utils.data.Dataset):
     """
+    Dataset for football segmentation task using triplets (original, fuse, save).
 
-    weights = alpha * targets = beta * (1 - targets)
-    loss = F.binary_cross_entropy_with_logits(outputs, targets, weights, reduction="none")
-    intersection = torch.sum(outputs * targets * weights)
-    union = torch.sum(outputs * weights) = torch.sum(targets * weights)
-    loss += 1 - 2 * (intersection + 1) / (union + 1)
-    return torch.mean(loss)
+    Args:
+        root_dir (str): Path to the dataset directory (train/val/test folder).
+        use_mask_type (str): Use either 'fuse' or 'save' as the segmentation mask.
+        transform (callable, optional): Transformations to apply to the input images.
+        target_transform (callable, optional): Transformations to apply to the segmentation masks.
+    """
+    def __init__(self, root_dir, use_mask_type="fuse", transform=None, target_transform=None):
+        self.root_dir = root_dir
+        self.use_mask_type = use_mask_type
+        self.transform = transform
+        self.target_transform = target_transform
+
+        # Build the dataset by finding all base image files
+        self.base_files = []
+        for file_name in sorted(os.listdir(root_dir)):
+            if file_name.endswith(".jpg") and "___fuse" not in file_name and "___save" not in file_name:
+                self.base_files.append(file_name)
+
+    def __len__(self):
+        return len(self.base_files)
+
+    def __getitem__(self, idx):
+        base_file = self.base_files[idx]
+        base_name = os.path.splitext(base_file)[0]
+
+        # Paths for original image and mask
+        original_path = os.path.join(self.root_dir, base_file)
+        mask_path = os.path.join(self.root_dir, f"{base_name}.jpg___{self.use_mask_type}.png")
+
+        # Load original image
+        original_image = Image.open(original_path).convert("RGB")
+
+        # Load segmentation mask
+        if os.path.exists(mask_path):
+            mask = Image.open(mask_path).convert("L")
+        else:
+            raise FileNotFoundError(f"Mask file not found: {mask_path}")
+
+        # Apply transformations
+        if self.transform:
+            original_image = self.transform(original_image)
+            mask = self.transform(mask)
+        if self.target_transform:
+            mask = self.target_transform(mask)
+        else:
+            # Default conversion to tensor with class indices
+            mask = torch.tensor(np.array(mask, dtype=np.int64))
+
+        return original_image, mask
 
 
-def accuracy(outputs, targets):
-    outputs = torch.sigmoid(outputs)
-    outputs = (outputs > 0.5).float()
-    return torch.mean((outputs == targets).float())
+##############################################
+# Helper Functions
+##############################################
+def mask_transform(mask):
+    """Convert PIL mask to torch tensor of class indices."""
+    mask = np.asarray(mask, dtype=np.int64)
+    return torch.tensor(mask)
 
 
-"""
-    - Args:
-        - model: torch.nn.Module: The model to train.
-        - train_loader: torch.utils.data.DataLoader: The training data loader.
-        - optimizer: torch.optim.Optimizer: The optimizer to use for training.
-        - loss_fn: torch.nn.Module: The loss function to use for training.
+def adapt_model(model, num_classes):
+    """Adapt DeepLabV3 output layer to the desired number of classes."""
+    model.classifier[4] = nn.Conv2d(256, num_classes, kernel_size=1)
+    return model
 
-    - Returns:
-        A tuple of training loss and training accuracy metrics.
-        In the form (train_loss, train_accuracy). For example: (0.1112, 0.8743)
-"""
-def train_step(model, dataloader, loss_fn, optimizer):
-    # Trains the model for one epoch.
+
+def train_one_epoch(model, loader, optimizer, criterion, device):
+    """One epoch of training."""
     model.train()
+    total_loss = 0
+    for images, masks in loader:
+        images, masks = images.to(device), masks.to(device)
+        masks = masks.squeeze(1)  # remove channel dimension if needed
 
-    train_loss, train_acc = 0, 0
-
-    # Loop through data loader data batches
-    for batch, (X, y) in enumerate(dataloader):
-        X, y = X.to(DEVICE), y.to(DEVICE)
-        
-        # 1. Forward pass
-        y_pred = model(X)
-
-        # 2. Calculate and accumulate loss
-        loss = loss_fn(y_pred, y)
-        train_loss += loss.item()
-
-        # 3. Optimizer zero grad
         optimizer.zero_grad()
-
-        # 4. Loss backward
+        outputs = model(images)["out"]
+        loss = criterion(outputs, masks)
         loss.backward()
-
-        # 5. Optimizer step
         optimizer.step()
 
-        # Calculate and accumulate accuracy metric accross all batches
-        train_acc += accuracy(y_pred, y).item()
-    
-    # Adjust metrics to get average loss and accuracy per batch
-    train_loss = train_loss / len(dataloader)
-    train_acc = train_acc / len(dataloader)
+        total_loss += loss.item()
 
-    return train_loss, train_acc
+    return total_loss / len(loader)
 
-""""
-    Turns a target Pytorch model to "eval" mode and then performs a forward pass on a testing dataset
-    - Args:
-        - model: torch.nn.Module: The model to evaluate.
-        - dataloader: torch.utils.data.DataLoader: The evaluation data loader.
-        - loss_fn: torch.nn.Module: The loss function to use for evaluation.
-    
-    - Returns:
-        - Tuple[float, float]
-            A tuple of testing loss and testing accuracy metrics.
-            In the form (val_loss, val_accuracy). For example: (0.0223, 0.8985)
-"""
-def val_step(model, dataloader, loss_fn):
+
+def compute_metrics(predictions, targets, num_classes):
+    """Computes mIoU, Pixel Accuracy, and Dice Coefficient."""
+    predictions = torch.argmax(predictions, dim=1)  # Get predicted class per pixel
+    intersection = torch.zeros(num_classes, device=predictions.device)
+    union = torch.zeros(num_classes, device=predictions.device)
+    dice = torch.zeros(num_classes, device=predictions.device)
+    correct_pixels = (predictions == targets).sum().item()
+    total_pixels = targets.numel()
+
+    for cls in range(num_classes):
+        pred_cls = (predictions == cls)
+        true_cls = (targets == cls)
+
+        intersection[cls] = (pred_cls & true_cls).sum().item()
+        union[cls] = (pred_cls | true_cls).sum().item()
+        # dice coefficient for each class
+        dice[cls] = (2 * intersection[cls]) / (2 * intersection[cls] + union[cls] - intersection[cls] + 1e-6)
+
+    miou = (intersection / (union + 1e-6)).mean().item()  # Avoid division by zero
+    pixel_accuracy = correct_pixels / total_pixels
+    dice_score = dice.mean().item()
+
+    return miou, pixel_accuracy, dice_score
+
+
+def evaluate(model, loader, criterion, device, num_classes):
+    """Evaluate model and compute loss and metrics."""
     model.eval()
+    total_loss = 0
+    total_miou, total_pa, total_dice = 0, 0, 0
+    count = 0
 
-    val_loss, val_acc = 0, 0
+    with torch.no_grad():
+        for images, masks in loader:
+            images, masks = images.to(device), masks.to(device)
+            masks = masks.squeeze(1)  # remove channel dimension
+            outputs = model(images)["out"]
 
-    # Turn on inference context manager
-    with torch.inference_model():
-        for batch, (X, y) in enumerate(dataloader):
-            # Send data to target device
-            X, y = X.to(DEVICE), y.to(DEVICE)
+            loss = criterion(outputs, masks)
+            total_loss += loss.item()
 
-            # 1. Forward pass
-            val_pred_logits = model(X)
+            # Compute Metrics
+            miou, pa, dice = compute_metrics(outputs, masks, num_classes)
+            total_miou += miou
+            total_pa += pa
+            total_dice += dice
+            count += 1
 
-            # 2. Calculate and accumulate loss
-            loss = loss_fn(val_pred_logits, y)
-            val_loss += loss.item()
+    avg_loss = total_loss / len(loader)
+    avg_miou = total_miou / count
+    avg_pa = total_pa / count
+    avg_dice = total_dice / count
 
-            # Calculate and accumulate accuracy
-            val_acc += accuracy(val_pred_logits, y).item()
-        
-        # Adjust metrics to get average loss and accuracy per batch
-        val_loss = val_loss / len(dataloader)
-        val_acc = val_acc / len(dataloader)
+    return avg_loss, avg_miou, avg_pa, avg_dice
 
-        return val_loss, val_acc
-    
 
-"""
-    Trains and tests a Pytorch model.
-    Passes a target Pytorch model through train_step() and val_step() functions for a number of epochs, training and testing the model in the same epoch loop.
-    Calculates, prints and stores evaluation metrics throughtout.
-    - Args:
-        - model: torch.nn.Module: The model to train.
-        - train_dataloader: torch.utils.data.DataLoader: The training data loader.
-        - val_dataloader: torch.utils.data.DataLoader: The testing data loader.
-        - optimizer: torch.optim.Optimizer: The optimizer to use for training.
-        - loss_fn: torch.nn.Module: The loss function to use for training.
-        - epochs: int: The number of epochs to train the model for.
+##############################################
+# Main with Hydra and Profiling
+##############################################
+@hydra.main(version_base=None, config_path="config", config_name="config")
+def main(cfg: DictConfig):
+    """
+    Main training function, parameterized by Hydra config.
+    We optionally enable cProfile if cfg.profiling.enable is True.
+    """
+    # Check if profiling is enabled
+    if cfg.profiling.enable:
+        profiler = cProfile.Profile()
+        profiler.enable()
 
-    - Returns:
-        - Dict[str, List]
-            A dictionary of training and validation metrics.
-            In the form {"train_loss": [0.1112, 0.1093, ...], "train_accuracy": [0.8743, 0.8874, ...], "val_loss": [0.1112, 0.1093, ...], "val_accuracy": [0.8743, 0.8874, ...]}
-            For example: {"train_loss": [0.1112, 0.1093, ...], "train_accuracy": [0.8743, 0.8874, ...], "val_loss": [0.1112, 0.1093, ...], "val_accuracy": [0.8743, 0.8874, ...]}
-"""
-def train(model, train_dataloader, val_dataloader, optimizer, loss_fn, epochs):
-    results = {
-        "train_loss": [], 
-        "train_acc": [],
-        "val_loss": [],
-        "val_acc": []
-    }
+    # 1) Define transformations
+    image_transform = transforms.Compose([
+        transforms.Resize((cfg.training.image_size, cfg.training.image_size)),
+        transforms.ToTensor(),
+    ])
 
-    # Loop through training and testing steps for a number of epochs
-    for epoch in tdqm(range(epochs), desc="Epochs"):
-        train_loss, train_acc = train_step(
-            model=model,
-            dataloader=train_dataloader,
-            loss_fn=loss_fn,
-            optimizer=optimizer
-        )
-        val_loss, val_acc = val_step(
-            model=model,
-            dataloader=val_dataloader,
-            loss_fn=loss_fn
-        )
+    # 2) Create datasets and data loaders
+    train_dataset = FootballSegmentationDataset(
+        root_dir=cfg.data.train_dir,
+        use_mask_type=cfg.data.use_mask_type,
+        transform=image_transform,
+        target_transform=mask_transform
+    )
+    val_dataset = FootballSegmentationDataset(
+        root_dir=cfg.data.val_dir,
+        use_mask_type=cfg.data.use_mask_type,
+        transform=image_transform,
+        target_transform=mask_transform
+    )
+    test_dataset = FootballSegmentationDataset(
+        root_dir=cfg.data.test_dir,
+        use_mask_type=cfg.data.use_mask_type,
+        transform=image_transform,
+        target_transform=mask_transform
+    )
 
-        # Prints
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=cfg.training.batch_size,
+        shuffle=True,
+        num_workers=cfg.data.num_workers
+    )
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=cfg.training.batch_size,
+        shuffle=False,
+        num_workers=cfg.data.num_workers
+    )
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=cfg.training.batch_size,
+        shuffle=False,
+        num_workers=cfg.data.num_workers
+    )
+
+    # 3) Initialize Weights & Biases
+    wandb.init(project=cfg.wandb.project_name)
+
+    # 4) Load or create your model
+    model = deeplabv3_resnet50(pretrained=cfg.model.pretrained)
+    model = adapt_model(model, num_classes=cfg.model.num_classes)
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
+
+    # 5) Define loss and optimizer
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(
+        model.parameters(),
+        lr=cfg.training.learning_rate,
+        weight_decay=cfg.training.weight_decay
+    )
+
+    # 6) Main training loop
+    for epoch in range(cfg.training.epochs):
+        train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device)
+        val_loss, val_miou, val_pa, val_dice = evaluate(model, val_loader, criterion, device, cfg.model.num_classes)
+
+        # Log metrics to wandb
+        wandb.log({
+            "epoch": epoch,
+            "train_loss": train_loss,
+            "val_loss": val_loss,
+            "val_mIoU": val_miou,
+            "val_Pixel_Accuracy": val_pa,
+            "val_Dice_Score": val_dice
+        })
+
         print(
-            f"Epochs: {epoch+1} |" 
-            f"train_loss: {train_loss:.4f} |" 
-            f"train_acc: {train_acc:.4f} |"
-            f"val_loss: {val_loss: .4f} |" 
-            f"val_acc: {val_acc: .4f}"
+            f"Epoch {epoch+1}/{cfg.training.epochs} | "
+            f"Train Loss: {train_loss:.4f} | Val Loss: {val_loss:.4f} | "
+            f"Val mIoU: {val_miou:.4f} | Val Pixel Acc: {val_pa:.4f} | Val Dice: {val_dice:.4f}"
         )
 
-        # Update results dictionary
-        results["train_loss"].append(train_loss)
-        results["train_acc"].append(train_acc)
-        results["val_loss"].append(val_loss)
-        results["val_acc"].append(val_acc)
+    # 7) Save the model
+    save_path = cfg.misc.save_path
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    torch.save(model.state_dict(), save_path)
+    wandb.save(save_path)
 
-    # Return the filled results at the end of the epochs
-    torch.save(model.state_dict(), MODEL_PATH)
-    print(f"Model saved at {MODEL_PATH}")
-    
-    return results
+    # 8) Evaluate on test set
+    test_loss, test_miou, test_pa, test_dice = evaluate(
+        model, test_loader, criterion, device, cfg.model.num_classes
+    )
+    print(
+        f"Test Metrics | Loss: {test_loss:.4f} | mIoU: {test_miou:.4f} | "
+        f"Pixel Accuracy: {test_pa:.4f} | Dice Score: {test_dice:.4f}"
+    )
+
+    # If profiling was enabled, print or save results
+    if cfg.profiling.enable:
+        profiler.disable()
+        stats = pstats.Stats(profiler).sort_stats(cfg.profiling.sort_key)
+        # Print top 30 lines by default
+        stats.print_stats(30)
+        # Optionally, you can dump stats to a file for further analysis:
+        # stats.dump_stats("profile_results.pstat")
 
 
 if __name__ == "__main__":
-    loss_fn = torch.nn.BCEWithLogitsLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
-    train(
-        model=model,
-        train_dataloader=train_dataloader,
-        val_dataloader=val_dataloader,
-        optimizer=optimizer,
-        loss_fn=loss_fn,
-        epochs=NUM_EPOCHS
-    )
+    main()
