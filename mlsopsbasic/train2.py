@@ -1,11 +1,8 @@
 import os
-import glob
-from typing import Dict, List, Tuple
 
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torch.nn.functional as F
 import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
@@ -19,7 +16,6 @@ import hydra
 from omegaconf import DictConfig
 
 # Progress bar
-from tqdm.auto import tqdm
 
 # Weights & Biases
 import wandb

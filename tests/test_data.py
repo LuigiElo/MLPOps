@@ -1,9 +1,7 @@
 import pytest
-import os
 from pathlib import Path
 import cv2
 import numpy as np
-from PIL import Image
 from mlsopsbasic.config import DATA_DIR
 
 class FootballDataset:

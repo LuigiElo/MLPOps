@@ -15,3 +15,6 @@ mkdocstrings[python]>=0.18
 
 # pre-commit hooks
 pre-commit
+
+# API
+fastapi

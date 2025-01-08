@@ -1,5 +1,3 @@
-import click
-import kagglehub
 import os
 import torch
 from PIL import Image
@@ -11,13 +9,6 @@ import wandb
 # Configure logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-import os
-import torch
-from PIL import Image
-from torchvision import transforms
-from sklearn.model_selection import train_test_split
-import logging
 
 # Configure logger
 logging.basicConfig(level=logging.INFO)

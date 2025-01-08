@@ -2,9 +2,9 @@ name: "Ruff codecheck"
 
 on:
   push:
-    branches: ['*']
+    branches: ["*"]
   pull_request:
-    branches: ['*']
+    branches: ["*"]
   workflow_dispatch: {}
 
 jobs:
@@ -28,9 +28,11 @@ jobs:
         run: |
           pip install ruff
           pip list
-      - name: Ruff check
-        run:
-          ruff check .
+      - name: Ruff check (fail on errors)
+        run: |
+          ruff check . --fix
+      - name: Verify no errors remain
+        run: |
+          ruff check . --exit-zero
       - name: Ruff format
-        run:
-          ruff format .
+        run: ruff format .
