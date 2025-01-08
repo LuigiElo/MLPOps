@@ -23,11 +23,11 @@ def predict(
     dataloader: torch.utils.data.DataLoader
 ) -> torch.Tensor:
     """Run prediction for a given model and dataloader.
-    
+
     Args:
         model: Model to use for prediction.
         dataloader: DataLoader with batches.
-    
+
     Returns:
         Tensor of shape [N, d] where N is the number of samples and d is the output dimension of the model.
     """
@@ -64,7 +64,7 @@ def main(cfg: DictConfig) -> None:
 
     # Creating dataloader
     dataloader = torch.utils.data.DataLoader(
-        images, 
+        images,
         batch_size=cfg.hyperparameters.batch_size
     )
     logger.info(f"DataLoader created with batch size {cfg.hyperparameters.batch_size}.")

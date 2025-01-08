@@ -17,7 +17,7 @@ DEVICE = (
 # Hyperparameters
 BATCH_SIZE = 8
 
-LEARNING_RATE = 1e-3                    
+LEARNING_RATE = 1e-3
 EPOCHS = 10
 NUM_WORKERS = os.cpu_count() - 1
 WEIGHT_DECAY = 1e-4 # L2 regularization - This small value allows the model to fit the training data more closely, a higher value would increase regularization

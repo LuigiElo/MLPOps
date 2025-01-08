@@ -17,7 +17,7 @@ class FootballDataset:
         self.image_files = [f for f in self.root_dir.glob("Frame*1*(*).jpg")
                             if not str(f).endswith(("___fuse.png", "___save.png"))]
         # image_files = glob.glob(os.path.join(self.root_dir, "Frame*(*).jpg"))
-        
+
         # Load class mappings / these are the 11 classes from the dataset
         self.classes = {
             0: "Goal Bar",
@@ -38,7 +38,7 @@ class FootballDataset:
 
     def __len__(self):
         return len(self.image_files)
-    
+
     def __getitem__(self, index):
         img_path =   self.image_files[index]
         fuse_mask_path = str(img_path) + "___fuse.png"
@@ -50,7 +50,7 @@ class FootballDataset:
         mask = cv2.imread(str(fuse_mask_path), cv2.IMREAD_GRAYSCALE)
 
         return image, mask
-    
+
 
 @pytest.fixture
 def dataset():

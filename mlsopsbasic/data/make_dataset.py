@@ -102,7 +102,7 @@ def make_data(raw_dir: str, processed_dir: str, train_ratio=0.7, val_ratio=0.15,
             except Exception as e:
                 logger.error("Error processing file %s: %s", file_name, e)
                 wandb.log({"error": str(e)})
-    
+
     # Log processing stats
     logger.info("Total images processed: %d", total_images)
     logger.info("Missing fuse images: %d", missing_fuse)

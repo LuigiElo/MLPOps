@@ -2,8 +2,9 @@ name: Docker Image continuous integration
 
 on:
   push:
-    branches: ['*']
-  pull_request: ['*']
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
 
 jobs:
     build:

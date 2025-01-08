@@ -18,7 +18,7 @@ from torch import nn
 class DoubleConvBlock(nn.Module):
     """ A convolutional block in the UNet architecture.
 
-    This block consists of two convolutional layers with batch normalization followed by a ReLU 
+    This block consists of two convolutional layers with batch normalization followed by a ReLU
     activation function.
 
     Args:
@@ -200,7 +200,7 @@ class Decoder(nn.Module):
 
 
 class UNet(nn.Module):
-    """The UNet architecture.   
+    """The UNet architecture.
 
     Args:
         out_channels (int): The number of output channels.
@@ -244,7 +244,7 @@ if __name__ == "__main__":
     model = UNet(channels=[3, 64, 128, 256, 512, 1024], out_channels=1)
 
     # Test the model
-    x = torch.randn(1, 3, 256, 256) 
+    x = torch.randn(1, 3, 256, 256)
     y = model(x)
     print(y.shape)
 

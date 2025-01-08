@@ -43,7 +43,7 @@ def train(cfg: DictConfig) -> None:
     train_set, _ = corrupt_mnist(cfg.directories.data_dir)
 
     train_dataloader = torch.utils.data.DataLoader(
-        train_set, 
+        train_set,
         batch_size=cfg.hyperparameters.batch_size,
         num_workers=cfg.hyperparameters.num_workers
     )
@@ -51,8 +51,8 @@ def train(cfg: DictConfig) -> None:
     # Loss and optimizer
     loss_fn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(
-        model.parameters(), 
-        lr=cfg.hyperparameters.learning_rate, 
+        model.parameters(),
+        lr=cfg.hyperparameters.learning_rate,
         weight_decay=cfg.hyperparameters.weight_decay
     )
 
@@ -121,11 +121,11 @@ def evaluate(cfg: DictConfig) -> None:
     # Load dataset
     _, test_set = corrupt_mnist(cfg.directories.data_dir)
     test_dataloader = torch.utils.data.DataLoader(
-        test_set, 
+        test_set,
         batch_size=cfg.hyperparameters.batch_size
     )
 
-    # Evaluation 
+    # Evaluation
     model.eval()
     correct, total = 0, 0
     with torch.no_grad():

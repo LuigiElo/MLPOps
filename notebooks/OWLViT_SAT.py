@@ -2,14 +2,14 @@
 # coding: utf-8
 
 # # Combining Grounding DINO with Segment Anything (SAM) for text-based mask generation
-# 
+#
 # This is based on the popular [Grounded Segment Anything](https://github.com/IDEA-Research/Grounded-Segment-Anything) project.
-# 
+#
 # <img src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/model_doc/grounded_sam.png"
 # alt="drawing" width="900"/>
-# 
+#
 # <small> Grounded SAM overview. Taken from the <a href="https://github.com/IDEA-Research/Grounded-Segment-Anything">original repository</a>. </small>
-# 
+#
 import os
 from pathlib import Path
 import cv2
@@ -295,7 +295,7 @@ def refine_masks(masks: torch.BoolTensor, polygon_refinement: bool = False) -> L
 
 
 # ## Grounded Segment Anything (SAM)
-# 
+#
 # The approach:
 # 1. use Grounding DINO to detect a given set of texts ('players' in this case, so both players from Real Madrid and Manchester United) in the image. The output is a set of bounding boxes.
 # 2. prompt Segment Anything (SAM) with the bounding boxes, for which the model will output segmentation masks.

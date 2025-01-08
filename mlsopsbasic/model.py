@@ -84,4 +84,3 @@ if __name__ == "__main__":
     dummy_input = torch.randn(1, 1, 256, 256)  # Batch size 1, grayscale image 256x256
     output = model(dummy_input)
     print(f"Output shape: {output.shape}")
-

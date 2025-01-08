@@ -7,7 +7,12 @@ directories:
 
 # Device
 device:
-  type: "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+  options:
+    - "cuda"
+    - "cpu"
+    - "mps"
+  selected: "cuda"
+  # type: "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 
 # Hyperparameters
 hyperparameters:
@@ -15,7 +20,7 @@ hyperparameters:
   learning_rate: 0.001
   epochs: 10
   num_workers: ${oc.env:NUM_WORKERS, os.cpu_count() - 1}
-  weight_decay: 0.0001  # L2 regularization
+  weight_decay: 0.0001 # L2 regularization
 
 # Image Parameters
 image:
@@ -23,13 +28,12 @@ image:
 
 # Model Parameters
 model:
-  num_classes: 1  # Change to 11 for multi-class classification
+  num_classes: 1 # Change to 11 for multi-class classification
   channels: [1, 64, 128, 256, 512, 1024]
   out_channels: 1
 
 # Logging
 logging:
-  model_name: "unet_${now:%Y-%m-%d-%H-%M-%S}"  # model name is set up based on timestamp
+  model_name: "unet_${now:%Y-%m-%d-%H-%M-%S}" # model name is set up based on timestamp
   model_path: "${directories.model_dir}/${logging.model_name}.pt"
   log_path: "${directories.log_dir}/${logging.model_name}.log"
-
