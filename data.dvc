@@ -1,6 +1,4211 @@
 outs:
-- md5: 815a814c3989d20fc4001925411365fb.dir
-  size: 131036406
-  nfiles: 601
-  hash: md5
+- hash: md5
   path: data
+  files:
+  - relpath: processed/.gitkeep
+    md5: d41d8cd98f00b204e9800998ecf8427e
+    size: 0
+    cloud:
+      myremote:
+        etag: 08fbeae6e88be78a031001
+        version_id: '1736372551005563'
+  - relpath: processed/test/Frame 1  (1).jpg
+    md5: a00a24c92300e789ceff42f8f97b22de
+    size: 761698
+    cloud:
+      myremote:
+        etag: 08cc859ae98be78a031001
+        version_id: '1736372551844556'
+  - relpath: processed/test/Frame 1  (1).jpg___fuse.png
+    md5: cdb8757cc24ba996d1d66ffff4c5e196
+    size: 23704
+    cloud:
+      myremote:
+        etag: 08d8c38ee98be78a031001
+        version_id: '1736372551655896'
+  - relpath: processed/test/Frame 1  (1).jpg___save.png
+    md5: 35bdbdd9aa573c36a3b5335a2f461f5c
+    size: 88218
+    cloud:
+      myremote:
+        etag: 08eaa8a1e98be78a031001
+        version_id: '1736372551963754'
+  - relpath: processed/test/Frame 1  (12).jpg
+    md5: aceb474d3c5e89f77e38b04f2bf73bb0
+    size: 524885
+    cloud:
+      myremote:
+        etag: 08bc8dd8e98be78a031001
+        version_id: '1736372552861372'
+  - relpath: processed/test/Frame 1  (12).jpg___fuse.png
+    md5: 67c26996ca60ea7f4c86766723df2bfd
+    size: 22888
+    cloud:
+      myremote:
+        etag: 08ccbc9ee98be78a031001
+        version_id: '1736372551917132'
+  - relpath: processed/test/Frame 1  (12).jpg___save.png
+    md5: 14e1db8b990b0fbb5467070f6b586aef
+    size: 82394
+    cloud:
+      myremote:
+        etag: 08b3dbb8e98be78a031001
+        version_id: '1736372552347059'
+  - relpath: processed/test/Frame 1  (18).jpg
+    md5: a5c8647ededcba61054c44bb576b13fe
+    size: 627565
+    cloud:
+      myremote:
+        etag: 08b2ec9fe98be78a031001
+        version_id: '1736372551939634'
+  - relpath: processed/test/Frame 1  (18).jpg___fuse.png
+    md5: 3aaa57819deb6f888cbbb43f322130a6
+    size: 19828
+    cloud:
+      myremote:
+        etag: 08b9ef9be98be78a031001
+        version_id: '1736372551874489'
+  - relpath: processed/test/Frame 1  (18).jpg___save.png
+    md5: bca217a4f05e58f7e1984d315852afb0
+    size: 78155
+    cloud:
+      myremote:
+        etag: 08dda28ee98be78a031001
+        version_id: '1736372551651677'
+  - relpath: processed/test/Frame 1  (32).jpg
+    md5: 4c0011122eb917a6c69705451ce9367c
+    size: 442135
+    cloud:
+      myremote:
+        etag: 08eab88fe98be78a031001
+        version_id: '1736372551670890'
+  - relpath: processed/test/Frame 1  (32).jpg___fuse.png
+    md5: 2ea08305c8c3014e005cd9cb6881a0ce
+    size: 15740
+    cloud:
+      myremote:
+        etag: 08e7a3a1e98be78a031001
+        version_id: '1736372551963111'
+  - relpath: processed/test/Frame 1  (32).jpg___save.png
+    md5: 80d4ded8e1cebc5c159c1a9e688882ba
+    size: 67451
+    cloud:
+      myremote:
+        etag: 08d4ae95e98be78a031001
+        version_id: '1736372551767892'
+  - relpath: processed/test/Frame 1  (36).jpg
+    md5: eda27222ef31c57d3ffe75225132b29a
+    size: 510606
+    cloud:
+      myremote:
+        etag: 08f0ba8ce98be78a031001
+        version_id: '1736372551622000'
+  - relpath: processed/test/Frame 1  (36).jpg___fuse.png
+    md5: 62b9e700a27b5fa5b5630ac8cf91330e
+    size: 23212
+    cloud:
+      myremote:
+        etag: 089da698e98be78a031001
+        version_id: '1736372551815965'
+  - relpath: processed/test/Frame 1  (36).jpg___save.png
+    md5: 6e576cb9cc02fc2f6462adac7c92ea22
+    size: 94564
+    cloud:
+      myremote:
+        etag: 08a2e38ce98be78a031001
+        version_id: '1736372551627170'
+  - relpath: processed/test/Frame 1  (39).jpg
+    md5: df251e14b3132823edca192f8d4ad934
+    size: 643150
+    cloud:
+      myremote:
+        etag: 08a09299e98be78a031001
+        version_id: '1736372551829792'
+  - relpath: processed/test/Frame 1  (39).jpg___fuse.png
+    md5: 75a7a5dea4fb02dd05ba036325270a00
+    size: 20499
+    cloud:
+      myremote:
+        etag: 08b59b8fe98be78a031001
+        version_id: '1736372551667125'
+  - relpath: processed/test/Frame 1  (39).jpg___save.png
+    md5: 941d10a166ade55f01f8c77f039b1dbf
+    size: 77367
+    cloud:
+      myremote:
+        etag: 08b4cf90e98be78a031001
+        version_id: '1736372551690164'
+  - relpath: processed/test/Frame 1  (44).jpg
+    md5: ba92038f6d63f3cede97248f981f9254
+    size: 568091
+    cloud:
+      myremote:
+        etag: 08d5cccee98be78a031001
+        version_id: '1736372552705621'
+  - relpath: processed/test/Frame 1  (44).jpg___fuse.png
+    md5: 5d513dbfc9ce33f275f25243d4a0f831
+    size: 17149
+    cloud:
+      myremote:
+        etag: 08ceaba1e98be78a031001
+        version_id: '1736372551964110'
+  - relpath: processed/test/Frame 1  (44).jpg___save.png
+    md5: a04a4bc215af11af4765bf94cfd1e070
+    size: 65278
+    cloud:
+      myremote:
+        etag: 08c99e9fe98be78a031001
+        version_id: '1736372551929673'
+  - relpath: processed/test/Frame 1  (47).jpg
+    md5: 47ac7e064ada2b3797c482850cf53de9
+    size: 556478
+    cloud:
+      myremote:
+        etag: 08bce898e98be78a031001
+        version_id: '1736372551824444'
+  - relpath: processed/test/Frame 1  (47).jpg___fuse.png
+    md5: 3b7d42e34fe1d7fcd191df1b071b63d4
+    size: 19676
+    cloud:
+      myremote:
+        etag: 089bf58de98be78a031001
+        version_id: '1736372551645851'
+  - relpath: processed/test/Frame 1  (47).jpg___save.png
+    md5: cd1d10554e72b5ca2b78bf1c55851219
+    size: 85466
+    cloud:
+      myremote:
+        etag: 0896dd8ce98be78a031001
+        version_id: '1736372551626390'
+  - relpath: processed/test/Frame 1  (49).jpg
+    md5: fa326d82b1c948fd1aa668545ef705ae
+    size: 473714
+    cloud:
+      myremote:
+        etag: 08acbdcbe98be78a031001
+        version_id: '1736372552654508'
+  - relpath: processed/test/Frame 1  (49).jpg___fuse.png
+    md5: 9329ec9c887014fb2c7ff3043bec5bf8
+    size: 16294
+    cloud:
+      myremote:
+        etag: 08829e94e98be78a031001
+        version_id: '1736372551749378'
+  - relpath: processed/test/Frame 1  (49).jpg___save.png
+    md5: 9325b7ad53bee78dc678c8940a2bd10d
+    size: 63006
+    cloud:
+      myremote:
+        etag: 08b6d28ee98be78a031001
+        version_id: '1736372551657782'
+  - relpath: processed/test/Frame 1  (71).jpg
+    md5: b64feac753d9870973412f3cd84c3fc9
+    size: 677388
+    cloud:
+      myremote:
+        etag: 08d28ba0e98be78a031001
+        version_id: '1736372551943634'
+  - relpath: processed/test/Frame 1  (71).jpg___fuse.png
+    md5: 760ae6013fab4c33dd65c934613ca339
+    size: 28121
+    cloud:
+      myremote:
+        etag: 0885c88ee98be78a031001
+        version_id: '1736372551656453'
+  - relpath: processed/test/Frame 1  (71).jpg___save.png
+    md5: 2f3f99a53ad014e2da9f4233094fa534
+    size: 91236
+    cloud:
+      myremote:
+        etag: 089ddc9de98be78a031001
+        version_id: '1736372551904797'
+  - relpath: processed/test/Frame 1  (74).jpg
+    md5: 1c5a0b4461a5920b09180eb3a668390a
+    size: 678099
+    cloud:
+      myremote:
+        etag: 08f1bd9ae98be78a031001
+        version_id: '1736372551851761'
+  - relpath: processed/test/Frame 1  (74).jpg___fuse.png
+    md5: 26bd6f40f1ef3842b9ba17e7b56a8b9c
+    size: 27204
+    cloud:
+      myremote:
+        etag: 0893d890e98be78a031001
+        version_id: '1736372551691283'
+  - relpath: processed/test/Frame 1  (74).jpg___save.png
+    md5: 0a59f04d19a5c85ded5ff66a102bf2f1
+    size: 83882
+    cloud:
+      myremote:
+        etag: 08a8b3a4e98be78a031001
+        version_id: '1736372552014248'
+  - relpath: processed/test/Frame 1  (75).jpg
+    md5: 4f6a907847fce21f37188ce7bf7ba167
+    size: 682847
+    cloud:
+      myremote:
+        etag: 08cedbf2e98be78a031001
+        version_id: '1736372553297358'
+  - relpath: processed/test/Frame 1  (75).jpg___fuse.png
+    md5: 2e9dc78b2c83e5ef500d38a517590db9
+    size: 26669
+    cloud:
+      myremote:
+        etag: 08b0858ee98be78a031001
+        version_id: '1736372551647920'
+  - relpath: processed/test/Frame 1  (75).jpg___save.png
+    md5: 66b24e20df59806c8f7ab43d08968c53
+    size: 90591
+    cloud:
+      myremote:
+        etag: 08a6f29fe98be78a031001
+        version_id: '1736372551940390'
+  - relpath: processed/test/Frame 1  (78).jpg
+    md5: ee1bec08fdda9ad7c48d8425ddcce559
+    size: 706783
+    cloud:
+      myremote:
+        etag: 08e7a98eea8be78a031001
+        version_id: '1736372553749735'
+  - relpath: processed/test/Frame 1  (78).jpg___fuse.png
+    md5: 1361802db1b9c1655b4cd45b2ffabca7
+    size: 26472
+    cloud:
+      myremote:
+        etag: 08c2d58fe98be78a031001
+        version_id: '1736372551674562'
+  - relpath: processed/test/Frame 1  (78).jpg___save.png
+    md5: b7a8a002cfc6c27907c6b229250b2af3
+    size: 81847
+    cloud:
+      myremote:
+        etag: 08d4eb8ae98be78a031001
+        version_id: '1736372551595476'
+  - relpath: processed/test/Frame 1  (79).jpg
+    md5: 64efea0936744d214eac941317fa9723
+    size: 706185
+    cloud:
+      myremote:
+        etag: 08e09fdfe98be78a031001
+        version_id: '1736372552978400'
+  - relpath: processed/test/Frame 1  (79).jpg___fuse.png
+    md5: a7604a677dd4ac8c86d04a855e4bc0a4
+    size: 26223
+    cloud:
+      myremote:
+        etag: 08f4d0a1e98be78a031001
+        version_id: '1736372551968884'
+  - relpath: processed/test/Frame 1  (79).jpg___save.png
+    md5: df11ee7aab62d2f4f82551903639dd69
+    size: 85490
+    cloud:
+      myremote:
+        etag: 08aabd90e98be78a031001
+        version_id: '1736372551687850'
+  - relpath: processed/test/Frame 1  (84).jpg
+    md5: 93d33d33059b91ec103aa0b004661bf5
+    size: 593929
+    cloud:
+      myremote:
+        etag: 08868688ea8be78a031001
+        version_id: '1736372553646854'
+  - relpath: processed/test/Frame 1  (84).jpg___fuse.png
+    md5: 140b89e468fac4f2748d94d2ba3a5c30
+    size: 16951
+    cloud:
+      myremote:
+        etag: 08d08e8de98be78a031001
+        version_id: '1736372551632720'
+  - relpath: processed/test/Frame 1  (84).jpg___save.png
+    md5: 27aa2ac019b5b80eacc30383448114bd
+    size: 57773
+    cloud:
+      myremote:
+        etag: 08889f92e98be78a031001
+        version_id: '1736372551716744'
+  - relpath: processed/test/Frame 1  (96).jpg
+    md5: 49c3383318e993b4597c3935688cda0c
+    size: 352294
+    cloud:
+      myremote:
+        etag: 0892d491ea8be78a031001
+        version_id: '1736372553804306'
+  - relpath: processed/test/Frame 1  (96).jpg___fuse.png
+    md5: 83550ac26b9e48a02309bae0eec89c12
+    size: 14974
+    cloud:
+      myremote:
+        etag: 08c6dc8ae98be78a031001
+        version_id: '1736372551593542'
+  - relpath: processed/test/Frame 1  (96).jpg___save.png
+    md5: 8e2352000086614eb29b5cffe39c281e
+    size: 57526
+    cloud:
+      myremote:
+        etag: 08c7df9fe98be78a031001
+        version_id: '1736372551937991'
+  - relpath: processed/train/Frame 1  (10).jpg
+    md5: 1e957ccaeba9dfd07b18aa6a31f2b4cb
+    size: 527427
+    cloud:
+      myremote:
+        etag: 08fb91ceea8be78a031001
+        version_id: '1736372554795259'
+  - relpath: processed/train/Frame 1  (10).jpg___fuse.png
+    md5: a1b4db6a1f3d944abbc8c5f7bebfece3
+    size: 22369
+    cloud:
+      myremote:
+        etag: 08b1a1e0ea8be78a031001
+        version_id: '1736372555092145'
+  - relpath: processed/train/Frame 1  (10).jpg___save.png
+    md5: 920a76f18a647bc3ebff41719e700117
+    size: 79579
+    cloud:
+      myremote:
+        etag: 08cec2b9ea8be78a031001
+        version_id: '1736372554457422'
+  - relpath: processed/train/Frame 1  (100).jpg
+    md5: 5c32a105412bc1ff67c58de7fd92f613
+    size: 526031
+    cloud:
+      myremote:
+        etag: 08bfe4f1ea8be78a031001
+        version_id: '1736372555379263'
+  - relpath: processed/train/Frame 1  (100).jpg___fuse.png
+    md5: 4a95142b0445a2520be257f56064ef00
+    size: 20353
+    cloud:
+      myremote:
+        etag: 0890d6cfe98be78a031001
+        version_id: '1736372552723216'
+  - relpath: processed/train/Frame 1  (100).jpg___save.png
+    md5: d5f4c5329f9a2e5b2b1b24f9421b4a97
+    size: 80172
+    cloud:
+      myremote:
+        etag: 08ddfd8fea8be78a031001
+        version_id: '1736372553776861'
+  - relpath: processed/train/Frame 1  (11).jpg
+    md5: 92da02893d3c18f86eeb38f8a710e82d
+    size: 521865
+    cloud:
+      myremote:
+        etag: 08dac8a9ea8be78a031001
+        version_id: '1736372554196058'
+  - relpath: processed/train/Frame 1  (11).jpg___fuse.png
+    md5: 0d4f89aaad1cf07371ba9bbaa5567fb6
+    size: 21546
+    cloud:
+      myremote:
+        etag: 08f185a1ea8be78a031001
+        version_id: '1736372554056433'
+  - relpath: processed/train/Frame 1  (11).jpg___save.png
+    md5: 3898b530ff029d5ec3e140131d0435b8
+    size: 82676
+    cloud:
+      myremote:
+        etag: 08aff5d5ea8be78a031001
+        version_id: '1736372554922671'
+  - relpath: processed/train/Frame 1  (13).jpg
+    md5: 0348624cef0c77d20d9faf556dfe065d
+    size: 536190
+    cloud:
+      myremote:
+        etag: 08b1f58aeb8be78a031001
+        version_id: '1736372555791025'
+  - relpath: processed/train/Frame 1  (13).jpg___fuse.png
+    md5: bbee7f327d6f2d9bf13fd073e855ce30
+    size: 24517
+    cloud:
+      myremote:
+        etag: 08b99385ea8be78a031001
+        version_id: '1736372553599417'
+  - relpath: processed/train/Frame 1  (13).jpg___save.png
+    md5: 2ffbd7aa358dd7e8440df2773d9e58b1
+    size: 89021
+    cloud:
+      myremote:
+        etag: 08f7dc91ea8be78a031001
+        version_id: '1736372553805431'
+  - relpath: processed/train/Frame 1  (14).jpg
+    md5: b64feac753d9870973412f3cd84c3fc9
+    size: 677388
+    cloud:
+      myremote:
+        etag: 0890adfbea8be78a031001
+        version_id: '1736372555536016'
+  - relpath: processed/train/Frame 1  (14).jpg___fuse.png
+    md5: 61387169bf398e54f1da2517cdd34d4b
+    size: 28372
+    cloud:
+      myremote:
+        etag: 08d1cbacea8be78a031001
+        version_id: '1736372554245585'
+  - relpath: processed/train/Frame 1  (14).jpg___save.png
+    md5: f419ab89c13d61d8b76d619320c25d91
+    size: 94083
+    cloud:
+      myremote:
+        etag: 08c1af8dea8be78a031001
+        version_id: '1736372553734081'
+  - relpath: processed/train/Frame 1  (15).jpg
+    md5: 3394f38c14a1f65dc743f816efa46857
+    size: 479484
+    cloud:
+      myremote:
+        etag: 0885c4d2ea8be78a031001
+        version_id: '1736372554867205'
+  - relpath: processed/train/Frame 1  (15).jpg___fuse.png
+    md5: d9f9a60a83b4b02d4bd761e72a3f4063
+    size: 18792
+    cloud:
+      myremote:
+        etag: 08c3a891ea8be78a031001
+        version_id: '1736372553798723'
+  - relpath: processed/train/Frame 1  (15).jpg___save.png
+    md5: 9a85b0cdd34df03d7da66f682a5e6225
+    size: 70408
+    cloud:
+      myremote:
+        etag: 0888cb83ea8be78a031001
+        version_id: '1736372553573768'
+  - relpath: processed/train/Frame 1  (16).jpg
+    md5: c0e61d33195913c8375998e547e66e5b
+    size: 630841
+    cloud:
+      myremote:
+        etag: 08aac5dee98be78a031001
+        version_id: '1736372552966826'
+  - relpath: processed/train/Frame 1  (16).jpg___fuse.png
+    md5: 83540c25956464bbfc5bd803f3827606
+    size: 22315
+    cloud:
+      myremote:
+        etag: 08e585ecea8be78a031001
+        version_id: '1736372555285221'
+  - relpath: processed/train/Frame 1  (16).jpg___save.png
+    md5: 41124c62d0309b32ef316e14cffd79b9
+    size: 75233
+    cloud:
+      myremote:
+        etag: 08a9b1e2ea8be78a031001
+        version_id: '1736372555126953'
+  - relpath: processed/train/Frame 1  (20).jpg
+    md5: ad178c31547087d11fb68a96670c042b
+    size: 441224
+    cloud:
+      myremote:
+        etag: 088ae6aeea8be78a031001
+        version_id: '1736372554281738'
+  - relpath: processed/train/Frame 1  (20).jpg___fuse.png
+    md5: fdaa97c75fdc8d927acdae51a03e4a0e
+    size: 13800
+    cloud:
+      myremote:
+        etag: 088f8aadea8be78a031001
+        version_id: '1736372554253583'
+  - relpath: processed/train/Frame 1  (20).jpg___save.png
+    md5: b0986b40430b50a8c24df50d1394feb7
+    size: 55009
+    cloud:
+      myremote:
+        etag: 0886ffe7ea8be78a031001
+        version_id: '1736372555218822'
+  - relpath: processed/train/Frame 1  (21).jpg
+    md5: 80b6138ec14879c4b7eebdc83556459b
+    size: 480576
+    cloud:
+      myremote:
+        etag: 08a680eaea8be78a031001
+        version_id: '1736372555251750'
+  - relpath: processed/train/Frame 1  (21).jpg___fuse.png
+    md5: 1a395182871e9f580e5dffe4019c93d7
+    size: 14332
+    cloud:
+      myremote:
+        etag: 08f6c2fae98be78a031001
+        version_id: '1736372553425270'
+  - relpath: processed/train/Frame 1  (21).jpg___save.png
+    md5: 83d34d2eff8a4da1d418e9d5cd9927c0
+    size: 58793
+    cloud:
+      myremote:
+        etag: 08b0bca5ea8be78a031001
+        version_id: '1736372554128944'
+  - relpath: processed/train/Frame 1  (23).jpg
+    md5: 252c833cb1a308f06417ec4e087e2636
+    size: 457581
+    cloud:
+      myremote:
+        etag: 0881d0f9ea8be78a031001
+        version_id: '1736372555507713'
+  - relpath: processed/train/Frame 1  (23).jpg___fuse.png
+    md5: da7242d1a604138010ddf5be72ba6825
+    size: 16245
+    cloud:
+      myremote:
+        etag: 08dce0e7ea8be78a031001
+        version_id: '1736372555214940'
+  - relpath: processed/train/Frame 1  (23).jpg___save.png
+    md5: b33b25844d10dfddf2f52c16c8be496c
+    size: 63597
+    cloud:
+      myremote:
+        etag: 08a4c0dbea8be78a031001
+        version_id: '1736372555014180'
+  - relpath: processed/train/Frame 1  (24).jpg
+    md5: 6b84b78a61bb0c77d6be22a01fcdace9
+    size: 505642
+    cloud:
+      myremote:
+        etag: 0880c2f9ea8be78a031001
+        version_id: '1736372555505920'
+  - relpath: processed/train/Frame 1  (24).jpg___fuse.png
+    md5: 8d5aab448004c5ae66ebe1756b464c34
+    size: 16857
+    cloud:
+      myremote:
+        etag: 08cccbfde98be78a031001
+        version_id: '1736372553475532'
+  - relpath: processed/train/Frame 1  (24).jpg___save.png
+    md5: 95359dfe333309a537a4cf51a36d0059
+    size: 59765
+    cloud:
+      myremote:
+        etag: 08d2abf2e98be78a031001
+        version_id: '1736372553291218'
+  - relpath: processed/train/Frame 1  (26).jpg
+    md5: 0c71691087737016da1322c98f4c5cb7
+    size: 536467
+    cloud:
+      myremote:
+        etag: 08fdb0d0ea8be78a031001
+        version_id: '1736372554831997'
+  - relpath: processed/train/Frame 1  (26).jpg___fuse.png
+    md5: 31d1a427a3d95f5a4365d580bdc70094
+    size: 19376
+    cloud:
+      myremote:
+        etag: 08c5e980ea8be78a031001
+        version_id: '1736372553528517'
+  - relpath: processed/train/Frame 1  (26).jpg___save.png
+    md5: b8a3cf265851594a22eb0c20d8261e0c
+    size: 68573
+    cloud:
+      myremote:
+        etag: 08b0c2a9ea8be78a031001
+        version_id: '1736372554195248'
+  - relpath: processed/train/Frame 1  (27).jpg
+    md5: 1be62f6b0ae33cf7ebc70a57666ce494
+    size: 528396
+    cloud:
+      myremote:
+        etag: 0897db99ea8be78a031001
+        version_id: '1736372553936279'
+  - relpath: processed/train/Frame 1  (27).jpg___fuse.png
+    md5: f36661c2b3bf25be5eb2b60d7368a826
+    size: 19614
+    cloud:
+      myremote:
+        etag: 08b7d2e2e98be78a031001
+        version_id: '1736372553034039'
+  - relpath: processed/train/Frame 1  (27).jpg___save.png
+    md5: 1302053a3e446d6e3634e33bf568a9ea
+    size: 83062
+    cloud:
+      myremote:
+        etag: 08f3c6a2ea8be78a031001
+        version_id: '1736372554081139'
+  - relpath: processed/train/Frame 1  (28).jpg
+    md5: 2bac4d60a30a74269fa616a8ba73e796
+    size: 547297
+    cloud:
+      myremote:
+        etag: 08baeaf1ea8be78a031001
+        version_id: '1736372555380026'
+  - relpath: processed/train/Frame 1  (28).jpg___fuse.png
+    md5: 02c29eb658ddb5f742391548f129e824
+    size: 17553
+    cloud:
+      myremote:
+        etag: 08f7a0dbe98be78a031001
+        version_id: '1736372552913015'
+  - relpath: processed/train/Frame 1  (28).jpg___save.png
+    md5: 8ddba694d07281eed94588d6242b6245
+    size: 63701
+    cloud:
+      myremote:
+        etag: 08f092e0e98be78a031001
+        version_id: '1736372552993136'
+  - relpath: processed/train/Frame 1  (3).jpg
+    md5: 485e976dacc1bc4297a5a67bf15c38d4
+    size: 516301
+    cloud:
+      myremote:
+        etag: 0891f4c7ea8be78a031001
+        version_id: '1736372554693137'
+  - relpath: processed/train/Frame 1  (3).jpg___fuse.png
+    md5: ea86f9e26c5a1d7455bfa25cf1bf80a0
+    size: 32049
+    cloud:
+      myremote:
+        etag: 08b5afd6ea8be78a031001
+        version_id: '1736372554930101'
+  - relpath: processed/train/Frame 1  (3).jpg___save.png
+    md5: ef97880354955f2420468a19eb7bde1d
+    size: 108946
+    cloud:
+      myremote:
+        etag: 0881b992ea8be78a031001
+        version_id: '1736372553817217'
+  - relpath: processed/train/Frame 1  (30).jpg
+    md5: 4bc6ad07154ebf6f27b47de488bf9a0a
+    size: 439375
+    cloud:
+      myremote:
+        etag: 08b1eed7ea8be78a031001
+        version_id: '1736372554954545'
+  - relpath: processed/train/Frame 1  (30).jpg___fuse.png
+    md5: 379b9cc0aca7c71975b58c7d0b846aa7
+    size: 14725
+    cloud:
+      myremote:
+        etag: 08d79adfe98be78a031001
+        version_id: '1736372552977751'
+  - relpath: processed/train/Frame 1  (30).jpg___save.png
+    md5: 92cdc66fb4b8c1647cd6ff5978504cd2
+    size: 62952
+    cloud:
+      myremote:
+        etag: 08eaf6dfea8be78a031001
+        version_id: '1736372555086698'
+  - relpath: processed/train/Frame 1  (31).jpg
+    md5: 5aecb28054f1fdfcee3d52b86d99c0a3
+    size: 668398
+    cloud:
+      myremote:
+        etag: 0886c2d7ea8be78a031001
+        version_id: '1736372554948870'
+  - relpath: processed/train/Frame 1  (31).jpg___fuse.png
+    md5: 6f5f15282b793d581f5679124de56f77
+    size: 21267
+    cloud:
+      myremote:
+        etag: 08b9adc8ea8be78a031001
+        version_id: '1736372554700473'
+  - relpath: processed/train/Frame 1  (31).jpg___save.png
+    md5: 793b2fe22aed5338939f662bbee6f7e5
+    size: 72319
+    cloud:
+      myremote:
+        etag: 08b0cee9e98be78a031001
+        version_id: '1736372553148208'
+  - relpath: processed/train/Frame 1  (33).jpg
+    md5: 3dc19ef5026ce1d70b1a54b8a0a4f922
+    size: 513003
+    cloud:
+      myremote:
+        etag: 08a6cde7ea8be78a031001
+        version_id: '1736372555212454'
+  - relpath: processed/train/Frame 1  (33).jpg___fuse.png
+    md5: 023c1d61d839ac140758f2ff4e70594e
+    size: 20907
+    cloud:
+      myremote:
+        etag: 08b7968fea8be78a031001
+        version_id: '1736372553763639'
+  - relpath: processed/train/Frame 1  (33).jpg___save.png
+    md5: 040c137ce3cbae873c3f9d7cb735cacc
+    size: 77938
+    cloud:
+      myremote:
+        etag: 08cad7e0ea8be78a031001
+        version_id: '1736372555099082'
+  - relpath: processed/train/Frame 1  (34).jpg
+    md5: 998351503ae6af0642980e84c427f3cd
+    size: 488242
+    cloud:
+      myremote:
+        etag: 08fbe4e4ea8be78a031001
+        version_id: '1736372555166331'
+  - relpath: processed/train/Frame 1  (34).jpg___fuse.png
+    md5: 1cb1c8dec8a4eebe77cba3b4b0e14f2d
+    size: 15975
+    cloud:
+      myremote:
+        etag: 08d68efce98be78a031001
+        version_id: '1736372553451350'
+  - relpath: processed/train/Frame 1  (34).jpg___save.png
+    md5: 1f9c1630f8e25dc7b9b76bfb9fdc5b28
+    size: 63715
+    cloud:
+      myremote:
+        etag: 08daecadea8be78a031001
+        version_id: '1736372554266202'
+  - relpath: processed/train/Frame 1  (35).jpg
+    md5: 5bc33bb6618da82ca4ca79036e5fbadf
+    size: 498003
+    cloud:
+      myremote:
+        etag: 088fabc2ea8be78a031001
+        version_id: '1736372554601871'
+  - relpath: processed/train/Frame 1  (35).jpg___fuse.png
+    md5: f1b6a49a639b173bc2a01de39733b9f4
+    size: 27134
+    cloud:
+      myremote:
+        etag: 08fbb4c1e98be78a031001
+        version_id: '1736372552489595'
+  - relpath: processed/train/Frame 1  (35).jpg___save.png
+    md5: 91c42f99f2ed9ddf5307312646fdf067
+    size: 85136
+    cloud:
+      myremote:
+        etag: 08f4e2c0e98be78a031001
+        version_id: '1736372552479092'
+  - relpath: processed/train/Frame 1  (38).jpg
+    md5: c6450f105766fe1a1b87152ad198ed4c
+    size: 674599
+    cloud:
+      myremote:
+        etag: 08a9e6fee98be78a031001
+        version_id: '1736372553495337'
+  - relpath: processed/train/Frame 1  (38).jpg___fuse.png
+    md5: 683aa2a7f57df6170087409b51c31605
+    size: 19130
+    cloud:
+      myremote:
+        etag: 088deebdea8be78a031001
+        version_id: '1736372554528525'
+  - relpath: processed/train/Frame 1  (38).jpg___save.png
+    md5: afca00919f25f312c10864334175c07c
+    size: 69336
+    cloud:
+      myremote:
+        etag: 08c9bffce98be78a031001
+        version_id: '1736372553457609'
+  - relpath: processed/train/Frame 1  (4).jpg
+    md5: 4ba83c40d532d5445b9acdb520e936d3
+    size: 500726
+    cloud:
+      myremote:
+        etag: 08a7f7b5ea8be78a031001
+        version_id: '1736372554398631'
+  - relpath: processed/train/Frame 1  (4).jpg___fuse.png
+    md5: 066b78cceb94c259242f6855ce07d5b6
+    size: 29438
+    cloud:
+      myremote:
+        etag: 08cd8ea8e98be78a031001
+        version_id: '1736372552075085'
+  - relpath: processed/train/Frame 1  (4).jpg___save.png
+    md5: 53ec94f6ff2801808e467ecaa99f3d0a
+    size: 106897
+    cloud:
+      myremote:
+        etag: 08c0bcdce98be78a031001
+        version_id: '1736372552932928'
+  - relpath: processed/train/Frame 1  (40).jpg
+    md5: d6acc926c0d56e89ec25ea16c3c599a1
+    size: 669123
+    cloud:
+      myremote:
+        etag: 0894bfa3ea8be78a031001
+        version_id: '1736372554096532'
+  - relpath: processed/train/Frame 1  (40).jpg___fuse.png
+    md5: 36a6494e183c7a5854a23ff1a83b34f5
+    size: 21973
+    cloud:
+      myremote:
+        etag: 08cbef9cea8be78a031001
+        version_id: '1736372553988043'
+  - relpath: processed/train/Frame 1  (40).jpg___save.png
+    md5: c334e51a6f3c67950cf72a00b704d395
+    size: 86552
+    cloud:
+      myremote:
+        etag: 089bffd6ea8be78a031001
+        version_id: '1736372554940315'
+  - relpath: processed/train/Frame 1  (41).jpg
+    md5: 8541fca5099c3f895ea8858a7cf35994
+    size: 571328
+    cloud:
+      myremote:
+        etag: 08bdcacfea8be78a031001
+        version_id: '1736372554818877'
+  - relpath: processed/train/Frame 1  (41).jpg___fuse.png
+    md5: 1123d974f23bdb83598150d9ba7d43a7
+    size: 20411
+    cloud:
+      myremote:
+        etag: 08b5fa8eea8be78a031001
+        version_id: '1736372553760053'
+  - relpath: processed/train/Frame 1  (41).jpg___save.png
+    md5: 8e89de073fcf6a50eabf53ed3646bf5b
+    size: 78729
+    cloud:
+      myremote:
+        etag: 08b59b94ea8be78a031001
+        version_id: '1736372553846197'
+  - relpath: processed/train/Frame 1  (42).jpg
+    md5: 1f856bb56a297803fd72577c268e5040
+    size: 420255
+    cloud:
+      myremote:
+        etag: 08a9828fea8be78a031001
+        version_id: '1736372553761065'
+  - relpath: processed/train/Frame 1  (42).jpg___fuse.png
+    md5: bdc6f4bc56bb9b7d8cfadb1802de7420
+    size: 16534
+    cloud:
+      myremote:
+        etag: 088be9d1ea8be78a031001
+        version_id: '1736372554855563'
+  - relpath: processed/train/Frame 1  (42).jpg___save.png
+    md5: 7b6ae95888067129a5c0369b16722876
+    size: 67066
+    cloud:
+      myremote:
+        etag: 088b93a9e98be78a031001
+        version_id: '1736372552092043'
+  - relpath: processed/train/Frame 1  (43).jpg
+    md5: fa4ba8413237b3fec4294677d55bc838
+    size: 540444
+    cloud:
+      myremote:
+        etag: 08ebd6a5ea8be78a031001
+        version_id: '1736372554132331'
+  - relpath: processed/train/Frame 1  (43).jpg___fuse.png
+    md5: 12497fc96f2d6558bf08db45a9fceb27
+    size: 16776
+    cloud:
+      myremote:
+        etag: 08d09d80ea8be78a031001
+        version_id: '1736372553518800'
+  - relpath: processed/train/Frame 1  (43).jpg___save.png
+    md5: bcd458caab87cb0e1d9f996de5b30e7a
+    size: 67115
+    cloud:
+      myremote:
+        etag: 08ced69bea8be78a031001
+        version_id: '1736372553968462'
+  - relpath: processed/train/Frame 1  (46).jpg
+    md5: b39ad4c4ab98170a32ce85f2f043e977
+    size: 558891
+    cloud:
+      myremote:
+        etag: 08cea7f3ea8be78a031001
+        version_id: '1736372555404238'
+  - relpath: processed/train/Frame 1  (46).jpg___fuse.png
+    md5: cc7119f872f8013b301d3a579cd60363
+    size: 18979
+    cloud:
+      myremote:
+        etag: 08ed8dc3ea8be78a031001
+        version_id: '1736372554614509'
+  - relpath: processed/train/Frame 1  (46).jpg___save.png
+    md5: 2788a2d9768bc98f2df95e2d675ec755
+    size: 71684
+    cloud:
+      myremote:
+        etag: 08b8ffd8e98be78a031001
+        version_id: '1736372552875960'
+  - relpath: processed/train/Frame 1  (48).jpg
+    md5: a9b2c27109cea954bdf144ac7723b390
+    size: 557051
+    cloud:
+      myremote:
+        etag: 089184ecea8be78a031001
+        version_id: '1736372555285009'
+  - relpath: processed/train/Frame 1  (48).jpg___fuse.png
+    md5: dd344cdfe94f2071fd73d18c7e7de757
+    size: 20164
+    cloud:
+      myremote:
+        etag: 08cbb6b5ea8be78a031001
+        version_id: '1736372554390347'
+  - relpath: processed/train/Frame 1  (48).jpg___save.png
+    md5: dbc632430193861eff20753f639cf556
+    size: 75758
+    cloud:
+      myremote:
+        etag: 08dfd9caea8be78a031001
+        version_id: '1736372554738911'
+  - relpath: processed/train/Frame 1  (50).jpg
+    md5: 5e4d051b3b893e62d40997abb7d0a1e2
+    size: 741601
+    cloud:
+      myremote:
+        etag: 08eac2e4ea8be78a031001
+        version_id: '1736372555161962'
+  - relpath: processed/train/Frame 1  (50).jpg___fuse.png
+    md5: a5daca24f9a7b972def3726e6f707c06
+    size: 20200
+    cloud:
+      myremote:
+        etag: 08c2e7d1ea8be78a031001
+        version_id: '1736372554855362'
+  - relpath: processed/train/Frame 1  (50).jpg___save.png
+    md5: 5c2b503b840bd67168c05331c56c0849
+    size: 66061
+    cloud:
+      myremote:
+        etag: 08bc8ba0ea8be78a031001
+        version_id: '1736372554040764'
+  - relpath: processed/train/Frame 1  (51).jpg
+    md5: 3489fb67786efcb82d850798df2e374d
+    size: 762403
+    cloud:
+      myremote:
+        etag: 08f6e180ea8be78a031001
+        version_id: '1736372553527542'
+  - relpath: processed/train/Frame 1  (51).jpg___fuse.png
+    md5: 0d0518eb7cf373282b8d13147d3a678e
+    size: 19710
+    cloud:
+      myremote:
+        etag: 08bcc89cea8be78a031001
+        version_id: '1736372553983036'
+  - relpath: processed/train/Frame 1  (51).jpg___save.png
+    md5: f0d776b2deaf5fa933cce77ae2aec121
+    size: 65848
+    cloud:
+      myremote:
+        etag: 089bb4e6ea8be78a031001
+        version_id: '1736372555192859'
+  - relpath: processed/train/Frame 1  (52).jpg
+    md5: 81ba8e9dc4215d93b4d2ffa040ffe465
+    size: 456221
+    cloud:
+      myremote:
+        etag: 0899b3deea8be78a031001
+        version_id: '1736372555061657'
+  - relpath: processed/train/Frame 1  (52).jpg___fuse.png
+    md5: 280f3b8af32f62b3c374a9c37c9d78da
+    size: 17382
+    cloud:
+      myremote:
+        etag: 08c2cde2e98be78a031001
+        version_id: '1736372553033410'
+  - relpath: processed/train/Frame 1  (52).jpg___save.png
+    md5: 5e33d06b924a5d134dc5addd2ef16e37
+    size: 60667
+    cloud:
+      myremote:
+        etag: 08b3f6d0ea8be78a031001
+        version_id: '1736372554840883'
+  - relpath: processed/train/Frame 1  (53).jpg
+    md5: 3648fbaafd721ab8dec70e78c56b689a
+    size: 431573
+    cloud:
+      myremote:
+        etag: 0889acdaea8be78a031001
+        version_id: '1736372554995209'
+  - relpath: processed/train/Frame 1  (53).jpg___fuse.png
+    md5: 9a1436551a5bb24f5604b78e0193c445
+    size: 13185
+    cloud:
+      myremote:
+        etag: 08f1aea6e98be78a031001
+        version_id: '1736372552046449'
+  - relpath: processed/train/Frame 1  (53).jpg___save.png
+    md5: bc2826a2efb117e68ecb26fbf336b314
+    size: 49346
+    cloud:
+      myremote:
+        etag: 08b1e7e7e98be78a031001
+        version_id: '1736372553118641'
+  - relpath: processed/train/Frame 1  (54).jpg
+    md5: 94dbf3fbf5ffdf38934d510e9e1b7962
+    size: 438515
+    cloud:
+      myremote:
+        etag: 08f2e1a9ea8be78a031001
+        version_id: '1736372554199282'
+  - relpath: processed/train/Frame 1  (54).jpg___fuse.png
+    md5: 5dd441dd4ebc12d4aaf014a8979cba86
+    size: 13292
+    cloud:
+      myremote:
+        etag: 08bdd0cbe98be78a031001
+        version_id: '1736372552656957'
+  - relpath: processed/train/Frame 1  (54).jpg___save.png
+    md5: f6b8fc2dc747f9fc6d02258a4cf47ffe
+    size: 55197
+    cloud:
+      myremote:
+        etag: 0888ca95ea8be78a031001
+        version_id: '1736372553868552'
+  - relpath: processed/train/Frame 1  (55).jpg
+    md5: 6f664effff3038bc4926de4309623716
+    size: 432693
+    cloud:
+      myremote:
+        etag: 08c488c8ea8be78a031001
+        version_id: '1736372554695748'
+  - relpath: processed/train/Frame 1  (55).jpg___fuse.png
+    md5: ab34814f326d35904c5948a6b1db9f06
+    size: 13331
+    cloud:
+      myremote:
+        etag: 08b6a793ea8be78a031001
+        version_id: '1736372553831350'
+  - relpath: processed/train/Frame 1  (55).jpg___save.png
+    md5: 0bc20503f18c869be2f1d81bfe444113
+    size: 57504
+    cloud:
+      myremote:
+        etag: 089cf5afea8be78a031001
+        version_id: '1736372554300060'
+  - relpath: processed/train/Frame 1  (56).jpg
+    md5: 15f9b0bfa421b56edab196af337b9d20
+    size: 428096
+    cloud:
+      myremote:
+        etag: 0889dcd1ea8be78a031001
+        version_id: '1736372554853897'
+  - relpath: processed/train/Frame 1  (56).jpg___fuse.png
+    md5: 88d3de7ffe67680f6b69fc50d9187a9b
+    size: 13119
+    cloud:
+      myremote:
+        etag: 08eb9cafea8be78a031001
+        version_id: '1736372554288747'
+  - relpath: processed/train/Frame 1  (56).jpg___save.png
+    md5: c210d232d44c281a85882d42681dfb7c
+    size: 55495
+    cloud:
+      myremote:
+        etag: 08e1b791ea8be78a031001
+        version_id: '1736372553800673'
+  - relpath: processed/train/Frame 1  (58).jpg
+    md5: e1d51747401162c320cc2941e89f289e
+    size: 439822
+    cloud:
+      myremote:
+        etag: 08948accea8be78a031001
+        version_id: '1736372554761492'
+  - relpath: processed/train/Frame 1  (58).jpg___fuse.png
+    md5: cfe84843749fc0cf98c6d6cc950ae1c2
+    size: 15757
+    cloud:
+      myremote:
+        etag: 08f0cdc9ea8be78a031001
+        version_id: '1736372554721008'
+  - relpath: processed/train/Frame 1  (58).jpg___save.png
+    md5: e330bfd7d5ab53094c6acca4bc750cb2
+    size: 67178
+    cloud:
+      myremote:
+        etag: 08b2e6b4ea8be78a031001
+        version_id: '1736372554380082'
+  - relpath: processed/train/Frame 1  (6).jpg
+    md5: d91d3c56972e90555b17621fb9380b17
+    size: 536850
+    cloud:
+      myremote:
+        etag: 08b5ffe7ea8be78a031001
+        version_id: '1736372555218869'
+  - relpath: processed/train/Frame 1  (6).jpg___fuse.png
+    md5: 789931ec7c4fa188f2151419475e6bc4
+    size: 25761
+    cloud:
+      myremote:
+        etag: 08df87dbe98be78a031001
+        version_id: '1736372552909791'
+  - relpath: processed/train/Frame 1  (6).jpg___save.png
+    md5: 7f26e88f2cba924e71c32a143832fc91
+    size: 89951
+    cloud:
+      myremote:
+        etag: 0898d1eaea8be78a031001
+        version_id: '1736372555262104'
+  - relpath: processed/train/Frame 1  (60).jpg
+    md5: de412173781089debe39af8d5f8b32d8
+    size: 591619
+    cloud:
+      myremote:
+        etag: 08b0918cea8be78a031001
+        version_id: '1736372553713840'
+  - relpath: processed/train/Frame 1  (60).jpg___fuse.png
+    md5: eb3e93a008691d5e72c793c4bf08a697
+    size: 26333
+    cloud:
+      myremote:
+        etag: 08f2ca92ea8be78a031001
+        version_id: '1736372553819506'
+  - relpath: processed/train/Frame 1  (60).jpg___save.png
+    md5: ecad839b356cf48f3cddc535553fd9af
+    size: 89462
+    cloud:
+      myremote:
+        etag: 08d6839bea8be78a031001
+        version_id: '1736372553957846'
+  - relpath: processed/train/Frame 1  (61).jpg
+    md5: 8a1dfe99554e6af783d8c2ee25475e8c
+    size: 583281
+    cloud:
+      myremote:
+        etag: 08b6f5d6ea8be78a031001
+        version_id: '1736372554939062'
+  - relpath: processed/train/Frame 1  (61).jpg___fuse.png
+    md5: 3c73b7d7ce8d69d87db859f2247e79a9
+    size: 26185
+    cloud:
+      myremote:
+        etag: 08d7a59bea8be78a031001
+        version_id: '1736372553962199'
+  - relpath: processed/train/Frame 1  (61).jpg___save.png
+    md5: 2bb0e0867f0090f82fe7ddcedd24beb3
+    size: 94205
+    cloud:
+      myremote:
+        etag: 08fda7dbe98be78a031001
+        version_id: '1736372552913917'
+  - relpath: processed/train/Frame 1  (62).jpg
+    md5: b2de1d697fb494e3aad9e4dc4be831e7
+    size: 527727
+    cloud:
+      myremote:
+        etag: 08ceb6a1ea8be78a031001
+        version_id: '1736372554062670'
+  - relpath: processed/train/Frame 1  (62).jpg___fuse.png
+    md5: bec72cd178c1300654250e3e33796643
+    size: 28736
+    cloud:
+      myremote:
+        etag: 08908a8fea8be78a031001
+        version_id: '1736372553762064'
+  - relpath: processed/train/Frame 1  (62).jpg___save.png
+    md5: a01e64ca8b10c13f2a629330d2091956
+    size: 109282
+    cloud:
+      myremote:
+        etag: 0883acaae98be78a031001
+        version_id: '1736372552111619'
+  - relpath: processed/train/Frame 1  (63).jpg
+    md5: 53afd94afcb15fa476d26bc2fa94c967
+    size: 521422
+    cloud:
+      myremote:
+        etag: 0896a9f6ea8be78a031001
+        version_id: '1736372555453590'
+  - relpath: processed/train/Frame 1  (63).jpg___fuse.png
+    md5: b92ac458260aa1124e0cf74ebbfb6352
+    size: 22560
+    cloud:
+      myremote:
+        etag: 08e2bdb5ea8be78a031001
+        version_id: '1736372554391266'
+  - relpath: processed/train/Frame 1  (63).jpg___save.png
+    md5: 368e330644918250d81af58477ae794d
+    size: 87239
+    cloud:
+      myremote:
+        etag: 0896a3e3e98be78a031001
+        version_id: '1736372553044374'
+  - relpath: processed/train/Frame 1  (64).jpg
+    md5: e08960583ada5ab43702ea32f8389e8c
+    size: 518556
+    cloud:
+      myremote:
+        etag: 089991dee98be78a031001
+        version_id: '1736372552960153'
+  - relpath: processed/train/Frame 1  (64).jpg___fuse.png
+    md5: cd68de2c8d6fdd0ab5ab292cdfa30c71
+    size: 23525
+    cloud:
+      myremote:
+        etag: 08f9968fea8be78a031001
+        version_id: '1736372553763705'
+  - relpath: processed/train/Frame 1  (64).jpg___save.png
+    md5: 2aad3ac3c28f038c392122e87f9eab3a
+    size: 84645
+    cloud:
+      myremote:
+        etag: 089cd9eaea8be78a031001
+        version_id: '1736372555263132'
+  - relpath: processed/train/Frame 1  (65).jpg
+    md5: 5d4c362c6278ae02c967ed54d31f32ac
+    size: 635679
+    cloud:
+      myremote:
+        etag: 08e7f4b9ea8be78a031001
+        version_id: '1736372554463847'
+  - relpath: processed/train/Frame 1  (65).jpg___fuse.png
+    md5: 6b0c07143fcebdfd907b88e5c9715e51
+    size: 18558
+    cloud:
+      myremote:
+        etag: 08d080a2ea8be78a031001
+        version_id: '1736372554072144'
+  - relpath: processed/train/Frame 1  (65).jpg___save.png
+    md5: 3a279e732d1c56a903c6d863e14d4709
+    size: 73262
+    cloud:
+      myremote:
+        etag: 08989692ea8be78a031001
+        version_id: '1736372553812760'
+  - relpath: processed/train/Frame 1  (66).jpg
+    md5: 850453f915800750630696fc4ac14e2d
+    size: 644621
+    cloud:
+      myremote:
+        etag: 08fb8bf5ea8be78a031001
+        version_id: '1736372555433467'
+  - relpath: processed/train/Frame 1  (66).jpg___fuse.png
+    md5: f8a035442fcd8b2aaf20314bc799451f
+    size: 20661
+    cloud:
+      myremote:
+        etag: 08c5b882ea8be78a031001
+        version_id: '1736372553555013'
+  - relpath: processed/train/Frame 1  (66).jpg___save.png
+    md5: df0e7568e5fd8606b2d48450c6ee6b42
+    size: 72877
+    cloud:
+      myremote:
+        etag: 0896caffe98be78a031001
+        version_id: '1736372553508118'
+  - relpath: processed/train/Frame 1  (67).jpg
+    md5: dee32201de4d75e6b2ea276439aa772e
+    size: 609508
+    cloud:
+      myremote:
+        etag: 08a3cdd2ea8be78a031001
+        version_id: '1736372554868387'
+  - relpath: processed/train/Frame 1  (67).jpg___fuse.png
+    md5: 000ca4dd1e396e57ac1611231c1b584c
+    size: 21033
+    cloud:
+      myremote:
+        etag: 08fbcad5e98be78a031001
+        version_id: '1736372552820091'
+  - relpath: processed/train/Frame 1  (67).jpg___save.png
+    md5: ae5c3cbe243cd88fd1d4ebb812054ff0
+    size: 75773
+    cloud:
+      myremote:
+        etag: 08abfbf2e98be78a031001
+        version_id: '1736372553301419'
+  - relpath: processed/train/Frame 1  (68).jpg
+    md5: d5262821799ed37545b3a93d9654b7ba
+    size: 474610
+    cloud:
+      myremote:
+        etag: 0891b0a4ea8be78a031001
+        version_id: '1736372554110993'
+  - relpath: processed/train/Frame 1  (68).jpg___fuse.png
+    md5: cae7b4c90095264a2a9c8ccca79b6c4a
+    size: 22632
+    cloud:
+      myremote:
+        etag: 08bc8b90ea8be78a031001
+        version_id: '1736372553778620'
+  - relpath: processed/train/Frame 1  (68).jpg___save.png
+    md5: d4abdb9b48e023ef2de970ce786e246b
+    size: 75901
+    cloud:
+      myremote:
+        etag: 08d1c7d1ea8be78a031001
+        version_id: '1736372554851281'
+  - relpath: processed/train/Frame 1  (69).jpg
+    md5: 6e9bfc90fb6b87363acd7792d59f63df
+    size: 483713
+    cloud:
+      myremote:
+        etag: 08ec8eb2ea8be78a031001
+        version_id: '1736372554336108'
+  - relpath: processed/train/Frame 1  (69).jpg___fuse.png
+    md5: 575145649d79ea61fb98f2c0f694db92
+    size: 23531
+    cloud:
+      myremote:
+        etag: 08a5e6d7ea8be78a031001
+        version_id: '1736372554953509'
+  - relpath: processed/train/Frame 1  (69).jpg___save.png
+    md5: 84a19b1ba6dedd0822abe6dfb49fc49b
+    size: 77750
+    cloud:
+      myremote:
+        etag: 088adbd5e98be78a031001
+        version_id: '1736372552822154'
+  - relpath: processed/train/Frame 1  (7).jpg
+    md5: 532d332f10ad94895248603da5705ebc
+    size: 546615
+    cloud:
+      myremote:
+        etag: 088ab5fbe98be78a031001
+        version_id: '1736372553439882'
+  - relpath: processed/train/Frame 1  (7).jpg___fuse.png
+    md5: 25b6dfbcaeac3354ecc399b8e09f0141
+    size: 26775
+    cloud:
+      myremote:
+        etag: 08caf7c7ea8be78a031001
+        version_id: '1736372554693578'
+  - relpath: processed/train/Frame 1  (7).jpg___save.png
+    md5: d2a7e23e0540f1d8e27bf34b30c909fe
+    size: 81679
+    cloud:
+      myremote:
+        etag: 08a7cfbfea8be78a031001
+        version_id: '1736372554557351'
+  - relpath: processed/train/Frame 1  (70).jpg
+    md5: 59785244ef1499371919143b2a3147f8
+    size: 480360
+    cloud:
+      myremote:
+        etag: 08d7c2fee98be78a031001
+        version_id: '1736372553490775'
+  - relpath: processed/train/Frame 1  (70).jpg___fuse.png
+    md5: 2c15868073ba94c62eab9fa767ef8971
+    size: 24349
+    cloud:
+      myremote:
+        etag: 08cea4dbe98be78a031001
+        version_id: '1736372552913486'
+  - relpath: processed/train/Frame 1  (70).jpg___save.png
+    md5: 89444e92749f7e2814e5c127cd44d726
+    size: 77486
+    cloud:
+      myremote:
+        etag: 08bde983ea8be78a031001
+        version_id: '1736372553577661'
+  - relpath: processed/train/Frame 1  (73).jpg
+    md5: 8a0dd0897e6567c3fe8241bc769bb4e6
+    size: 689388
+    cloud:
+      myremote:
+        etag: 0890ebedea8be78a031001
+        version_id: '1736372555314576'
+  - relpath: processed/train/Frame 1  (73).jpg___fuse.png
+    md5: e7fbbcdbce9d5b23a5b6ca6197f9be4d
+    size: 27289
+    cloud:
+      myremote:
+        etag: 08c8af8bea8be78a031001
+        version_id: '1736372553701320'
+  - relpath: processed/train/Frame 1  (73).jpg___save.png
+    md5: c69c66acdd8b002cecc1aff7fa0b0ad0
+    size: 89072
+    cloud:
+      myremote:
+        etag: 08a0a0bbea8be78a031001
+        version_id: '1736372554485792'
+  - relpath: processed/train/Frame 1  (76).jpg
+    md5: a45d5e634e9c719fbe11021e333bb2df
+    size: 687448
+    cloud:
+      myremote:
+        etag: 08e6b1f2ea8be78a031001
+        version_id: '1736372555389158'
+  - relpath: processed/train/Frame 1  (76).jpg___fuse.png
+    md5: 4e700150fa91e89d421c7d6c40b9744c
+    size: 26368
+    cloud:
+      myremote:
+        etag: 08f49d9eea8be78a031001
+        version_id: '1736372554010356'
+  - relpath: processed/train/Frame 1  (76).jpg___save.png
+    md5: 8ca39d4a5f336dee4935ca9496c23dab
+    size: 80812
+    cloud:
+      myremote:
+        etag: 08dae1d3e98be78a031001
+        version_id: '1736372552790234'
+  - relpath: processed/train/Frame 1  (77).jpg
+    md5: 43d670625290d4af589800e4d7783420
+    size: 689307
+    cloud:
+      myremote:
+        etag: 08ada9faea8be78a031001
+        version_id: '1736372555519149'
+  - relpath: processed/train/Frame 1  (77).jpg___fuse.png
+    md5: 84319b0b98ed6ab2f70d43628064d3c2
+    size: 26523
+    cloud:
+      myremote:
+        etag: 08eecde4ea8be78a031001
+        version_id: '1736372555163374'
+  - relpath: processed/train/Frame 1  (77).jpg___save.png
+    md5: 70d126a25ced83cc1905f99648603333
+    size: 82597
+    cloud:
+      myremote:
+        etag: 08e79eb6ea8be78a031001
+        version_id: '1736372554403687'
+  - relpath: processed/train/Frame 1  (8).jpg
+    md5: 3f73b72546deb1323e9f21ed41d6aed7
+    size: 526851
+    cloud:
+      myremote:
+        etag: 088998f2ea8be78a031001
+        version_id: '1736372555385865'
+  - relpath: processed/train/Frame 1  (8).jpg___fuse.png
+    md5: 636b2dd5abd3c4d0fe1d520eefea0c56
+    size: 26360
+    cloud:
+      myremote:
+        etag: 088aa8d1ea8be78a031001
+        version_id: '1736372554847242'
+  - relpath: processed/train/Frame 1  (8).jpg___save.png
+    md5: 26223fdb8f6bc65687f0b430b0345302
+    size: 101567
+    cloud:
+      myremote:
+        etag: 089394ecea8be78a031001
+        version_id: '1736372555287059'
+  - relpath: processed/train/Frame 1  (80).jpg
+    md5: 5a1155ec5472dde40a01eab1a9e7900f
+    size: 691959
+    cloud:
+      myremote:
+        etag: 0889f4d6ea8be78a031001
+        version_id: '1736372554938889'
+  - relpath: processed/train/Frame 1  (80).jpg___fuse.png
+    md5: a2e4c033e8a48db8cb5bec0d8f7f4bc7
+    size: 26218
+    cloud:
+      myremote:
+        etag: 088fed80ea8be78a031001
+        version_id: '1736372553528975'
+  - relpath: processed/train/Frame 1  (80).jpg___save.png
+    md5: 536b2211b2a901a8629cdae8c5f15f6b
+    size: 94707
+    cloud:
+      myremote:
+        etag: 08d1a6a9e98be78a031001
+        version_id: '1736372552094545'
+  - relpath: processed/train/Frame 1  (82).jpg
+    md5: 4b8659f7498ccdf739f754e5a30d8f8e
+    size: 684533
+    cloud:
+      myremote:
+        etag: 08ca8afaea8be78a031001
+        version_id: '1736372555515210'
+  - relpath: processed/train/Frame 1  (82).jpg___fuse.png
+    md5: c17f727ff3656c80e316c5cf1b816737
+    size: 25712
+    cloud:
+      myremote:
+        etag: 089ce0e2e98be78a031001
+        version_id: '1736372553035804'
+  - relpath: processed/train/Frame 1  (82).jpg___save.png
+    md5: 8a53824fac5653cba0014d9f846f420b
+    size: 94406
+    cloud:
+      myremote:
+        etag: 08dfae86ea8be78a031001
+        version_id: '1736372553619295'
+  - relpath: processed/train/Frame 1  (83).jpg
+    md5: 6ed7ac8b337ea81044715894b6d78058
+    size: 598663
+    cloud:
+      myremote:
+        etag: 08c2e8dbea8be78a031001
+        version_id: '1736372555019330'
+  - relpath: processed/train/Frame 1  (83).jpg___fuse.png
+    md5: 7fd6fb83d920f0530afa15df1f24739a
+    size: 16829
+    cloud:
+      myremote:
+        etag: 08a8cb96ea8be78a031001
+        version_id: '1736372553885096'
+  - relpath: processed/train/Frame 1  (83).jpg___save.png
+    md5: 0b4a51e7a0b4b0b0ef5943653bd0af64
+    size: 68638
+    cloud:
+      myremote:
+        etag: 08e9bedbea8be78a031001
+        version_id: '1736372555013993'
+  - relpath: processed/train/Frame 1  (85).jpg
+    md5: ec98b4ae6fe9512e1041270045c6c6ca
+    size: 596179
+    cloud:
+      myremote:
+        etag: 08b3aaf5ea8be78a031001
+        version_id: '1736372555437363'
+  - relpath: processed/train/Frame 1  (85).jpg___fuse.png
+    md5: 1bad6958458e152ab09b5b7765fd56a9
+    size: 17719
+    cloud:
+      myremote:
+        etag: 08ce94adea8be78a031001
+        version_id: '1736372554254926'
+  - relpath: processed/train/Frame 1  (85).jpg___save.png
+    md5: 9c8c07f764a7a9d561d6b86d66faf803
+    size: 59535
+    cloud:
+      myremote:
+        etag: 088e97f4e98be78a031001
+        version_id: '1736372553321358'
+  - relpath: processed/train/Frame 1  (86).jpg
+    md5: 6c75dd9800e39a1fbfb5ffc304167b52
+    size: 596247
+    cloud:
+      myremote:
+        etag: 089bc99dea8be78a031001
+        version_id: '1736372553999515'
+  - relpath: processed/train/Frame 1  (86).jpg___fuse.png
+    md5: 03bf63973be57bfebbf23db973475460
+    size: 17665
+    cloud:
+      myremote:
+        etag: 08d4b0e2e98be78a031001
+        version_id: '1736372553029716'
+  - relpath: processed/train/Frame 1  (86).jpg___save.png
+    md5: 0fe5eb15212cf9d4bf5f30dac827d903
+    size: 61203
+    cloud:
+      myremote:
+        etag: 08d490cdea8be78a031001
+        version_id: '1736372554778708'
+  - relpath: processed/train/Frame 1  (87).jpg
+    md5: 56b671e5231695b74104518910306851
+    size: 582567
+    cloud:
+      myremote:
+        etag: 08899fd9e98be78a031001
+        version_id: '1736372552880009'
+  - relpath: processed/train/Frame 1  (87).jpg___fuse.png
+    md5: 73c9f6fa4f022a44c94f398b60f9f0a3
+    size: 17824
+    cloud:
+      myremote:
+        etag: 08dfbda1ea8be78a031001
+        version_id: '1736372554063583'
+  - relpath: processed/train/Frame 1  (87).jpg___save.png
+    md5: 2bf7c78686416f93c4d38ed34bd79423
+    size: 62692
+    cloud:
+      myremote:
+        etag: 08fce8a9ea8be78a031001
+        version_id: '1736372554200188'
+  - relpath: processed/train/Frame 1  (88).jpg
+    md5: a061d2311cfa469462a4fb05927bdceb
+    size: 612636
+    cloud:
+      myremote:
+        etag: 0896b2fbea8be78a031001
+        version_id: '1736372555536662'
+  - relpath: processed/train/Frame 1  (88).jpg___fuse.png
+    md5: d59e753d00383eb85a8bfdf80048922d
+    size: 21838
+    cloud:
+      myremote:
+        etag: 08e680a4ea8be78a031001
+        version_id: '1736372554104934'
+  - relpath: processed/train/Frame 1  (88).jpg___save.png
+    md5: 210284393781985bcc253d1b95b1e32a
+    size: 77061
+    cloud:
+      myremote:
+        etag: 08aec8adea8be78a031001
+        version_id: '1736372554261550'
+  - relpath: processed/train/Frame 1  (9).jpg
+    md5: baa53623f60fc2c529980b1766b97f53
+    size: 543228
+    cloud:
+      myremote:
+        etag: 08fcb9dfe98be78a031001
+        version_id: '1736372552981756'
+  - relpath: processed/train/Frame 1  (9).jpg___fuse.png
+    md5: 68d96741cb7c9aa847fdd71cb80fb0dd
+    size: 24355
+    cloud:
+      myremote:
+        etag: 08e1b4b8ea8be78a031001
+        version_id: '1736372554439265'
+  - relpath: processed/train/Frame 1  (9).jpg___save.png
+    md5: 854b86e482a60325b64ac34d9d451b89
+    size: 78066
+    cloud:
+      myremote:
+        etag: 08adb39bea8be78a031001
+        version_id: '1736372553963949'
+  - relpath: processed/train/Frame 1  (91).jpg
+    md5: 48f7f6b46bab324a636550fa9b3b5dda
+    size: 612502
+    cloud:
+      myremote:
+        etag: 08e4a389ea8be78a031001
+        version_id: '1736372553667044'
+  - relpath: processed/train/Frame 1  (91).jpg___fuse.png
+    md5: d857269976e1ec6773b17dde4e8bf7b7
+    size: 21978
+    cloud:
+      myremote:
+        etag: 08b181dbe98be78a031001
+        version_id: '1736372552908977'
+  - relpath: processed/train/Frame 1  (91).jpg___save.png
+    md5: 576b09721f2ff0aa2239b6666e7473ba
+    size: 79482
+    cloud:
+      myremote:
+        etag: 08d3c3a9ea8be78a031001
+        version_id: '1736372554195411'
+  - relpath: processed/train/Frame 1  (92).jpg
+    md5: bf21811230d55082795d13eac0db2fb8
+    size: 615425
+    cloud:
+      myremote:
+        etag: 08a2d89fea8be78a031001
+        version_id: '1736372554034210'
+  - relpath: processed/train/Frame 1  (92).jpg___fuse.png
+    md5: 9c9086e5b2075966b6847ce190d09d99
+    size: 22408
+    cloud:
+      myremote:
+        etag: 08f3a4f6e98be78a031001
+        version_id: '1736372553355891'
+  - relpath: processed/train/Frame 1  (92).jpg___save.png
+    md5: dc0c4fe91922008f67155ddfda9d67d1
+    size: 79742
+    cloud:
+      myremote:
+        etag: 08f08aa2ea8be78a031001
+        version_id: '1736372554073456'
+  - relpath: processed/train/Frame 1  (93).jpg
+    md5: c7062fc329497f588e8e45e74cde279d
+    size: 621240
+    cloud:
+      myremote:
+        etag: 0892f2b4ea8be78a031001
+        version_id: '1736372554381586'
+  - relpath: processed/train/Frame 1  (93).jpg___fuse.png
+    md5: f7f1318c86cae6013cc8c7398ba13afe
+    size: 22571
+    cloud:
+      myremote:
+        etag: 08e8f8d8e98be78a031001
+        version_id: '1736372552875112'
+  - relpath: processed/train/Frame 1  (93).jpg___save.png
+    md5: 482b578bd455d1db76fdb510f4d2b9cb
+    size: 80936
+    cloud:
+      myremote:
+        etag: 089988b2ea8be78a031001
+        version_id: '1736372554335257'
+  - relpath: processed/train/Frame 1  (94).jpg
+    md5: 8543d81ec24449bdb90b601748ffc61a
+    size: 402908
+    cloud:
+      myremote:
+        etag: 08e6bfd6ea8be78a031001
+        version_id: '1736372554932198'
+  - relpath: processed/train/Frame 1  (94).jpg___fuse.png
+    md5: 5dbedab436cb72b10779490786adf6ec
+    size: 15386
+    cloud:
+      myremote:
+        etag: 0899ea9bea8be78a031001
+        version_id: '1736372553970969'
+  - relpath: processed/train/Frame 1  (94).jpg___save.png
+    md5: e76ed6357c964c1a3804ac94779740e9
+    size: 61445
+    cloud:
+      myremote:
+        etag: 0885eccaea8be78a031001
+        version_id: '1736372554741253'
+  - relpath: processed/train/Frame 1  (95).jpg
+    md5: 0e8224dfb3cb9c312718c2b0873f24f2
+    size: 361614
+    cloud:
+      myremote:
+        etag: 08d7f5beea8be78a031001
+        version_id: '1736372554545879'
+  - relpath: processed/train/Frame 1  (95).jpg___fuse.png
+    md5: d459193e73dfeb2e81ab068cf8babf05
+    size: 15043
+    cloud:
+      myremote:
+        etag: 08d2d39aea8be78a031001
+        version_id: '1736372553951698'
+  - relpath: processed/train/Frame 1  (95).jpg___save.png
+    md5: 56c1e050f1719be86cebd9b17dcb6b40
+    size: 55840
+    cloud:
+      myremote:
+        etag: 08c4eda7e98be78a031001
+        version_id: '1736372552070852'
+  - relpath: processed/train/Frame 1  (97).jpg
+    md5: b2d9d053180ca3de62750c4f17270811
+    size: 363442
+    cloud:
+      myremote:
+        etag: 08daca9cea8be78a031001
+        version_id: '1736372553983322'
+  - relpath: processed/train/Frame 1  (97).jpg___fuse.png
+    md5: 5bd2236642766d881d7bcb7dee692abb
+    size: 16284
+    cloud:
+      myremote:
+        etag: 08eea7a6e98be78a031001
+        version_id: '1736372552045550'
+  - relpath: processed/train/Frame 1  (97).jpg___save.png
+    md5: 5f5e2538404068c432a5aeb5c17eee5c
+    size: 61173
+    cloud:
+      myremote:
+        etag: 08df8aadea8be78a031001
+        version_id: '1736372554253663'
+  - relpath: processed/train/Frame 1  (98).jpg
+    md5: 4c6ab36838aec5351eab0e967ef8d1b7
+    size: 534418
+    cloud:
+      myremote:
+        etag: 08a1f1d4e98be78a031001
+        version_id: '1736372552808609'
+  - relpath: processed/train/Frame 1  (98).jpg___fuse.png
+    md5: 7a4e4c57ebb8c563a9d75c26b2e26003
+    size: 19863
+    cloud:
+      myremote:
+        etag: 08f288adea8be78a031001
+        version_id: '1736372554253426'
+  - relpath: processed/train/Frame 1  (98).jpg___save.png
+    md5: 0055f98e7ccbbffaf7749fb234f5f59d
+    size: 71631
+    cloud:
+      myremote:
+        etag: 0885a2aae98be78a031001
+        version_id: '1736372552110341'
+  - relpath: processed/train/Frame 1  (99).jpg
+    md5: f58696750006aecc5f032a1fff201266
+    size: 529808
+    cloud:
+      myremote:
+        etag: 08e7aedbea8be78a031001
+        version_id: '1736372555011943'
+  - relpath: processed/train/Frame 1  (99).jpg___fuse.png
+    md5: 1e541c7064717fc6c44fdcab4d542678
+    size: 20132
+    cloud:
+      myremote:
+        etag: 08daea80ea8be78a031001
+        version_id: '1736372553528666'
+  - relpath: processed/train/Frame 1  (99).jpg___save.png
+    md5: b55eaafc5fd170d0b245e62bfb641076
+    size: 69773
+    cloud:
+      myremote:
+        etag: 089ce5ecea8be78a031001
+        version_id: '1736372555297436'
+  - relpath: processed/val/Frame 1  (17).jpg
+    md5: 5558284ca1ee368c4d1ee7ca39cb4904
+    size: 606318
+    cloud:
+      myremote:
+        etag: 08989c89e98be78a031001
+        version_id: '1736372551568920'
+  - relpath: processed/val/Frame 1  (17).jpg___fuse.png
+    md5: 8a65d98a21e0ef2b5941cfb673bfeefb
+    size: 21744
+    cloud:
+      myremote:
+        etag: 08eaaffce88be78a031001
+        version_id: '1736372551358442'
+  - relpath: processed/val/Frame 1  (17).jpg___save.png
+    md5: 79bd01413b3f07917f477722e157b0ce
+    size: 76425
+    cloud:
+      myremote:
+        etag: 08bdb1fee88be78a031001
+        version_id: '1736372551391421'
+  - relpath: processed/val/Frame 1  (19).jpg
+    md5: b5f0c383439398ffa7d464f0bf60bcbd
+    size: 652651
+    cloud:
+      myremote:
+        etag: 08b1ab80e98be78a031001
+        version_id: '1736372551423409'
+  - relpath: processed/val/Frame 1  (19).jpg___fuse.png
+    md5: 2f29ab9ec5fc2132f06a18f34622eb65
+    size: 19721
+    cloud:
+      myremote:
+        etag: 08b3bdfee88be78a031001
+        version_id: '1736372551392947'
+  - relpath: processed/val/Frame 1  (19).jpg___save.png
+    md5: 9abe8f63df4699ea8e90d2fcc111f86d
+    size: 76361
+    cloud:
+      myremote:
+        etag: 089a90fee88be78a031001
+        version_id: '1736372551387162'
+  - relpath: processed/val/Frame 1  (2).jpg
+    md5: c6576ef5502c20dab54fcfa9e582bc2b
+    size: 488883
+    cloud:
+      myremote:
+        etag: 08dbd08cea8be78a031001
+        version_id: '1736372553721947'
+  - relpath: processed/val/Frame 1  (2).jpg___fuse.png
+    md5: 0fbfed58de0a33f15c82b584482ceb13
+    size: 31691
+    cloud:
+      myremote:
+        etag: 08c3cff9e88be78a031001
+        version_id: '1736372551313347'
+  - relpath: processed/val/Frame 1  (2).jpg___save.png
+    md5: a97f469b1f380b1b63edb42fe23e2285
+    size: 105073
+    cloud:
+      myremote:
+        etag: 08c78efce88be78a031001
+        version_id: '1736372551354183'
+  - relpath: processed/val/Frame 1  (22).jpg
+    md5: 1a86653bef351a4ad9172e0d0ac46253
+    size: 471747
+    cloud:
+      myremote:
+        etag: 08abd5fde88be78a031001
+        version_id: '1736372551379627'
+  - relpath: processed/val/Frame 1  (22).jpg___fuse.png
+    md5: d8ade681908d82689a81eeefd00a5632
+    size: 14678
+    cloud:
+      myremote:
+        etag: 08c18c85e98be78a031001
+        version_id: '1736372551501377'
+  - relpath: processed/val/Frame 1  (22).jpg___save.png
+    md5: 2057541a31c25483199cdf6c6348875d
+    size: 58921
+    cloud:
+      myremote:
+        etag: 08c3acc3ea8be78a031001
+        version_id: '1736372554618435'
+  - relpath: processed/val/Frame 1  (25).jpg
+    md5: af798390d89496332c508f552ce0aeae
+    size: 601158
+    cloud:
+      myremote:
+        etag: 08c1d283ea8be78a031001
+        version_id: '1736372553574721'
+  - relpath: processed/val/Frame 1  (25).jpg___fuse.png
+    md5: df75acce943a704d8f9c89ae8d92198c
+    size: 17107
+    cloud:
+      myremote:
+        etag: 08aff7eae88be78a031001
+        version_id: '1736372551072687'
+  - relpath: processed/val/Frame 1  (25).jpg___save.png
+    md5: 72cf4570c15efdae5f7ceb466ff952ab
+    size: 70132
+    cloud:
+      myremote:
+        etag: 08db8380e98be78a031001
+        version_id: '1736372551418331'
+  - relpath: processed/val/Frame 1  (29).jpg
+    md5: 0b1b71585a2d74621d15c76a5b49e702
+    size: 401410
+    cloud:
+      myremote:
+        etag: 08cadcfae88be78a031001
+        version_id: '1736372551331402'
+  - relpath: processed/val/Frame 1  (29).jpg___fuse.png
+    md5: 6d942602fefb99088fdcce64d974db88
+    size: 16812
+    cloud:
+      myremote:
+        etag: 08f6e2fee88be78a031001
+        version_id: '1736372551397750'
+  - relpath: processed/val/Frame 1  (29).jpg___save.png
+    md5: dcc49aee32dff3b1af93d160c4e5bb9a
+    size: 63179
+    cloud:
+      myremote:
+        etag: 0883bdfce88be78a031001
+        version_id: '1736372551360131'
+  - relpath: processed/val/Frame 1  (37).jpg
+    md5: e1c7d05f74df1ca8b13479ba998fdf27
+    size: 570270
+    cloud:
+      myremote:
+        etag: 08cdeefee88be78a031001
+        version_id: '1736372551399245'
+  - relpath: processed/val/Frame 1  (37).jpg___fuse.png
+    md5: 0d752a4f726373aa6a75cf531bc7d61e
+    size: 17659
+    cloud:
+      myremote:
+        etag: 08d698fde88be78a031001
+        version_id: '1736372551371862'
+  - relpath: processed/val/Frame 1  (37).jpg___save.png
+    md5: fd86f8cd5142188c91abe7285dd2a02a
+    size: 68104
+    cloud:
+      myremote:
+        etag: 08fc83fae88be78a031001
+        version_id: '1736372551320060'
+  - relpath: processed/val/Frame 1  (45).jpg
+    md5: 684253efb47141b6719dec5958d4708c
+    size: 568350
+    cloud:
+      myremote:
+        etag: 08e9a6d5e98be78a031001
+        version_id: '1736372552815465'
+  - relpath: processed/val/Frame 1  (45).jpg___fuse.png
+    md5: 54ee331e6754166593574ccef8bc3fda
+    size: 18350
+    cloud:
+      myremote:
+        etag: 08ec8380e98be78a031001
+        version_id: '1736372551418348'
+  - relpath: processed/val/Frame 1  (45).jpg___save.png
+    md5: 46ff080334ba2a197eacddf433a908a7
+    size: 73462
+    cloud:
+      myremote:
+        etag: 08b4fbf9e88be78a031001
+        version_id: '1736372551318964'
+  - relpath: processed/val/Frame 1  (5).jpg
+    md5: 012b9df15a4acd7fd0fb6ba4b2739739
+    size: 500441
+    cloud:
+      myremote:
+        etag: 0888a285e98be78a031001
+        version_id: '1736372551504136'
+  - relpath: processed/val/Frame 1  (5).jpg___fuse.png
+    md5: 12b752abe507ad46afa2e19a32e19015
+    size: 25804
+    cloud:
+      myremote:
+        etag: 0880a7e9e88be78a031001
+        version_id: '1736372551046016'
+  - relpath: processed/val/Frame 1  (5).jpg___save.png
+    md5: e9a41f7472c39e6bc436aff54750e948
+    size: 78102
+    cloud:
+      myremote:
+        etag: 08a1b586e98be78a031001
+        version_id: '1736372551522977'
+  - relpath: processed/val/Frame 1  (57).jpg
+    md5: 4817a62685ee38552810a3812098a275
+    size: 426559
+    cloud:
+      myremote:
+        etag: 08acf28ee98be78a031001
+        version_id: '1736372551661868'
+  - relpath: processed/val/Frame 1  (57).jpg___fuse.png
+    md5: 949fd9f32ea7cd26fc66a921b86241b5
+    size: 12953
+    cloud:
+      myremote:
+        etag: 08d297ece88be78a031001
+        version_id: '1736372551093202'
+  - relpath: processed/val/Frame 1  (57).jpg___save.png
+    md5: e28c986e8a071dffa8490ff79ddf957e
+    size: 56246
+    cloud:
+      myremote:
+        etag: 08d2bcfce88be78a031001
+        version_id: '1736372551360082'
+  - relpath: processed/val/Frame 1  (59).jpg
+    md5: 534bb1d2830d9233fbd0e59e7c5dc73c
+    size: 560492
+    cloud:
+      myremote:
+        etag: 08bef992e98be78a031001
+        version_id: '1736372551728318'
+  - relpath: processed/val/Frame 1  (59).jpg___fuse.png
+    md5: 4c356271efc6724660bfb14662a7fa95
+    size: 21580
+    cloud:
+      myremote:
+        etag: 0893c4f8e88be78a031001
+        version_id: '1736372551295507'
+  - relpath: processed/val/Frame 1  (59).jpg___save.png
+    md5: 1b29c5d0b3a1ffbbc99af6d86dfddc4f
+    size: 86677
+    cloud:
+      myremote:
+        etag: 08fc828de98be78a031001
+        version_id: '1736372551631228'
+  - relpath: processed/val/Frame 1  (72).jpg
+    md5: 3c3833a017610db57b7e53e6476c50ff
+    size: 688546
+    cloud:
+      myremote:
+        etag: 08d3bf83e98be78a031001
+        version_id: '1736372551475155'
+  - relpath: processed/val/Frame 1  (72).jpg___fuse.png
+    md5: cd0548d4091ad4a0c9fdb59e6e738016
+    size: 27762
+    cloud:
+      myremote:
+        etag: 08a485fce88be78a031001
+        version_id: '1736372551352996'
+  - relpath: processed/val/Frame 1  (72).jpg___save.png
+    md5: ae41b16093b6181765223d0c926e6d97
+    size: 88745
+    cloud:
+      myremote:
+        etag: 08b0cceae88be78a031001
+        version_id: '1736372551067184'
+  - relpath: processed/val/Frame 1  (81).jpg
+    md5: 7d2903d727ac68a7bb03e80b555c9f23
+    size: 691911
+    cloud:
+      myremote:
+        etag: 08e7ead5e98be78a031001
+        version_id: '1736372552824167'
+  - relpath: processed/val/Frame 1  (81).jpg___fuse.png
+    md5: c4939dd5ae3978a5f39572d2f8113ba3
+    size: 26207
+    cloud:
+      myremote:
+        etag: 088ec7eae88be78a031001
+        version_id: '1736372551066510'
+  - relpath: processed/val/Frame 1  (81).jpg___save.png
+    md5: 64528b2469d055157ebf7cca0cc79074
+    size: 95450
+    cloud:
+      myremote:
+        etag: 08c39ffee88be78a031001
+        version_id: '1736372551389123'
+  - relpath: processed/val/Frame 1  (89).jpg
+    md5: 495b892c40b66b4671cf5effcad8f234
+    size: 623623
+    cloud:
+      myremote:
+        etag: 08ca8287e98be78a031001
+        version_id: '1736372551532874'
+  - relpath: processed/val/Frame 1  (89).jpg___fuse.png
+    md5: 2455526388e22be784732b9c1a3b8db6
+    size: 21459
+    cloud:
+      myremote:
+        etag: 08b1cfeee88be78a031001
+        version_id: '1736372551133105'
+  - relpath: processed/val/Frame 1  (89).jpg___save.png
+    md5: 0d50a9ba621aac44af6410c3be666954
+    size: 83734
+    cloud:
+      myremote:
+        etag: 08dfbefee88be78a031001
+        version_id: '1736372551393119'
+  - relpath: processed/val/Frame 1  (90).jpg
+    md5: 0188d17f7fd8ce1477ad696976f33eef
+    size: 617427
+    cloud:
+      myremote:
+        etag: 08bcfdd2e98be78a031001
+        version_id: '1736372552777404'
+  - relpath: processed/val/Frame 1  (90).jpg___fuse.png
+    md5: d6a36bf8dde6fd60f30f64a8939f73fe
+    size: 21997
+    cloud:
+      myremote:
+        etag: 08e3adf9e88be78a031001
+        version_id: '1736372551309027'
+  - relpath: processed/val/Frame 1  (90).jpg___save.png
+    md5: 07d8f7dddfc5b7635f8b4bac1b561ca4
+    size: 81107
+    cloud:
+      myremote:
+        etag: 08a299eee88be78a031001
+        version_id: '1736372551126178'
+  - relpath: raw/Frame 1  (1).jpg
+    md5: a00a24c92300e789ceff42f8f97b22de
+    size: 761698
+    cloud:
+      myremote:
+        etag: 089ca1b4e78be78a031001
+        version_id: '1736372548079772'
+  - relpath: raw/Frame 1  (1).jpg___fuse.png
+    md5: cdb8757cc24ba996d1d66ffff4c5e196
+    size: 23704
+    cloud:
+      myremote:
+        etag: 08f895e6e88be78a031001
+        version_id: '1736372550994680'
+  - relpath: raw/Frame 1  (1).jpg___save.png
+    md5: 35bdbdd9aa573c36a3b5335a2f461f5c
+    size: 88218
+    cloud:
+      myremote:
+        etag: 088ee395e78be78a031001
+        version_id: '1736372547580302'
+  - relpath: raw/Frame 1  (10).jpg
+    md5: 1e957ccaeba9dfd07b18aa6a31f2b4cb
+    size: 527427
+    cloud:
+      myremote:
+        etag: 08b1d4f9e78be78a031001
+        version_id: '1736372549216817'
+  - relpath: raw/Frame 1  (10).jpg___fuse.png
+    md5: a1b4db6a1f3d944abbc8c5f7bebfece3
+    size: 22369
+    cloud:
+      myremote:
+        etag: 0880eff1e78be78a031001
+        version_id: '1736372549089152'
+  - relpath: raw/Frame 1  (10).jpg___save.png
+    md5: 920a76f18a647bc3ebff41719e700117
+    size: 79579
+    cloud:
+      myremote:
+        etag: 088199b7e78be78a031001
+        version_id: '1736372548127873'
+  - relpath: raw/Frame 1  (100).jpg
+    md5: 5c32a105412bc1ff67c58de7fd92f613
+    size: 526031
+    cloud:
+      myremote:
+        etag: 08c98cace88be78a031001
+        version_id: '1736372550043209'
+  - relpath: raw/Frame 1  (100).jpg___fuse.png
+    md5: 4a95142b0445a2520be257f56064ef00
+    size: 20353
+    cloud:
+      myremote:
+        etag: 08a7bba1e88be78a031001
+        version_id: '1736372549868967'
+  - relpath: raw/Frame 1  (100).jpg___save.png
+    md5: d5f4c5329f9a2e5b2b1b24f9421b4a97
+    size: 80172
+    cloud:
+      myremote:
+        etag: 08b8b896e78be78a031001
+        version_id: '1736372547591224'
+  - relpath: raw/Frame 1  (11).jpg
+    md5: 92da02893d3c18f86eeb38f8a710e82d
+    size: 521865
+    cloud:
+      myremote:
+        etag: 08fac3c3e78be78a031001
+        version_id: '1736372548329978'
+  - relpath: raw/Frame 1  (11).jpg___fuse.png
+    md5: 0d4f89aaad1cf07371ba9bbaa5567fb6
+    size: 21546
+    cloud:
+      myremote:
+        etag: 08f4fa89e78be78a031001
+        version_id: '1736372547386740'
+  - relpath: raw/Frame 1  (11).jpg___save.png
+    md5: 3898b530ff029d5ec3e140131d0435b8
+    size: 82676
+    cloud:
+      myremote:
+        etag: 08c3afe6e78be78a031001
+        version_id: '1736372548900803'
+  - relpath: raw/Frame 1  (12).jpg
+    md5: aceb474d3c5e89f77e38b04f2bf73bb0
+    size: 524885
+    cloud:
+      myremote:
+        etag: 08dd95a4e78be78a031001
+        version_id: '1736372547816157'
+  - relpath: raw/Frame 1  (12).jpg___fuse.png
+    md5: 67c26996ca60ea7f4c86766723df2bfd
+    size: 22888
+    cloud:
+      myremote:
+        etag: 08a1b092e88be78a031001
+        version_id: '1736372549621793'
+  - relpath: raw/Frame 1  (12).jpg___save.png
+    md5: 14e1db8b990b0fbb5467070f6b586aef
+    size: 82394
+    cloud:
+      myremote:
+        etag: 08f6a089e88be78a031001
+        version_id: '1736372549472374'
+  - relpath: raw/Frame 1  (13).jpg
+    md5: 0348624cef0c77d20d9faf556dfe065d
+    size: 536190
+    cloud:
+      myremote:
+        etag: 08c7a0d1e88be78a031001
+        version_id: '1736372550651975'
+  - relpath: raw/Frame 1  (13).jpg___fuse.png
+    md5: bbee7f327d6f2d9bf13fd073e855ce30
+    size: 24517
+    cloud:
+      myremote:
+        etag: 08a683e4e88be78a031001
+        version_id: '1736372550959526'
+  - relpath: raw/Frame 1  (13).jpg___save.png
+    md5: 2ffbd7aa358dd7e8440df2773d9e58b1
+    size: 89021
+    cloud:
+      myremote:
+        etag: 08caf0c0e78be78a031001
+        version_id: '1736372548286538'
+  - relpath: raw/Frame 1  (14).jpg
+    md5: b64feac753d9870973412f3cd84c3fc9
+    size: 677388
+    cloud:
+      myremote:
+        etag: 089a8bc6e88be78a031001
+        version_id: '1736372550469018'
+  - relpath: raw/Frame 1  (14).jpg___fuse.png
+    md5: 61387169bf398e54f1da2517cdd34d4b
+    size: 28372
+    cloud:
+      myremote:
+        etag: 0888c59ee78be78a031001
+        version_id: '1736372547723912'
+  - relpath: raw/Frame 1  (14).jpg___save.png
+    md5: f419ab89c13d61d8b76d619320c25d91
+    size: 94083
+    cloud:
+      myremote:
+        etag: 08f6da96e78be78a031001
+        version_id: '1736372547595638'
+  - relpath: raw/Frame 1  (15).jpg
+    md5: 3394f38c14a1f65dc743f816efa46857
+    size: 479484
+    cloud:
+      myremote:
+        etag: 08aef6a2e88be78a031001
+        version_id: '1736372549892910'
+  - relpath: raw/Frame 1  (15).jpg___fuse.png
+    md5: d9f9a60a83b4b02d4bd761e72a3f4063
+    size: 18792
+    cloud:
+      myremote:
+        etag: 089ec1b6e78be78a031001
+        version_id: '1736372548116638'
+  - relpath: raw/Frame 1  (15).jpg___save.png
+    md5: 9a85b0cdd34df03d7da66f682a5e6225
+    size: 70408
+    cloud:
+      myremote:
+        etag: 089ba1bce78be78a031001
+        version_id: '1736372548210843'
+  - relpath: raw/Frame 1  (16).jpg
+    md5: c0e61d33195913c8375998e547e66e5b
+    size: 630841
+    cloud:
+      myremote:
+        etag: 08e295e3e88be78a031001
+        version_id: '1736372550945506'
+  - relpath: raw/Frame 1  (16).jpg___fuse.png
+    md5: 83540c25956464bbfc5bd803f3827606
+    size: 22315
+    cloud:
+      myremote:
+        etag: 08be8ccde88be78a031001
+        version_id: '1736372550583870'
+  - relpath: raw/Frame 1  (16).jpg___save.png
+    md5: 41124c62d0309b32ef316e14cffd79b9
+    size: 75233
+    cloud:
+      myremote:
+        etag: 08a6c8f7e78be78a031001
+        version_id: '1736372549182502'
+  - relpath: raw/Frame 1  (17).jpg
+    md5: 5558284ca1ee368c4d1ee7ca39cb4904
+    size: 606318
+    cloud:
+      myremote:
+        etag: 08e1a4afe78be78a031001
+        version_id: '1736372547998305'
+  - relpath: raw/Frame 1  (17).jpg___fuse.png
+    md5: 8a65d98a21e0ef2b5941cfb673bfeefb
+    size: 21744
+    cloud:
+      myremote:
+        etag: 08f4f1b0e88be78a031001
+        version_id: '1736372550121716'
+  - relpath: raw/Frame 1  (17).jpg___save.png
+    md5: 79bd01413b3f07917f477722e157b0ce
+    size: 76425
+    cloud:
+      myremote:
+        etag: 088a91c0e78be78a031001
+        version_id: '1736372548274314'
+  - relpath: raw/Frame 1  (18).jpg
+    md5: a5c8647ededcba61054c44bb576b13fe
+    size: 627565
+    cloud:
+      myremote:
+        etag: 08de96d6e78be78a031001
+        version_id: '1736372548635486'
+  - relpath: raw/Frame 1  (18).jpg___fuse.png
+    md5: 3aaa57819deb6f888cbbb43f322130a6
+    size: 19828
+    cloud:
+      myremote:
+        etag: 08d59d8be88be78a031001
+        version_id: '1736372549504725'
+  - relpath: raw/Frame 1  (18).jpg___save.png
+    md5: bca217a4f05e58f7e1984d315852afb0
+    size: 78155
+    cloud:
+      myremote:
+        etag: 08adceb0e88be78a031001
+        version_id: '1736372550117165'
+  - relpath: raw/Frame 1  (19).jpg
+    md5: b5f0c383439398ffa7d464f0bf60bcbd
+    size: 652651
+    cloud:
+      myremote:
+        etag: 088fa0fce78be78a031001
+        version_id: '1736372549259279'
+  - relpath: raw/Frame 1  (19).jpg___fuse.png
+    md5: 2f29ab9ec5fc2132f06a18f34622eb65
+    size: 19721
+    cloud:
+      myremote:
+        etag: 08d084c4e88be78a031001
+        version_id: '1736372550435408'
+  - relpath: raw/Frame 1  (19).jpg___save.png
+    md5: 9abe8f63df4699ea8e90d2fcc111f86d
+    size: 76361
+    cloud:
+      myremote:
+        etag: 08b797bee78be78a031001
+        version_id: '1736372548242359'
+  - relpath: raw/Frame 1  (2).jpg
+    md5: c6576ef5502c20dab54fcfa9e582bc2b
+    size: 488883
+    cloud:
+      myremote:
+        etag: 08cabcc2e88be78a031001
+        version_id: '1736372550409802'
+  - relpath: raw/Frame 1  (2).jpg___fuse.png
+    md5: 0fbfed58de0a33f15c82b584482ceb13
+    size: 31691
+    cloud:
+      myremote:
+        etag: 08fee7a7e78be78a031001
+        version_id: '1736372547875838'
+  - relpath: raw/Frame 1  (2).jpg___save.png
+    md5: a97f469b1f380b1b63edb42fe23e2285
+    size: 105073
+    cloud:
+      myremote:
+        etag: 08ffeeafe88be78a031001
+        version_id: '1736372550104959'
+  - relpath: raw/Frame 1  (20).jpg
+    md5: ad178c31547087d11fb68a96670c042b
+    size: 441224
+    cloud:
+      myremote:
+        etag: 08d6eadbe78be78a031001
+        version_id: '1736372548728150'
+  - relpath: raw/Frame 1  (20).jpg___fuse.png
+    md5: fdaa97c75fdc8d927acdae51a03e4a0e
+    size: 13800
+    cloud:
+      myremote:
+        etag: 0891b1e6e78be78a031001
+        version_id: '1736372548901009'
+  - relpath: raw/Frame 1  (20).jpg___save.png
+    md5: b0986b40430b50a8c24df50d1394feb7
+    size: 55009
+    cloud:
+      myremote:
+        etag: 08a7b3f9e78be78a031001
+        version_id: '1736372549212583'
+  - relpath: raw/Frame 1  (21).jpg
+    md5: 80b6138ec14879c4b7eebdc83556459b
+    size: 480576
+    cloud:
+      myremote:
+        etag: 08d39395e88be78a031001
+        version_id: '1736372549667283'
+  - relpath: raw/Frame 1  (21).jpg___fuse.png
+    md5: 1a395182871e9f580e5dffe4019c93d7
+    size: 14332
+    cloud:
+      myremote:
+        etag: 08e09f89e78be78a031001
+        version_id: '1736372547375072'
+  - relpath: raw/Frame 1  (21).jpg___save.png
+    md5: 83d34d2eff8a4da1d418e9d5cd9927c0
+    size: 58793
+    cloud:
+      myremote:
+        etag: 08ddb6d7e78be78a031001
+        version_id: '1736372548655965'
+  - relpath: raw/Frame 1  (22).jpg
+    md5: 1a86653bef351a4ad9172e0d0ac46253
+    size: 471747
+    cloud:
+      myremote:
+        etag: 0884c8b8e88be78a031001
+        version_id: '1736372550247428'
+  - relpath: raw/Frame 1  (22).jpg___fuse.png
+    md5: d8ade681908d82689a81eeefd00a5632
+    size: 14678
+    cloud:
+      myremote:
+        etag: 08b9fbc1e78be78a031001
+        version_id: '1736372548304313'
+  - relpath: raw/Frame 1  (22).jpg___save.png
+    md5: 2057541a31c25483199cdf6c6348875d
+    size: 58921
+    cloud:
+      myremote:
+        etag: 08c7cdd8e88be78a031001
+        version_id: '1736372550772423'
+  - relpath: raw/Frame 1  (23).jpg
+    md5: 252c833cb1a308f06417ec4e087e2636
+    size: 457581
+    cloud:
+      myremote:
+        etag: 08d9ac90e88be78a031001
+        version_id: '1736372549588569'
+  - relpath: raw/Frame 1  (23).jpg___fuse.png
+    md5: da7242d1a604138010ddf5be72ba6825
+    size: 16245
+    cloud:
+      myremote:
+        etag: 089db8f2e78be78a031001
+        version_id: '1736372549098525'
+  - relpath: raw/Frame 1  (23).jpg___save.png
+    md5: b33b25844d10dfddf2f52c16c8be496c
+    size: 63597
+    cloud:
+      myremote:
+        etag: 08dce2e7e78be78a031001
+        version_id: '1736372548923740'
+  - relpath: raw/Frame 1  (24).jpg
+    md5: 6b84b78a61bb0c77d6be22a01fcdace9
+    size: 505642
+    cloud:
+      myremote:
+        etag: 08e9da8be88be78a031001
+        version_id: '1736372549512553'
+  - relpath: raw/Frame 1  (24).jpg___fuse.png
+    md5: 8d5aab448004c5ae66ebe1756b464c34
+    size: 16857
+    cloud:
+      myremote:
+        etag: 08b1bdd7e88be78a031001
+        version_id: '1736372550753969'
+  - relpath: raw/Frame 1  (24).jpg___save.png
+    md5: 95359dfe333309a537a4cf51a36d0059
+    size: 59765
+    cloud:
+      myremote:
+        etag: 08f6a6cee88be78a031001
+        version_id: '1736372550603638'
+  - relpath: raw/Frame 1  (25).jpg
+    md5: af798390d89496332c508f552ce0aeae
+    size: 601158
+    cloud:
+      myremote:
+        etag: 088fd787e88be78a031001
+        version_id: '1736372549446543'
+  - relpath: raw/Frame 1  (25).jpg___fuse.png
+    md5: df75acce943a704d8f9c89ae8d92198c
+    size: 17107
+    cloud:
+      myremote:
+        etag: 08eaf789e78be78a031001
+        version_id: '1736372547386346'
+  - relpath: raw/Frame 1  (25).jpg___save.png
+    md5: 72cf4570c15efdae5f7ceb466ff952ab
+    size: 70132
+    cloud:
+      myremote:
+        etag: 08e5c089e88be78a031001
+        version_id: '1736372549476453'
+  - relpath: raw/Frame 1  (26).jpg
+    md5: 0c71691087737016da1322c98f4c5cb7
+    size: 536467
+    cloud:
+      myremote:
+        etag: 08c1eba0e78be78a031001
+        version_id: '1736372547761601'
+  - relpath: raw/Frame 1  (26).jpg___fuse.png
+    md5: 31d1a427a3d95f5a4365d580bdc70094
+    size: 19376
+    cloud:
+      myremote:
+        etag: 08e48fcde88be78a031001
+        version_id: '1736372550584292'
+  - relpath: raw/Frame 1  (26).jpg___save.png
+    md5: b8a3cf265851594a22eb0c20d8261e0c
+    size: 68573
+    cloud:
+      myremote:
+        etag: 08d3e1b5e78be78a031001
+        version_id: '1736372548104403'
+  - relpath: raw/Frame 1  (27).jpg
+    md5: 1be62f6b0ae33cf7ebc70a57666ce494
+    size: 528396
+    cloud:
+      myremote:
+        etag: 08dedfc7e78be78a031001
+        version_id: '1736372548399070'
+  - relpath: raw/Frame 1  (27).jpg___fuse.png
+    md5: f36661c2b3bf25be5eb2b60d7368a826
+    size: 19614
+    cloud:
+      myremote:
+        etag: 08e696bee88be78a031001
+        version_id: '1736372550339430'
+  - relpath: raw/Frame 1  (27).jpg___save.png
+    md5: 1302053a3e446d6e3634e33bf568a9ea
+    size: 83062
+    cloud:
+      myremote:
+        etag: 089ef6cee78be78a031001
+        version_id: '1736372548516638'
+  - relpath: raw/Frame 1  (28).jpg
+    md5: 2bac4d60a30a74269fa616a8ba73e796
+    size: 547297
+    cloud:
+      myremote:
+        etag: 088b8cbfe88be78a031001
+        version_id: '1736372550354443'
+  - relpath: raw/Frame 1  (28).jpg___fuse.png
+    md5: 02c29eb658ddb5f742391548f129e824
+    size: 17553
+    cloud:
+      myremote:
+        etag: 08bdfbb5e88be78a031001
+        version_id: '1736372550204861'
+  - relpath: raw/Frame 1  (28).jpg___save.png
+    md5: 8ddba694d07281eed94588d6242b6245
+    size: 63701
+    cloud:
+      myremote:
+        etag: 08a19e90e78be78a031001
+        version_id: '1736372547489569'
+  - relpath: raw/Frame 1  (29).jpg
+    md5: 0b1b71585a2d74621d15c76a5b49e702
+    size: 401410
+    cloud:
+      myremote:
+        etag: 08d9d5e7e78be78a031001
+        version_id: '1736372548922073'
+  - relpath: raw/Frame 1  (29).jpg___fuse.png
+    md5: 6d942602fefb99088fdcce64d974db88
+    size: 16812
+    cloud:
+      myremote:
+        etag: 089cb584e88be78a031001
+        version_id: '1736372549393052'
+  - relpath: raw/Frame 1  (29).jpg___save.png
+    md5: dcc49aee32dff3b1af93d160c4e5bb9a
+    size: 63179
+    cloud:
+      myremote:
+        etag: 08ce84e8e78be78a031001
+        version_id: '1736372548928078'
+  - relpath: raw/Frame 1  (3).jpg
+    md5: 485e976dacc1bc4297a5a67bf15c38d4
+    size: 516301
+    cloud:
+      myremote:
+        etag: 08c782b5e88be78a031001
+        version_id: '1736372550189383'
+  - relpath: raw/Frame 1  (3).jpg___fuse.png
+    md5: ea86f9e26c5a1d7455bfa25cf1bf80a0
+    size: 32049
+    cloud:
+      myremote:
+        etag: 08c0f5e0e78be78a031001
+        version_id: '1736372548811456'
+  - relpath: raw/Frame 1  (3).jpg___save.png
+    md5: ef97880354955f2420468a19eb7bde1d
+    size: 108946
+    cloud:
+      myremote:
+        etag: 08a7e0d1e88be78a031001
+        version_id: '1736372550660135'
+  - relpath: raw/Frame 1  (30).jpg
+    md5: 4bc6ad07154ebf6f27b47de488bf9a0a
+    size: 439375
+    cloud:
+      myremote:
+        etag: 08baf985e88be78a031001
+        version_id: '1736372549418170'
+  - relpath: raw/Frame 1  (30).jpg___fuse.png
+    md5: 379b9cc0aca7c71975b58c7d0b846aa7
+    size: 14725
+    cloud:
+      myremote:
+        etag: 08f29cf4e68be78a031001
+        version_id: '1736372547030642'
+  - relpath: raw/Frame 1  (30).jpg___save.png
+    md5: 92cdc66fb4b8c1647cd6ff5978504cd2
+    size: 62952
+    cloud:
+      myremote:
+        etag: 08a699f2e78be78a031001
+        version_id: '1736372549094566'
+  - relpath: raw/Frame 1  (31).jpg
+    md5: 5aecb28054f1fdfcee3d52b86d99c0a3
+    size: 668398
+    cloud:
+      myremote:
+        etag: 08e5d6d7e78be78a031001
+        version_id: '1736372548660069'
+  - relpath: raw/Frame 1  (31).jpg___fuse.png
+    md5: 6f5f15282b793d581f5679124de56f77
+    size: 21267
+    cloud:
+      myremote:
+        etag: 08f1abcde78be78a031001
+        version_id: '1736372548490737'
+  - relpath: raw/Frame 1  (31).jpg___save.png
+    md5: 793b2fe22aed5338939f662bbee6f7e5
+    size: 72319
+    cloud:
+      myremote:
+        etag: 08e4b294e78be78a031001
+        version_id: '1736372547557732'
+  - relpath: raw/Frame 1  (32).jpg
+    md5: 4c0011122eb917a6c69705451ce9367c
+    size: 442135
+    cloud:
+      myremote:
+        etag: 08dd87d8e78be78a031001
+        version_id: '1736372548666333'
+  - relpath: raw/Frame 1  (32).jpg___fuse.png
+    md5: 2ea08305c8c3014e005cd9cb6881a0ce
+    size: 15740
+    cloud:
+      myremote:
+        etag: 08e8cccee88be78a031001
+        version_id: '1736372550608488'
+  - relpath: raw/Frame 1  (32).jpg___save.png
+    md5: 80d4ded8e1cebc5c159c1a9e688882ba
+    size: 67451
+    cloud:
+      myremote:
+        etag: 08e49bcce88be78a031001
+        version_id: '1736372550569444'
+  - relpath: raw/Frame 1  (33).jpg
+    md5: 3dc19ef5026ce1d70b1a54b8a0a4f922
+    size: 513003
+    cloud:
+      myremote:
+        etag: 089dd4cbe88be78a031001
+        version_id: '1736372550560285'
+  - relpath: raw/Frame 1  (33).jpg___fuse.png
+    md5: 023c1d61d839ac140758f2ff4e70594e
+    size: 20907
+    cloud:
+      myremote:
+        etag: 08dee9eae68be78a031001
+        version_id: '1736372546876638'
+  - relpath: raw/Frame 1  (33).jpg___save.png
+    md5: 040c137ce3cbae873c3f9d7cb735cacc
+    size: 77938
+    cloud:
+      myremote:
+        etag: 08e6f0f6e78be78a031001
+        version_id: '1736372549171302'
+  - relpath: raw/Frame 1  (34).jpg
+    md5: 998351503ae6af0642980e84c427f3cd
+    size: 488242
+    cloud:
+      myremote:
+        etag: 08898595e88be78a031001
+        version_id: '1736372549665417'
+  - relpath: raw/Frame 1  (34).jpg___fuse.png
+    md5: 1cb1c8dec8a4eebe77cba3b4b0e14f2d
+    size: 15975
+    cloud:
+      myremote:
+        etag: 08b4dd93e78be78a031001
+        version_id: '1736372547546804'
+  - relpath: raw/Frame 1  (34).jpg___save.png
+    md5: 1f9c1630f8e25dc7b9b76bfb9fdc5b28
+    size: 63715
+    cloud:
+      myremote:
+        etag: 08fcfde1e78be78a031001
+        version_id: '1736372548828924'
+  - relpath: raw/Frame 1  (35).jpg
+    md5: 5bc33bb6618da82ca4ca79036e5fbadf
+    size: 498003
+    cloud:
+      myremote:
+        etag: 08febed8e78be78a031001
+        version_id: '1736372548673406'
+  - relpath: raw/Frame 1  (35).jpg___fuse.png
+    md5: f1b6a49a639b173bc2a01de39733b9f4
+    size: 27134
+    cloud:
+      myremote:
+        etag: 08e0ca9ce88be78a031001
+        version_id: '1736372549789024'
+  - relpath: raw/Frame 1  (35).jpg___save.png
+    md5: 91c42f99f2ed9ddf5307312646fdf067
+    size: 85136
+    cloud:
+      myremote:
+        etag: 08f6f39ae88be78a031001
+        version_id: '1736372549761526'
+  - relpath: raw/Frame 1  (36).jpg
+    md5: eda27222ef31c57d3ffe75225132b29a
+    size: 510606
+    cloud:
+      myremote:
+        etag: 08b498fde78be78a031001
+        version_id: '1736372549274676'
+  - relpath: raw/Frame 1  (36).jpg___fuse.png
+    md5: 62b9e700a27b5fa5b5630ac8cf91330e
+    size: 23212
+    cloud:
+      myremote:
+        etag: 08f99284e88be78a031001
+        version_id: '1736372549388665'
+  - relpath: raw/Frame 1  (36).jpg___save.png
+    md5: 6e576cb9cc02fc2f6462adac7c92ea22
+    size: 94564
+    cloud:
+      myremote:
+        etag: 08c493e6e78be78a031001
+        version_id: '1736372548897220'
+  - relpath: raw/Frame 1  (37).jpg
+    md5: e1c7d05f74df1ca8b13479ba998fdf27
+    size: 570270
+    cloud:
+      myremote:
+        etag: 08d7eee5e78be78a031001
+        version_id: '1736372548892503'
+  - relpath: raw/Frame 1  (37).jpg___fuse.png
+    md5: 0d752a4f726373aa6a75cf531bc7d61e
+    size: 17659
+    cloud:
+      myremote:
+        etag: 089ee6fde78be78a031001
+        version_id: '1736372549284638'
+  - relpath: raw/Frame 1  (37).jpg___save.png
+    md5: fd86f8cd5142188c91abe7285dd2a02a
+    size: 68104
+    cloud:
+      myremote:
+        etag: 08eca2b4e78be78a031001
+        version_id: '1736372548079980'
+  - relpath: raw/Frame 1  (38).jpg
+    md5: c6450f105766fe1a1b87152ad198ed4c
+    size: 674599
+    cloud:
+      myremote:
+        etag: 088df4cde88be78a031001
+        version_id: '1736372550597133'
+  - relpath: raw/Frame 1  (38).jpg___fuse.png
+    md5: 683aa2a7f57df6170087409b51c31605
+    size: 19130
+    cloud:
+      myremote:
+        etag: 08ef8285e88be78a031001
+        version_id: '1736372549402991'
+  - relpath: raw/Frame 1  (38).jpg___save.png
+    md5: afca00919f25f312c10864334175c07c
+    size: 69336
+    cloud:
+      myremote:
+        etag: 08ccf0d7e88be78a031001
+        version_id: '1736372550760524'
+  - relpath: raw/Frame 1  (39).jpg
+    md5: df251e14b3132823edca192f8d4ad934
+    size: 643150
+    cloud:
+      myremote:
+        etag: 08b69ee1e88be78a031001
+        version_id: '1736372550913846'
+  - relpath: raw/Frame 1  (39).jpg___fuse.png
+    md5: 75a7a5dea4fb02dd05ba036325270a00
+    size: 20499
+    cloud:
+      myremote:
+        etag: 089aeef1e78be78a031001
+        version_id: '1736372549089050'
+  - relpath: raw/Frame 1  (39).jpg___save.png
+    md5: 941d10a166ade55f01f8c77f039b1dbf
+    size: 77367
+    cloud:
+      myremote:
+        etag: 08fbb3e8e88be78a031001
+        version_id: '1736372551031291'
+  - relpath: raw/Frame 1  (4).jpg
+    md5: 4ba83c40d532d5445b9acdb520e936d3
+    size: 500726
+    cloud:
+      myremote:
+        etag: 08dcabfce78be78a031001
+        version_id: '1736372549260764'
+  - relpath: raw/Frame 1  (4).jpg___fuse.png
+    md5: 066b78cceb94c259242f6855ce07d5b6
+    size: 29438
+    cloud:
+      myremote:
+        etag: 08e4f5d4e88be78a031001
+        version_id: '1736372550712036'
+  - relpath: raw/Frame 1  (4).jpg___save.png
+    md5: 53ec94f6ff2801808e467ecaa99f3d0a
+    size: 106897
+    cloud:
+      myremote:
+        etag: 08ebbcb7e88be78a031001
+        version_id: '1736372550229611'
+  - relpath: raw/Frame 1  (40).jpg
+    md5: d6acc926c0d56e89ec25ea16c3c599a1
+    size: 669123
+    cloud:
+      myremote:
+        etag: 08b39bd0e78be78a031001
+        version_id: '1736372548537779'
+  - relpath: raw/Frame 1  (40).jpg___fuse.png
+    md5: 36a6494e183c7a5854a23ff1a83b34f5
+    size: 21973
+    cloud:
+      myremote:
+        etag: 08aa9ec4e78be78a031001
+        version_id: '1736372548341546'
+  - relpath: raw/Frame 1  (40).jpg___save.png
+    md5: c334e51a6f3c67950cf72a00b704d395
+    size: 86552
+    cloud:
+      myremote:
+        etag: 0886828fe88be78a031001
+        version_id: '1736372549566726'
+  - relpath: raw/Frame 1  (41).jpg
+    md5: 8541fca5099c3f895ea8858a7cf35994
+    size: 571328
+    cloud:
+      myremote:
+        etag: 08b8f4c7e88be78a031001
+        version_id: '1736372550498872'
+  - relpath: raw/Frame 1  (41).jpg___fuse.png
+    md5: 1123d974f23bdb83598150d9ba7d43a7
+    size: 20411
+    cloud:
+      myremote:
+        etag: 08dfdec1e68be78a031001
+        version_id: '1736372546203487'
+  - relpath: raw/Frame 1  (41).jpg___save.png
+    md5: 8e89de073fcf6a50eabf53ed3646bf5b
+    size: 78729
+    cloud:
+      myremote:
+        etag: 08e6d18ee78be78a031001
+        version_id: '1736372547463398'
+  - relpath: raw/Frame 1  (42).jpg
+    md5: 1f856bb56a297803fd72577c268e5040
+    size: 420255
+    cloud:
+      myremote:
+        etag: 0881a9e4e88be78a031001
+        version_id: '1736372550964353'
+  - relpath: raw/Frame 1  (42).jpg___fuse.png
+    md5: bdc6f4bc56bb9b7d8cfadb1802de7420
+    size: 16534
+    cloud:
+      myremote:
+        etag: 08dbd5d6e78be78a031001
+        version_id: '1736372548643547'
+  - relpath: raw/Frame 1  (42).jpg___save.png
+    md5: 7b6ae95888067129a5c0369b16722876
+    size: 67066
+    cloud:
+      myremote:
+        etag: 08e5bbcee88be78a031001
+        version_id: '1736372550606309'
+  - relpath: raw/Frame 1  (43).jpg
+    md5: fa4ba8413237b3fec4294677d55bc838
+    size: 540444
+    cloud:
+      myremote:
+        etag: 08bdbcb6e78be78a031001
+        version_id: '1736372548116029'
+  - relpath: raw/Frame 1  (43).jpg___fuse.png
+    md5: 12497fc96f2d6558bf08db45a9fceb27
+    size: 16776
+    cloud:
+      myremote:
+        etag: 08d6f7dce88be78a031001
+        version_id: '1736372550843350'
+  - relpath: raw/Frame 1  (43).jpg___save.png
+    md5: bcd458caab87cb0e1d9f996de5b30e7a
+    size: 67115
+    cloud:
+      myremote:
+        etag: 08c0eab5e78be78a031001
+        version_id: '1736372548105536'
+  - relpath: raw/Frame 1  (44).jpg
+    md5: ba92038f6d63f3cede97248f981f9254
+    size: 568091
+    cloud:
+      myremote:
+        etag: 08fcb5bfe88be78a031001
+        version_id: '1736372550359804'
+  - relpath: raw/Frame 1  (44).jpg___fuse.png
+    md5: 5d513dbfc9ce33f275f25243d4a0f831
+    size: 17149
+    cloud:
+      myremote:
+        etag: 08adf889e78be78a031001
+        version_id: '1736372547386413'
+  - relpath: raw/Frame 1  (44).jpg___save.png
+    md5: a04a4bc215af11af4765bf94cfd1e070
+    size: 65278
+    cloud:
+      myremote:
+        etag: 08b1c28ce88be78a031001
+        version_id: '1736372549525809'
+  - relpath: raw/Frame 1  (45).jpg
+    md5: 684253efb47141b6719dec5958d4708c
+    size: 568350
+    cloud:
+      myremote:
+        etag: 08cdc0ace88be78a031001
+        version_id: '1736372550049869'
+  - relpath: raw/Frame 1  (45).jpg___fuse.png
+    md5: 54ee331e6754166593574ccef8bc3fda
+    size: 18350
+    cloud:
+      myremote:
+        etag: 08f4a089e78be78a031001
+        version_id: '1736372547375220'
+  - relpath: raw/Frame 1  (45).jpg___save.png
+    md5: 46ff080334ba2a197eacddf433a908a7
+    size: 73462
+    cloud:
+      myremote:
+        etag: 08c4dcdbe88be78a031001
+        version_id: '1736372550823492'
+  - relpath: raw/Frame 1  (46).jpg
+    md5: b39ad4c4ab98170a32ce85f2f043e977
+    size: 558891
+    cloud:
+      myremote:
+        etag: 08e4ccf4e78be78a031001
+        version_id: '1736372549133924'
+  - relpath: raw/Frame 1  (46).jpg___fuse.png
+    md5: cc7119f872f8013b301d3a579cd60363
+    size: 18979
+    cloud:
+      myremote:
+        etag: 08dcf6c0e78be78a031001
+        version_id: '1736372548287324'
+  - relpath: raw/Frame 1  (46).jpg___save.png
+    md5: 2788a2d9768bc98f2df95e2d675ec755
+    size: 71684
+    cloud:
+      myremote:
+        etag: 08c6cfe3e88be78a031001
+        version_id: '1736372550952902'
+  - relpath: raw/Frame 1  (47).jpg
+    md5: 47ac7e064ada2b3797c482850cf53de9
+    size: 556478
+    cloud:
+      myremote:
+        etag: 08c6f9cee78be78a031001
+        version_id: '1736372548517062'
+  - relpath: raw/Frame 1  (47).jpg___fuse.png
+    md5: 3b7d42e34fe1d7fcd191df1b071b63d4
+    size: 19676
+    cloud:
+      myremote:
+        etag: 08ccf9e3e88be78a031001
+        version_id: '1736372550958284'
+  - relpath: raw/Frame 1  (47).jpg___save.png
+    md5: cd1d10554e72b5ca2b78bf1c55851219
+    size: 85466
+    cloud:
+      myremote:
+        etag: 08f7dfdfe78be78a031001
+        version_id: '1736372548792311'
+  - relpath: raw/Frame 1  (48).jpg
+    md5: a9b2c27109cea954bdf144ac7723b390
+    size: 557051
+    cloud:
+      myremote:
+        etag: 08d1f1bfe78be78a031001
+        version_id: '1736372548270289'
+  - relpath: raw/Frame 1  (48).jpg___fuse.png
+    md5: dd344cdfe94f2071fd73d18c7e7de757
+    size: 20164
+    cloud:
+      myremote:
+        etag: 08f1b4b3e78be78a031001
+        version_id: '1736372548065905'
+  - relpath: raw/Frame 1  (48).jpg___save.png
+    md5: dbc632430193861eff20753f639cf556
+    size: 75758
+    cloud:
+      myremote:
+        etag: 08f88acfe78be78a031001
+        version_id: '1736372548519288'
+  - relpath: raw/Frame 1  (49).jpg
+    md5: fa326d82b1c948fd1aa668545ef705ae
+    size: 473714
+    cloud:
+      myremote:
+        etag: 08c8e9b8e88be78a031001
+        version_id: '1736372550251720'
+  - relpath: raw/Frame 1  (49).jpg___fuse.png
+    md5: 9329ec9c887014fb2c7ff3043bec5bf8
+    size: 16294
+    cloud:
+      myremote:
+        etag: 08d0b9d5e78be78a031001
+        version_id: '1736372548623568'
+  - relpath: raw/Frame 1  (49).jpg___save.png
+    md5: 9325b7ad53bee78dc678c8940a2bd10d
+    size: 63006
+    cloud:
+      myremote:
+        etag: 08a1edf1e78be78a031001
+        version_id: '1736372549088929'
+  - relpath: raw/Frame 1  (5).jpg
+    md5: 012b9df15a4acd7fd0fb6ba4b2739739
+    size: 500441
+    cloud:
+      myremote:
+        etag: 08febe85e88be78a031001
+        version_id: '1736372549410686'
+  - relpath: raw/Frame 1  (5).jpg___fuse.png
+    md5: 12b752abe507ad46afa2e19a32e19015
+    size: 25804
+    cloud:
+      myremote:
+        etag: 08b59b92e88be78a031001
+        version_id: '1736372549619125'
+  - relpath: raw/Frame 1  (5).jpg___save.png
+    md5: e9a41f7472c39e6bc436aff54750e948
+    size: 78102
+    cloud:
+      myremote:
+        etag: 08a5a796e88be78a031001
+        version_id: '1736372549686181'
+  - relpath: raw/Frame 1  (50).jpg
+    md5: 5e4d051b3b893e62d40997abb7d0a1e2
+    size: 741601
+    cloud:
+      myremote:
+        etag: 08c88890e88be78a031001
+        version_id: '1736372549583944'
+  - relpath: raw/Frame 1  (50).jpg___fuse.png
+    md5: a5daca24f9a7b972def3726e6f707c06
+    size: 20200
+    cloud:
+      myremote:
+        etag: 089483a1e88be78a031001
+        version_id: '1736372549861780'
+  - relpath: raw/Frame 1  (50).jpg___save.png
+    md5: 5c2b503b840bd67168c05331c56c0849
+    size: 66061
+    cloud:
+      myremote:
+        etag: 08c2d08de78be78a031001
+        version_id: '1736372547446850'
+  - relpath: raw/Frame 1  (51).jpg
+    md5: 3489fb67786efcb82d850798df2e374d
+    size: 762403
+    cloud:
+      myremote:
+        etag: 08f2a9e3e88be78a031001
+        version_id: '1736372550948082'
+  - relpath: raw/Frame 1  (51).jpg___fuse.png
+    md5: 0d0518eb7cf373282b8d13147d3a678e
+    size: 19710
+    cloud:
+      myremote:
+        etag: 08ec99c4e78be78a031001
+        version_id: '1736372548340972'
+  - relpath: raw/Frame 1  (51).jpg___save.png
+    md5: f0d776b2deaf5fa933cce77ae2aec121
+    size: 65848
+    cloud:
+      myremote:
+        etag: 08c9c1f7e78be78a031001
+        version_id: '1736372549181641'
+  - relpath: raw/Frame 1  (52).jpg
+    md5: 81ba8e9dc4215d93b4d2ffa040ffe465
+    size: 456221
+    cloud:
+      myremote:
+        etag: 0887d9cfe78be78a031001
+        version_id: '1736372548529287'
+  - relpath: raw/Frame 1  (52).jpg___fuse.png
+    md5: 280f3b8af32f62b3c374a9c37c9d78da
+    size: 17382
+    cloud:
+      myremote:
+        etag: 08cfdebee88be78a031001
+        version_id: '1736372550348623'
+  - relpath: raw/Frame 1  (52).jpg___save.png
+    md5: 5e33d06b924a5d134dc5addd2ef16e37
+    size: 60667
+    cloud:
+      myremote:
+        etag: 08d8b7d6e78be78a031001
+        version_id: '1736372548639704'
+  - relpath: raw/Frame 1  (53).jpg
+    md5: 3648fbaafd721ab8dec70e78c56b689a
+    size: 431573
+    cloud:
+      myremote:
+        etag: 08c2c2cae88be78a031001
+        version_id: '1736372550541634'
+  - relpath: raw/Frame 1  (53).jpg___fuse.png
+    md5: 9a1436551a5bb24f5604b78e0193c445
+    size: 13185
+    cloud:
+      myremote:
+        etag: 08d2fd92e88be78a031001
+        version_id: '1736372549631698'
+  - relpath: raw/Frame 1  (53).jpg___save.png
+    md5: bc2826a2efb117e68ecb26fbf336b314
+    size: 49346
+    cloud:
+      myremote:
+        etag: 08b9e6c9e88be78a031001
+        version_id: '1736372550529849'
+  - relpath: raw/Frame 1  (54).jpg
+    md5: 94dbf3fbf5ffdf38934d510e9e1b7962
+    size: 438515
+    cloud:
+      myremote:
+        etag: 08faeff4e88be78a031001
+        version_id: '1736372551235578'
+  - relpath: raw/Frame 1  (54).jpg___fuse.png
+    md5: 5dd441dd4ebc12d4aaf014a8979cba86
+    size: 13292
+    cloud:
+      myremote:
+        etag: 08c8c7a0e88be78a031001
+        version_id: '1736372549854152'
+  - relpath: raw/Frame 1  (54).jpg___save.png
+    md5: f6b8fc2dc747f9fc6d02258a4cf47ffe
+    size: 55197
+    cloud:
+      myremote:
+        etag: 08e582c2e78be78a031001
+        version_id: '1736372548305253'
+  - relpath: raw/Frame 1  (55).jpg
+    md5: 6f664effff3038bc4926de4309623716
+    size: 432693
+    cloud:
+      myremote:
+        etag: 08d0a0a6e78be78a031001
+        version_id: '1736372547850320'
+  - relpath: raw/Frame 1  (55).jpg___fuse.png
+    md5: ab34814f326d35904c5948a6b1db9f06
+    size: 13331
+    cloud:
+      myremote:
+        etag: 088d8ebae78be78a031001
+        version_id: '1736372548175629'
+  - relpath: raw/Frame 1  (55).jpg___save.png
+    md5: 0bc20503f18c869be2f1d81bfe444113
+    size: 57504
+    cloud:
+      myremote:
+        etag: 08a385b6e78be78a031001
+        version_id: '1736372548108963'
+  - relpath: raw/Frame 1  (56).jpg
+    md5: 15f9b0bfa421b56edab196af337b9d20
+    size: 428096
+    cloud:
+      myremote:
+        etag: 08ac839be88be78a031001
+        version_id: '1736372549763500'
+  - relpath: raw/Frame 1  (56).jpg___fuse.png
+    md5: 88d3de7ffe67680f6b69fc50d9187a9b
+    size: 13119
+    cloud:
+      myremote:
+        etag: 0897ade7e78be78a031001
+        version_id: '1736372548916887'
+  - relpath: raw/Frame 1  (56).jpg___save.png
+    md5: c210d232d44c281a85882d42681dfb7c
+    size: 55495
+    cloud:
+      myremote:
+        etag: 0887a6b7e78be78a031001
+        version_id: '1736372548129543'
+  - relpath: raw/Frame 1  (57).jpg
+    md5: 4817a62685ee38552810a3812098a275
+    size: 426559
+    cloud:
+      myremote:
+        etag: 089c88dfe88be78a031001
+        version_id: '1736372550878236'
+  - relpath: raw/Frame 1  (57).jpg___fuse.png
+    md5: 949fd9f32ea7cd26fc66a921b86241b5
+    size: 12953
+    cloud:
+      myremote:
+        etag: 08b4b6d6e78be78a031001
+        version_id: '1736372548639540'
+  - relpath: raw/Frame 1  (57).jpg___save.png
+    md5: e28c986e8a071dffa8490ff79ddf957e
+    size: 56246
+    cloud:
+      myremote:
+        etag: 08c2c2b1e88be78a031001
+        version_id: '1736372550132034'
+  - relpath: raw/Frame 1  (58).jpg
+    md5: e1d51747401162c320cc2941e89f289e
+    size: 439822
+    cloud:
+      myremote:
+        etag: 08b2a6e2e88be78a031001
+        version_id: '1736372550931250'
+  - relpath: raw/Frame 1  (58).jpg___fuse.png
+    md5: cfe84843749fc0cf98c6d6cc950ae1c2
+    size: 15757
+    cloud:
+      myremote:
+        etag: 0880a0cde78be78a031001
+        version_id: '1736372548489216'
+  - relpath: raw/Frame 1  (58).jpg___save.png
+    md5: e330bfd7d5ab53094c6acca4bc750cb2
+    size: 67178
+    cloud:
+      myremote:
+        etag: 08c5c6fde78be78a031001
+        version_id: '1736372549280581'
+  - relpath: raw/Frame 1  (59).jpg
+    md5: 534bb1d2830d9233fbd0e59e7c5dc73c
+    size: 560492
+    cloud:
+      myremote:
+        etag: 08a1bbb3e88be78a031001
+        version_id: '1736372550163873'
+  - relpath: raw/Frame 1  (59).jpg___fuse.png
+    md5: 4c356271efc6724660bfb14662a7fa95
+    size: 21580
+    cloud:
+      myremote:
+        etag: 08cceca0e88be78a031001
+        version_id: '1736372549858892'
+  - relpath: raw/Frame 1  (59).jpg___save.png
+    md5: 1b29c5d0b3a1ffbbc99af6d86dfddc4f
+    size: 86677
+    cloud:
+      myremote:
+        etag: 08f7c7f5e88be78a031001
+        version_id: '1736372551246839'
+  - relpath: raw/Frame 1  (6).jpg
+    md5: d91d3c56972e90555b17621fb9380b17
+    size: 536850
+    cloud:
+      myremote:
+        etag: 08afe489e88be78a031001
+        version_id: '1736372549481007'
+  - relpath: raw/Frame 1  (6).jpg___fuse.png
+    md5: 789931ec7c4fa188f2151419475e6bc4
+    size: 25761
+    cloud:
+      myremote:
+        etag: 08e0bab2e88be78a031001
+        version_id: '1736372550147424'
+  - relpath: raw/Frame 1  (6).jpg___save.png
+    md5: 7f26e88f2cba924e71c32a143832fc91
+    size: 89951
+    cloud:
+      myremote:
+        etag: 08f7c0fee78be78a031001
+        version_id: '1736372549296247'
+  - relpath: raw/Frame 1  (60).jpg
+    md5: de412173781089debe39af8d5f8b32d8
+    size: 591619
+    cloud:
+      myremote:
+        etag: 08cdb8d1e78be78a031001
+        version_id: '1736372548557901'
+  - relpath: raw/Frame 1  (60).jpg___fuse.png
+    md5: eb3e93a008691d5e72c793c4bf08a697
+    size: 26333
+    cloud:
+      myremote:
+        etag: 08e4f089e78be78a031001
+        version_id: '1736372547385444'
+  - relpath: raw/Frame 1  (60).jpg___save.png
+    md5: ecad839b356cf48f3cddc535553fd9af
+    size: 89462
+    cloud:
+      myremote:
+        etag: 08baee95e78be78a031001
+        version_id: '1736372547581754'
+  - relpath: raw/Frame 1  (61).jpg
+    md5: 8a1dfe99554e6af783d8c2ee25475e8c
+    size: 583281
+    cloud:
+      myremote:
+        etag: 089c9df4e88be78a031001
+        version_id: '1736372551224988'
+  - relpath: raw/Frame 1  (61).jpg___fuse.png
+    md5: 3c73b7d7ce8d69d87db859f2247e79a9
+    size: 26185
+    cloud:
+      myremote:
+        etag: 08d7ec8be78be78a031001
+        version_id: '1736372547417687'
+  - relpath: raw/Frame 1  (61).jpg___save.png
+    md5: 2bb0e0867f0090f82fe7ddcedd24beb3
+    size: 94205
+    cloud:
+      myremote:
+        etag: 08f1ca95e88be78a031001
+        version_id: '1736372549674353'
+  - relpath: raw/Frame 1  (62).jpg
+    md5: b2de1d697fb494e3aad9e4dc4be831e7
+    size: 527727
+    cloud:
+      myremote:
+        etag: 08eda5a3e78be78a031001
+        version_id: '1736372547801837'
+  - relpath: raw/Frame 1  (62).jpg___fuse.png
+    md5: bec72cd178c1300654250e3e33796643
+    size: 28736
+    cloud:
+      myremote:
+        etag: 08e3a2b4e78be78a031001
+        version_id: '1736372548079971'
+  - relpath: raw/Frame 1  (62).jpg___save.png
+    md5: a01e64ca8b10c13f2a629330d2091956
+    size: 109282
+    cloud:
+      myremote:
+        etag: 08a6b798e88be78a031001
+        version_id: '1736372549720998'
+  - relpath: raw/Frame 1  (63).jpg
+    md5: 53afd94afcb15fa476d26bc2fa94c967
+    size: 521422
+    cloud:
+      myremote:
+        etag: 08e4e9fce78be78a031001
+        version_id: '1736372549268708'
+  - relpath: raw/Frame 1  (63).jpg___fuse.png
+    md5: b92ac458260aa1124e0cf74ebbfb6352
+    size: 22560
+    cloud:
+      myremote:
+        etag: 08acb6fee78be78a031001
+        version_id: '1736372549294892'
+  - relpath: raw/Frame 1  (63).jpg___save.png
+    md5: 368e330644918250d81af58477ae794d
+    size: 87239
+    cloud:
+      myremote:
+        etag: 08849dc3e88be78a031001
+        version_id: '1736372550422148'
+  - relpath: raw/Frame 1  (64).jpg
+    md5: e08960583ada5ab43702ea32f8389e8c
+    size: 518556
+    cloud:
+      myremote:
+        etag: 08e694f8e88be78a031001
+        version_id: '1736372551289446'
+  - relpath: raw/Frame 1  (64).jpg___fuse.png
+    md5: cd68de2c8d6fdd0ab5ab292cdfa30c71
+    size: 23525
+    cloud:
+      myremote:
+        etag: 08affca7e78be78a031001
+        version_id: '1736372547878447'
+  - relpath: raw/Frame 1  (64).jpg___save.png
+    md5: 2aad3ac3c28f038c392122e87f9eab3a
+    size: 84645
+    cloud:
+      myremote:
+        etag: 08bca7cee88be78a031001
+        version_id: '1736372550603708'
+  - relpath: raw/Frame 1  (65).jpg
+    md5: 5d4c362c6278ae02c967ed54d31f32ac
+    size: 635679
+    cloud:
+      myremote:
+        etag: 08bd8bd2e78be78a031001
+        version_id: '1736372548568509'
+  - relpath: raw/Frame 1  (65).jpg___fuse.png
+    md5: 6b0c07143fcebdfd907b88e5c9715e51
+    size: 18558
+    cloud:
+      myremote:
+        etag: 08acdc8ae78be78a031001
+        version_id: '1736372547399212'
+  - relpath: raw/Frame 1  (65).jpg___save.png
+    md5: 3a279e732d1c56a903c6d863e14d4709
+    size: 73262
+    cloud:
+      myremote:
+        etag: 08efa48de78be78a031001
+        version_id: '1736372547441263'
+  - relpath: raw/Frame 1  (66).jpg
+    md5: 850453f915800750630696fc4ac14e2d
+    size: 644621
+    cloud:
+      myremote:
+        etag: 08d1afa7e88be78a031001
+        version_id: '1736372549965777'
+  - relpath: raw/Frame 1  (66).jpg___fuse.png
+    md5: f8a035442fcd8b2aaf20314bc799451f
+    size: 20661
+    cloud:
+      myremote:
+        etag: 08f7d2e3e88be78a031001
+        version_id: '1736372550953335'
+  - relpath: raw/Frame 1  (66).jpg___save.png
+    md5: df0e7568e5fd8606b2d48450c6ee6b42
+    size: 72877
+    cloud:
+      myremote:
+        etag: 08d1b4dfe88be78a031001
+        version_id: '1736372550883921'
+  - relpath: raw/Frame 1  (67).jpg
+    md5: dee32201de4d75e6b2ea276439aa772e
+    size: 609508
+    cloud:
+      myremote:
+        etag: 08a6d0d4e78be78a031001
+        version_id: '1736372548610086'
+  - relpath: raw/Frame 1  (67).jpg___fuse.png
+    md5: 000ca4dd1e396e57ac1611231c1b584c
+    size: 21033
+    cloud:
+      myremote:
+        etag: 08ca85e2e88be78a031001
+        version_id: '1736372550927050'
+  - relpath: raw/Frame 1  (67).jpg___save.png
+    md5: ae5c3cbe243cd88fd1d4ebb812054ff0
+    size: 75773
+    cloud:
+      myremote:
+        etag: 08f0c9cee88be78a031001
+        version_id: '1736372550608112'
+  - relpath: raw/Frame 1  (68).jpg
+    md5: d5262821799ed37545b3a93d9654b7ba
+    size: 474610
+    cloud:
+      myremote:
+        etag: 08b6dcc2e78be78a031001
+        version_id: '1736372548316726'
+  - relpath: raw/Frame 1  (68).jpg___fuse.png
+    md5: cae7b4c90095264a2a9c8ccca79b6c4a
+    size: 22632
+    cloud:
+      myremote:
+        etag: 0880f4b3e78be78a031001
+        version_id: '1736372548073984'
+  - relpath: raw/Frame 1  (68).jpg___save.png
+    md5: d4abdb9b48e023ef2de970ce786e246b
+    size: 75901
+    cloud:
+      myremote:
+        etag: 08efbca6e88be78a031001
+        version_id: '1736372549951087'
+  - relpath: raw/Frame 1  (69).jpg
+    md5: 6e9bfc90fb6b87363acd7792d59f63df
+    size: 483713
+    cloud:
+      myremote:
+        etag: 08a8ffd8e78be78a031001
+        version_id: '1736372548681640'
+  - relpath: raw/Frame 1  (69).jpg___fuse.png
+    md5: 575145649d79ea61fb98f2c0f694db92
+    size: 23531
+    cloud:
+      myremote:
+        etag: 08ba87abe88be78a031001
+        version_id: '1736372550026170'
+  - relpath: raw/Frame 1  (69).jpg___save.png
+    md5: 84a19b1ba6dedd0822abe6dfb49fc49b
+    size: 77750
+    cloud:
+      myremote:
+        etag: 0892d5e2e88be78a031001
+        version_id: '1736372550937234'
+  - relpath: raw/Frame 1  (7).jpg
+    md5: 532d332f10ad94895248603da5705ebc
+    size: 546615
+    cloud:
+      myremote:
+        etag: 08e2c2f3e88be78a031001
+        version_id: '1736372551213410'
+  - relpath: raw/Frame 1  (7).jpg___fuse.png
+    md5: 25b6dfbcaeac3354ecc399b8e09f0141
+    size: 26775
+    cloud:
+      myremote:
+        etag: 08938fc4e78be78a031001
+        version_id: '1736372548339603'
+  - relpath: raw/Frame 1  (7).jpg___save.png
+    md5: d2a7e23e0540f1d8e27bf34b30c909fe
+    size: 81679
+    cloud:
+      myremote:
+        etag: 089eedc4e78be78a031001
+        version_id: '1736372548351646'
+  - relpath: raw/Frame 1  (70).jpg
+    md5: 59785244ef1499371919143b2a3147f8
+    size: 480360
+    cloud:
+      myremote:
+        etag: 089791b0e78be78a031001
+        version_id: '1736372548012183'
+  - relpath: raw/Frame 1  (70).jpg___fuse.png
+    md5: 2c15868073ba94c62eab9fa767ef8971
+    size: 24349
+    cloud:
+      myremote:
+        etag: 08889bb7e88be78a031001
+        version_id: '1736372550225288'
+  - relpath: raw/Frame 1  (70).jpg___save.png
+    md5: 89444e92749f7e2814e5c127cd44d726
+    size: 77486
+    cloud:
+      myremote:
+        etag: 08b6ffd5e88be78a031001
+        version_id: '1736372550729654'
+  - relpath: raw/Frame 1  (71).jpg
+    md5: b64feac753d9870973412f3cd84c3fc9
+    size: 677388
+    cloud:
+      myremote:
+        etag: 08d8d2ade78be78a031001
+        version_id: '1736372547971416'
+  - relpath: raw/Frame 1  (71).jpg___fuse.png
+    md5: 760ae6013fab4c33dd65c934613ca339
+    size: 28121
+    cloud:
+      myremote:
+        etag: 08f5c7b1e88be78a031001
+        version_id: '1736372550132725'
+  - relpath: raw/Frame 1  (71).jpg___save.png
+    md5: 2f3f99a53ad014e2da9f4233094fa534
+    size: 91236
+    cloud:
+      myremote:
+        etag: 08bdc8dfe78be78a031001
+        version_id: '1736372548789309'
+  - relpath: raw/Frame 1  (72).jpg
+    md5: 3c3833a017610db57b7e53e6476c50ff
+    size: 688546
+    cloud:
+      myremote:
+        etag: 0882ddb5e78be78a031001
+        version_id: '1736372548103810'
+  - relpath: raw/Frame 1  (72).jpg___fuse.png
+    md5: cd0548d4091ad4a0c9fdb59e6e738016
+    size: 27762
+    cloud:
+      myremote:
+        etag: 08adf9b0e88be78a031001
+        version_id: '1736372550122669'
+  - relpath: raw/Frame 1  (72).jpg___save.png
+    md5: ae41b16093b6181765223d0c926e6d97
+    size: 88745
+    cloud:
+      myremote:
+        etag: 0896ef98e78be78a031001
+        version_id: '1736372547630998'
+  - relpath: raw/Frame 1  (73).jpg
+    md5: 8a0dd0897e6567c3fe8241bc769bb4e6
+    size: 689388
+    cloud:
+      myremote:
+        etag: 08a09da7e88be78a031001
+        version_id: '1736372549963424'
+  - relpath: raw/Frame 1  (73).jpg___fuse.png
+    md5: e7fbbcdbce9d5b23a5b6ca6197f9be4d
+    size: 27289
+    cloud:
+      myremote:
+        etag: 08a5aa8be78be78a031001
+        version_id: '1736372547409189'
+  - relpath: raw/Frame 1  (73).jpg___save.png
+    md5: c69c66acdd8b002cecc1aff7fa0b0ad0
+    size: 89072
+    cloud:
+      myremote:
+        etag: 088fdcc2e78be78a031001
+        version_id: '1736372548316687'
+  - relpath: raw/Frame 1  (74).jpg
+    md5: 1c5a0b4461a5920b09180eb3a668390a
+    size: 678099
+    cloud:
+      myremote:
+        etag: 08f3fdb0e78be78a031001
+        version_id: '1736372548026099'
+  - relpath: raw/Frame 1  (74).jpg___fuse.png
+    md5: 26bd6f40f1ef3842b9ba17e7b56a8b9c
+    size: 27204
+    cloud:
+      myremote:
+        etag: 0894a0e8e88be78a031001
+        version_id: '1736372551028756'
+  - relpath: raw/Frame 1  (74).jpg___save.png
+    md5: 0a59f04d19a5c85ded5ff66a102bf2f1
+    size: 83882
+    cloud:
+      myremote:
+        etag: 088e849be88be78a031001
+        version_id: '1736372549763598'
+  - relpath: raw/Frame 1  (75).jpg
+    md5: 4f6a907847fce21f37188ce7bf7ba167
+    size: 682847
+    cloud:
+      myremote:
+        etag: 0880eeb0e78be78a031001
+        version_id: '1736372548024064'
+  - relpath: raw/Frame 1  (75).jpg___fuse.png
+    md5: 2e9dc78b2c83e5ef500d38a517590db9
+    size: 26669
+    cloud:
+      myremote:
+        etag: 0896deaae88be78a031001
+        version_id: '1736372550020886'
+  - relpath: raw/Frame 1  (75).jpg___save.png
+    md5: 66b24e20df59806c8f7ab43d08968c53
+    size: 90591
+    cloud:
+      myremote:
+        etag: 08b5dfc7e78be78a031001
+        version_id: '1736372548399029'
+  - relpath: raw/Frame 1  (76).jpg
+    md5: a45d5e634e9c719fbe11021e333bb2df
+    size: 687448
+    cloud:
+      myremote:
+        etag: 0896cff6e78be78a031001
+        version_id: '1736372549166998'
+  - relpath: raw/Frame 1  (76).jpg___fuse.png
+    md5: 4e700150fa91e89d421c7d6c40b9744c
+    size: 26368
+    cloud:
+      myremote:
+        etag: 08c1f3c5e78be78a031001
+        version_id: '1736372548368833'
+  - relpath: raw/Frame 1  (76).jpg___save.png
+    md5: 8ca39d4a5f336dee4935ca9496c23dab
+    size: 80812
+    cloud:
+      myremote:
+        etag: 088ca7a0e88be78a031001
+        version_id: '1736372549849996'
+  - relpath: raw/Frame 1  (77).jpg
+    md5: 43d670625290d4af589800e4d7783420
+    size: 689307
+    cloud:
+      myremote:
+        etag: 08b3ddf5e88be78a031001
+        version_id: '1736372551249587'
+  - relpath: raw/Frame 1  (77).jpg___fuse.png
+    md5: 84319b0b98ed6ab2f70d43628064d3c2
+    size: 26523
+    cloud:
+      myremote:
+        etag: 08ce9bb7e88be78a031001
+        version_id: '1736372550225358'
+  - relpath: raw/Frame 1  (77).jpg___save.png
+    md5: 70d126a25ced83cc1905f99648603333
+    size: 82597
+    cloud:
+      myremote:
+        etag: 0894deb4e78be78a031001
+        version_id: '1736372548087572'
+  - relpath: raw/Frame 1  (78).jpg
+    md5: ee1bec08fdda9ad7c48d8425ddcce559
+    size: 706783
+    cloud:
+      myremote:
+        etag: 08d1f88de88be78a031001
+        version_id: '1736372549549137'
+  - relpath: raw/Frame 1  (78).jpg___fuse.png
+    md5: 1361802db1b9c1655b4cd45b2ffabca7
+    size: 26472
+    cloud:
+      myremote:
+        etag: 08fbe5f3e68be78a031001
+        version_id: '1736372547023611'
+  - relpath: raw/Frame 1  (78).jpg___save.png
+    md5: b7a8a002cfc6c27907c6b229250b2af3
+    size: 81847
+    cloud:
+      myremote:
+        etag: 08adb3dbe88be78a031001
+        version_id: '1736372550818221'
+  - relpath: raw/Frame 1  (79).jpg
+    md5: 64efea0936744d214eac941317fa9723
+    size: 706185
+    cloud:
+      myremote:
+        etag: 088ba5bfe78be78a031001
+        version_id: '1736372548260491'
+  - relpath: raw/Frame 1  (79).jpg___fuse.png
+    md5: a7604a677dd4ac8c86d04a855e4bc0a4
+    size: 26223
+    cloud:
+      myremote:
+        etag: 08d09e8ae78be78a031001
+        version_id: '1736372547391312'
+  - relpath: raw/Frame 1  (79).jpg___save.png
+    md5: df11ee7aab62d2f4f82551903639dd69
+    size: 85490
+    cloud:
+      myremote:
+        etag: 08a9c5e8e88be78a031001
+        version_id: '1736372551033513'
+  - relpath: raw/Frame 1  (8).jpg
+    md5: 3f73b72546deb1323e9f21ed41d6aed7
+    size: 526851
+    cloud:
+      myremote:
+        etag: 08f2fde5e78be78a031001
+        version_id: '1736372548894450'
+  - relpath: raw/Frame 1  (8).jpg___fuse.png
+    md5: 636b2dd5abd3c4d0fe1d520eefea0c56
+    size: 26360
+    cloud:
+      myremote:
+        etag: 088296a1e88be78a031001
+        version_id: '1736372549864194'
+  - relpath: raw/Frame 1  (8).jpg___save.png
+    md5: 26223fdb8f6bc65687f0b430b0345302
+    size: 101567
+    cloud:
+      myremote:
+        etag: 08afcfcce88be78a031001
+        version_id: '1736372550576047'
+  - relpath: raw/Frame 1  (80).jpg
+    md5: 5a1155ec5472dde40a01eab1a9e7900f
+    size: 691959
+    cloud:
+      myremote:
+        etag: 08b6ddbde78be78a031001
+        version_id: '1736372548234934'
+  - relpath: raw/Frame 1  (80).jpg___fuse.png
+    md5: a2e4c033e8a48db8cb5bec0d8f7f4bc7
+    size: 26218
+    cloud:
+      myremote:
+        etag: 0898f889e78be78a031001
+        version_id: '1736372547386392'
+  - relpath: raw/Frame 1  (80).jpg___save.png
+    md5: 536b2211b2a901a8629cdae8c5f15f6b
+    size: 94707
+    cloud:
+      myremote:
+        etag: 08d8d0d1e88be78a031001
+        version_id: '1736372550658136'
+  - relpath: raw/Frame 1  (81).jpg
+    md5: 7d2903d727ac68a7bb03e80b555c9f23
+    size: 691911
+    cloud:
+      myremote:
+        etag: 08ad808ce88be78a031001
+        version_id: '1736372549517357'
+  - relpath: raw/Frame 1  (81).jpg___fuse.png
+    md5: c4939dd5ae3978a5f39572d2f8113ba3
+    size: 26207
+    cloud:
+      myremote:
+        etag: 08a9c8cee88be78a031001
+        version_id: '1736372550607913'
+  - relpath: raw/Frame 1  (81).jpg___save.png
+    md5: 64528b2469d055157ebf7cca0cc79074
+    size: 95450
+    cloud:
+      myremote:
+        etag: 089d97bde78be78a031001
+        version_id: '1736372548225949'
+  - relpath: raw/Frame 1  (82).jpg
+    md5: 4b8659f7498ccdf739f754e5a30d8f8e
+    size: 684533
+    cloud:
+      myremote:
+        etag: 0889e99de88be78a031001
+        version_id: '1736372549809289'
+  - relpath: raw/Frame 1  (82).jpg___fuse.png
+    md5: c17f727ff3656c80e316c5cf1b816737
+    size: 25712
+    cloud:
+      myremote:
+        etag: 08a3d6bee88be78a031001
+        version_id: '1736372550347555'
+  - relpath: raw/Frame 1  (82).jpg___save.png
+    md5: 8a53824fac5653cba0014d9f846f420b
+    size: 94406
+    cloud:
+      myremote:
+        etag: 08a6a1c0e78be78a031001
+        version_id: '1736372548276390'
+  - relpath: raw/Frame 1  (83).jpg
+    md5: 6ed7ac8b337ea81044715894b6d78058
+    size: 598663
+    cloud:
+      myremote:
+        etag: 08e5fcfae88be78a031001
+        version_id: '1736372551335525'
+  - relpath: raw/Frame 1  (83).jpg___fuse.png
+    md5: 7fd6fb83d920f0530afa15df1f24739a
+    size: 16829
+    cloud:
+      myremote:
+        etag: 08b89388e78be78a031001
+        version_id: '1736372547357112'
+  - relpath: raw/Frame 1  (83).jpg___save.png
+    md5: 0b4a51e7a0b4b0b0ef5943653bd0af64
+    size: 68638
+    cloud:
+      myremote:
+        etag: 08c6bcb5e88be78a031001
+        version_id: '1736372550196806'
+  - relpath: raw/Frame 1  (84).jpg
+    md5: 93d33d33059b91ec103aa0b004661bf5
+    size: 593929
+    cloud:
+      myremote:
+        etag: 08ddbbbfea8be78a031001
+        version_id: '1736372554554845'
+  - relpath: raw/Frame 1  (84).jpg___fuse.png
+    md5: 140b89e468fac4f2748d94d2ba3a5c30
+    size: 16951
+    cloud:
+      myremote:
+        etag: 08d2f7e0e78be78a031001
+        version_id: '1736372548811730'
+  - relpath: raw/Frame 1  (84).jpg___save.png
+    md5: 27aa2ac019b5b80eacc30383448114bd
+    size: 57773
+    cloud:
+      myremote:
+        etag: 08a8e3b9e78be78a031001
+        version_id: '1736372548170152'
+  - relpath: raw/Frame 1  (85).jpg
+    md5: ec98b4ae6fe9512e1041270045c6c6ca
+    size: 596179
+    cloud:
+      myremote:
+        etag: 088cd6b3e88be78a031001
+        version_id: '1736372550167308'
+  - relpath: raw/Frame 1  (85).jpg___fuse.png
+    md5: 1bad6958458e152ab09b5b7765fd56a9
+    size: 17719
+    cloud:
+      myremote:
+        etag: 08f6e5a6e78be78a031001
+        version_id: '1736372547859190'
+  - relpath: raw/Frame 1  (85).jpg___save.png
+    md5: 9c8c07f764a7a9d561d6b86d66faf803
+    size: 59535
+    cloud:
+      myremote:
+        etag: 08dcce91e78be78a031001
+        version_id: '1736372547512156'
+  - relpath: raw/Frame 1  (86).jpg
+    md5: 6c75dd9800e39a1fbfb5ffc304167b52
+    size: 596247
+    cloud:
+      myremote:
+        etag: 08abc387e98be78a031001
+        version_id: '1736372551541163'
+  - relpath: raw/Frame 1  (86).jpg___fuse.png
+    md5: 03bf63973be57bfebbf23db973475460
+    size: 17665
+    cloud:
+      myremote:
+        etag: 0881d5bde88be78a031001
+        version_id: '1736372550331009'
+  - relpath: raw/Frame 1  (86).jpg___save.png
+    md5: 0fe5eb15212cf9d4bf5f30dac827d903
+    size: 61203
+    cloud:
+      myremote:
+        etag: 08e4c99de88be78a031001
+        version_id: '1736372549805284'
+  - relpath: raw/Frame 1  (87).jpg
+    md5: 56b671e5231695b74104518910306851
+    size: 582567
+    cloud:
+      myremote:
+        etag: 08e7efe9e88be78a031001
+        version_id: '1736372551055335'
+  - relpath: raw/Frame 1  (87).jpg___fuse.png
+    md5: 73c9f6fa4f022a44c94f398b60f9f0a3
+    size: 17824
+    cloud:
+      myremote:
+        etag: 08b7f989e78be78a031001
+        version_id: '1736372547386551'
+  - relpath: raw/Frame 1  (87).jpg___save.png
+    md5: 2bf7c78686416f93c4d38ed34bd79423
+    size: 62692
+    cloud:
+      myremote:
+        etag: 089bffdce78be78a031001
+        version_id: '1736372548747163'
+  - relpath: raw/Frame 1  (88).jpg
+    md5: a061d2311cfa469462a4fb05927bdceb
+    size: 612636
+    cloud:
+      myremote:
+        etag: 08ab8d99e88be78a031001
+        version_id: '1736372549732011'
+  - relpath: raw/Frame 1  (88).jpg___fuse.png
+    md5: d59e753d00383eb85a8bfdf80048922d
+    size: 21838
+    cloud:
+      myremote:
+        etag: 08cdd7d5e78be78a031001
+        version_id: '1736372548627405'
+  - relpath: raw/Frame 1  (88).jpg___save.png
+    md5: 210284393781985bcc253d1b95b1e32a
+    size: 77061
+    cloud:
+      myremote:
+        etag: 0895e2cce78be78a031001
+        version_id: '1736372548481301'
+  - relpath: raw/Frame 1  (89).jpg
+    md5: 495b892c40b66b4671cf5effcad8f234
+    size: 623623
+    cloud:
+      myremote:
+        etag: 089ae2d7e88be78a031001
+        version_id: '1736372550758682'
+  - relpath: raw/Frame 1  (89).jpg___fuse.png
+    md5: 2455526388e22be784732b9c1a3b8db6
+    size: 21459
+    cloud:
+      myremote:
+        etag: 089bff99e78be78a031001
+        version_id: '1736372547649435'
+  - relpath: raw/Frame 1  (89).jpg___save.png
+    md5: 0d50a9ba621aac44af6410c3be666954
+    size: 83734
+    cloud:
+      myremote:
+        etag: 08998bf8e78be78a031001
+        version_id: '1736372549191065'
+  - relpath: raw/Frame 1  (9).jpg
+    md5: baa53623f60fc2c529980b1766b97f53
+    size: 543228
+    cloud:
+      myremote:
+        etag: 08b594cee88be78a031001
+        version_id: '1736372550601269'
+  - relpath: raw/Frame 1  (9).jpg___fuse.png
+    md5: 68d96741cb7c9aa847fdd71cb80fb0dd
+    size: 24355
+    cloud:
+      myremote:
+        etag: 0898d8fee78be78a031001
+        version_id: '1736372549299224'
+  - relpath: raw/Frame 1  (9).jpg___save.png
+    md5: 854b86e482a60325b64ac34d9d451b89
+    size: 78066
+    cloud:
+      myremote:
+        etag: 08a6f7d5e88be78a031001
+        version_id: '1736372550728614'
+  - relpath: raw/Frame 1  (90).jpg
+    md5: 0188d17f7fd8ce1477ad696976f33eef
+    size: 617427
+    cloud:
+      myremote:
+        etag: 08d5b596e98be78a031001
+        version_id: '1736372551785173'
+  - relpath: raw/Frame 1  (90).jpg___fuse.png
+    md5: d6a36bf8dde6fd60f30f64a8939f73fe
+    size: 21997
+    cloud:
+      myremote:
+        etag: 08afb0e2e88be78a031001
+        version_id: '1736372550932527'
+  - relpath: raw/Frame 1  (90).jpg___save.png
+    md5: 07d8f7dddfc5b7635f8b4bac1b561ca4
+    size: 81107
+    cloud:
+      myremote:
+        etag: 08f4a38fe88be78a031001
+        version_id: '1736372549571060'
+  - relpath: raw/Frame 1  (91).jpg
+    md5: 48f7f6b46bab324a636550fa9b3b5dda
+    size: 612502
+    cloud:
+      myremote:
+        etag: 08c58ecbe78be78a031001
+        version_id: '1736372548454213'
+  - relpath: raw/Frame 1  (91).jpg___fuse.png
+    md5: d857269976e1ec6773b17dde4e8bf7b7
+    size: 21978
+    cloud:
+      myremote:
+        etag: 08b793b7e88be78a031001
+        version_id: '1736372550224311'
+  - relpath: raw/Frame 1  (91).jpg___save.png
+    md5: 576b09721f2ff0aa2239b6666e7473ba
+    size: 79482
+    cloud:
+      myremote:
+        etag: 08a7fdd5e88be78a031001
+        version_id: '1736372550729383'
+  - relpath: raw/Frame 1  (92).jpg
+    md5: bf21811230d55082795d13eac0db2fb8
+    size: 615425
+    cloud:
+      myremote:
+        etag: 08f79ad5e88be78a031001
+        version_id: '1736372550716791'
+  - relpath: raw/Frame 1  (92).jpg___fuse.png
+    md5: 9c9086e5b2075966b6847ce190d09d99
+    size: 22408
+    cloud:
+      myremote:
+        etag: 0887dd8ae78be78a031001
+        version_id: '1736372547399303'
+  - relpath: raw/Frame 1  (92).jpg___save.png
+    md5: dc0c4fe91922008f67155ddfda9d67d1
+    size: 79742
+    cloud:
+      myremote:
+        etag: 08f19b92e78be78a031001
+        version_id: '1736372547522033'
+  - relpath: raw/Frame 1  (93).jpg
+    md5: c7062fc329497f588e8e45e74cde279d
+    size: 621240
+    cloud:
+      myremote:
+        etag: 08e4a698e88be78a031001
+        version_id: '1736372549718884'
+  - relpath: raw/Frame 1  (93).jpg___fuse.png
+    md5: f7f1318c86cae6013cc8c7398ba13afe
+    size: 22571
+    cloud:
+      myremote:
+        etag: 089c96e6e88be78a031001
+        version_id: '1736372550994716'
+  - relpath: raw/Frame 1  (93).jpg___save.png
+    md5: 482b578bd455d1db76fdb510f4d2b9cb
+    size: 80936
+    cloud:
+      myremote:
+        etag: 08aac098e78be78a031001
+        version_id: '1736372547625002'
+  - relpath: raw/Frame 1  (94).jpg
+    md5: 8543d81ec24449bdb90b601748ffc61a
+    size: 402908
+    cloud:
+      myremote:
+        etag: 08daabb9e78be78a031001
+        version_id: '1736372548163034'
+  - relpath: raw/Frame 1  (94).jpg___fuse.png
+    md5: 5dbedab436cb72b10779490786adf6ec
+    size: 15386
+    cloud:
+      myremote:
+        etag: 08d4dac3e78be78a031001
+        version_id: '1736372548332884'
+  - relpath: raw/Frame 1  (94).jpg___save.png
+    md5: e76ed6357c964c1a3804ac94779740e9
+    size: 61445
+    cloud:
+      myremote:
+        etag: 08d0af98e88be78a031001
+        version_id: '1736372549720016'
+  - relpath: raw/Frame 1  (95).jpg
+    md5: 0e8224dfb3cb9c312718c2b0873f24f2
+    size: 361614
+    cloud:
+      myremote:
+        etag: 08f4e3bbe78be78a031001
+        version_id: '1736372548202996'
+  - relpath: raw/Frame 1  (95).jpg___fuse.png
+    md5: d459193e73dfeb2e81ab068cf8babf05
+    size: 15043
+    cloud:
+      myremote:
+        etag: 0899fcc1e78be78a031001
+        version_id: '1736372548304409'
+  - relpath: raw/Frame 1  (95).jpg___save.png
+    md5: 56c1e050f1719be86cebd9b17dcb6b40
+    size: 55840
+    cloud:
+      myremote:
+        etag: 08e79e94e88be78a031001
+        version_id: '1736372549652327'
+  - relpath: raw/Frame 1  (96).jpg
+    md5: 49c3383318e993b4597c3935688cda0c
+    size: 352294
+    cloud:
+      myremote:
+        etag: 08cfc4e3e78be78a031001
+        version_id: '1736372548854351'
+  - relpath: raw/Frame 1  (96).jpg___fuse.png
+    md5: 83550ac26b9e48a02309bae0eec89c12
+    size: 14974
+    cloud:
+      myremote:
+        etag: 089898dbe78be78a031001
+        version_id: '1736372548717592'
+  - relpath: raw/Frame 1  (96).jpg___save.png
+    md5: 8e2352000086614eb29b5cffe39c281e
+    size: 57526
+    cloud:
+      myremote:
+        etag: 08c2c790e78be78a031001
+        version_id: '1736372547494850'
+  - relpath: raw/Frame 1  (97).jpg
+    md5: b2d9d053180ca3de62750c4f17270811
+    size: 363442
+    cloud:
+      myremote:
+        etag: 08afe0e3e88be78a031001
+        version_id: '1736372550955055'
+  - relpath: raw/Frame 1  (97).jpg___fuse.png
+    md5: 5bd2236642766d881d7bcb7dee692abb
+    size: 16284
+    cloud:
+      myremote:
+        etag: 08f2b7cfe88be78a031001
+        version_id: '1736372550622194'
+  - relpath: raw/Frame 1  (97).jpg___save.png
+    md5: 5f5e2538404068c432a5aeb5c17eee5c
+    size: 61173
+    cloud:
+      myremote:
+        etag: 08fdfda8e78be78a031001
+        version_id: '1736372547895037'
+  - relpath: raw/Frame 1  (98).jpg
+    md5: 4c6ab36838aec5351eab0e967ef8d1b7
+    size: 534418
+    cloud:
+      myremote:
+        etag: 08d0e4e9e88be78a031001
+        version_id: '1736372551053904'
+  - relpath: raw/Frame 1  (98).jpg___fuse.png
+    md5: 7a4e4c57ebb8c563a9d75c26b2e26003
+    size: 19863
+    cloud:
+      myremote:
+        etag: 08988ba8e78be78a031001
+        version_id: '1736372547880344'
+  - relpath: raw/Frame 1  (98).jpg___save.png
+    md5: 0055f98e7ccbbffaf7749fb234f5f59d
+    size: 71631
+    cloud:
+      myremote:
+        etag: 08999fd8e88be78a031001
+        version_id: '1736372550766489'
+  - relpath: raw/Frame 1  (99).jpg
+    md5: f58696750006aecc5f032a1fff201266
+    size: 529808
+    cloud:
+      myremote:
+        etag: 08d7a2dee88be78a031001
+        version_id: '1736372550865239'
+  - relpath: raw/Frame 1  (99).jpg___fuse.png
+    md5: 1e541c7064717fc6c44fdcab4d542678
+    size: 20132
+    cloud:
+      myremote:
+        etag: 088cfaade78be78a031001
+        version_id: '1736372547976460'
+  - relpath: raw/Frame 1  (99).jpg___save.png
+    md5: b55eaafc5fd170d0b245e62bfb641076
+    size: 69773
+    cloud:
+      myremote:
+        etag: 08b8bacce88be78a031001
+        version_id: '1736372550573368'
