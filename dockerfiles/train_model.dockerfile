@@ -8,7 +8,6 @@ RUN apt update && \
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 COPY mlsopsbasic/ mlsopsbasic/
-COPY data/ data/
 
 WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir

@@ -31,7 +31,7 @@ steps:
     '--display-name',
     'example-mlops-job',
     '--config',
-    'mlsopsbasic/config/vertex_ai/config.yaml',
+    'mlsopsbasic/config/vertex_ai/config.yaml'
   ]
 availableSecrets:
   secretManager:

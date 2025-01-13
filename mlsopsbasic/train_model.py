@@ -191,6 +191,10 @@ def main(cfg: DictConfig):
         transforms.ToTensor(),
     ])
 
+    #log if data is from mounted fs
+    if cfg.vertex_ai.use_mounted_fs:
+        print(f"Data is loaded from mounted file system at {cfg.vertex_ai.mounted_fs_path}")
+
     # 2) Create datasets and data loaders
     train_dataset = FootballSegmentationDataset(
         root_dir=cfg.data.train_dir if not cfg.vertex_ai.use_mounted_fs else f'{cfg.vertex_ai.mounted_fs_path}/{cfg.data.train_dir}', 
