@@ -24,7 +24,7 @@ import wandb
 import cProfile
 import pstats
 
-from mlsopsbasic.models.model import SegmentationModel
+from models.model import SegmentationModel
 
 # Suppress warnings for beta transforms
 torchvision.disable_beta_transforms_warning()
