@@ -24,7 +24,7 @@ import wandb
 import cProfile
 import pstats
 
-from mlsopsbasic.model import SegmentationModel
+from mlsopsbasic.models.model import SegmentationModel
 
 # Suppress warnings for beta transforms
 torchvision.disable_beta_transforms_warning()
@@ -193,19 +193,19 @@ def main(cfg: DictConfig):
 
     # 2) Create datasets and data loaders
     train_dataset = FootballSegmentationDataset(
-        root_dir=cfg.data.train_dir,
+        root_dir=cfg.data.train_dir if not cfg.vertex_ai.use_mounted_fs else f'{cfg.vertex_ai.mounted_fs_path}/{cfg.data.train_dir}', 
         use_mask_type=cfg.data.use_mask_type,
         transform=image_transform,
         target_transform=mask_transform
     )
     val_dataset = FootballSegmentationDataset(
-        root_dir=cfg.data.val_dir,
+        root_dir=cfg.data.val_dir if not cfg.vertex_ai.use_mounted_fs else f'{cfg.vertex_ai.mounted_fs_path}/{cfg.data.val_dir}',
         use_mask_type=cfg.data.use_mask_type,
         transform=image_transform,
         target_transform=mask_transform
     )
     test_dataset = FootballSegmentationDataset(
-        root_dir=cfg.data.test_dir,
+        root_dir=cfg.data.test_dir if not cfg.vertex_ai.use_mounted_fs else f'{cfg.vertex_ai.mounted_fs_path}/{cfg.data.test_dir}',
         use_mask_type=cfg.data.use_mask_type,
         transform=image_transform,
         target_transform=mask_transform
