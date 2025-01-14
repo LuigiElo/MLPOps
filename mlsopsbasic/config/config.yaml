@@ -36,3 +36,8 @@ profiling:
 # Misc
 misc:
   save_path: "models/football_segmentation_model.pth"
+
+# Train on Vertex AI
+vertex_ai:  
+  use_mounted_fs: false
+  mounted_fs_path: "/gcs/mlopsbuckett/dvcstorage"
