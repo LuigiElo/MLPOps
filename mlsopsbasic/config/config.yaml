@@ -15,7 +15,7 @@ data:
 model:
   num_classes: 11
   pretrained: true
-
+#model_path: "/home/anpaisgar/MLPOps/models/model.pth"
 # Training settings
 training:
   epochs: 10
@@ -35,7 +35,7 @@ profiling:
 
 # Misc
 misc:
-  save_path: "models/football_segmentation_model.pth"
+  save_path: "/home/anpaisgar/MLPOps/models/football_segmentation_model.pth"
 
 # Train on Vertex AI
 vertex_ai:  
