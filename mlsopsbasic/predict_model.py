@@ -76,8 +76,11 @@ async def predict_endpoint(file: UploadFile = File(...)):
             print(output.shape)
             predicted_class = torch.argmax(output, dim=1)
             print(predicted_class.shape)
+            predicted_classes_list = predicted_class.squeeze().cpu().numpy().tolist()
+            print(predicted_classes_list)  # Print the list to debug
+            
 
-        return {"predicted_class": predicted_class}
+        return {"predicted_class": predicted_classes_list}
     except Exception as e:
         logger.error(f"Error during prediction: {e}")
         return {"error": str(e)}
