@@ -73,7 +73,7 @@ will check the repositories and the code to verify your answers.
 ### Week 2
 
 * [?] Write unit tests related to the data part of your code (M16) - TODO: Update to use DVC
-* [?] Write unit tests related to model construction and or model training (M16) - TODO: Update to use new model
+* [x] Write unit tests related to model construction and or model training (M16)
 * [x] Calculate the code coverage (M16)
 * [ ] Get some continuous integration running on the GitHub repository (M17)
 * [x] Add caching and multi-os/python/pytorch testing to your continuous integration (M17)
@@ -87,7 +87,7 @@ will check the repositories and the code to verify your answers.
 * [ ] Create a FastAPI application that can do inference using your model (M22)
 * [ ] Deploy your model in GCP using either Functions or Run as the backend (M23)
 * [ ] Write API tests for your application and setup continues integration for these (M24)
-* [ ] Load test your application (M24)
+* [ ] Load test your application (M24) - TODO: Maybe add workflow for Locust
 * [ ] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
 * [ ] Create a frontend for your API (M26)
 
