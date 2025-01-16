@@ -2,9 +2,9 @@ name: "Run tests"
 
 on:
   push:
-    branches: [master, main]
+    branches: ["*"]
   pull_request:
-    branches: [master, main]
+    branches: ["*"]
   workflow_dispatch: {}
 
 jobs:
@@ -31,5 +31,6 @@ jobs:
       - name: Test with pytest
         run: |
           pytest -v
+          pytest tests/
           coverage report -m
           coverage html
