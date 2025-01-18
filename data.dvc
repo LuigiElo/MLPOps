@@ -1,4 +1,4 @@
-outs:
+outs: 
 - hash: md5
   path: data
   files:
