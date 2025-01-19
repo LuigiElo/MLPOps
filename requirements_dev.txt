@@ -18,3 +18,7 @@ pre-commit
 
 # API
 fastapi
+
+#dvc
+dvc
+dvc_gs
