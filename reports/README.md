@@ -208,7 +208,12 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 7 fill here ---
+--- In total, we implemented **12 tests**, distributed across two files: `test_predict_mod.py` and `test_data.py`. The tests are focused on two main areas:  
+1. **Model Functionality**: In `test_predict_mod.py`, we test the model's initialization and output shape to ensure proper operation.  
+2. **Dataset Integrity**: In `test_data.py`, we verify the dataset is non-empty, contains valid images and masks, and that masks correspond to images.  
+
+These tests ensure both the segmentation model and dataset are functioning correctly.
+ ---
 
 ### Question 8
 
@@ -238,7 +243,8 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 9 fill here ---
+--- Yes, our workflow included using branches and pull requests (PRs) to manage different tasks efficiently. We created separate branches for specific tasks, such as `hydra`, `api`, and `DVC`. These branches were not dedicated to a single user but were open for anyone working on that particular task. This allowed for collaborative development, where team members could contribute to the same branch without conflicts. Once the task was complete, we used pull requests to review and merge the changes into the main branch (during the project the branch `actions` was used as main branch). This process ensured that code was well-organized, changes were properly reviewed, and the version control system maintained a clean history of the development process. Using branches and PRs also helped in isolating features, making it easier to test and deploy without affecting the main codebase.
+ ---
 
 ### Question 10
 
