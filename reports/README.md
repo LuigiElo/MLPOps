@@ -118,18 +118,13 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 1 fill here ---
+--- MLOPS 11 ---
 
 ### Question 2
 > **Enter the study number for each member in the group**
->
-> Example:
->
-> *sXXXXXX, sXXXXXX, sXXXXXX*
->
 > Answer:
 
---- question 2 fill here ---
+--- s232793, s230354, s233483 ---
 
 ### Question 3
 > **A requirement to the project is that you include a third-party package not covered in the course. What framework**
@@ -447,7 +442,27 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 23 fill here ---
+We developed an API for our model using **FastAPI**. The application, implemented in `predict_model.py`, defines a `/predict/` endpoint to handle image uploads and return pixel-level class predictions for segmentation. **Uvicorn** was used to run the app locally.
+
+## Steps
+
+1. **Set up FastAPI**:  
+   A FastAPI application was created, and logging was implemented to monitor performance and debug issues.
+
+2. **Load the Model**:  
+   Using **Hydra**, we loaded the configuration and model path. The segmentation model was initialized in evaluation mode during FastAPI's startup event.
+
+3. **Define `/predict/` Endpoint**:  
+   A POST endpoint was created to accept image files. Images were preprocessed by resizing, converting to tensors, and normalizing to match the model's requirements.
+
+4. **Generate Predictions**:  
+   The preprocessed image was passed through the model, and predictions were returned as a JSON response.
+
+5. **Run Locally**:  
+   **Uvicorn** allowed us to test the API locally before exploring cloud deployment options.
+
+This approach provided a robust and user-friendly API, enabling easy image uploads and prediction retrieval for further processing.
+ ---
 
 ### Question 24
 
@@ -463,7 +478,14 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 24 fill here ---
+--- For deployment, we wrapped our model into an application using FastAPI. We first tried locally serving the model, which worked. The FastAPI application was implemented in predict_model.py, where we defined an endpoint /predict/ to handle image uploads and return predictions of the class of each pixel to later perform segmentation. We used Uvicorn to run the FastAPI app locally.
+To invoke the service an user would call: 
+
+```bash
+curl -X POST -F "file=@path/to/your/image.jpg" http://127.0.0.1:8000/predict/
+```
+
+This command sends a POST request to the `/predict/` endpoint with the image file, and the API returns the predicted class of each pixel of the image. Additionally, images can also be uploaded directly in the host once the API is deployed ---
 
 ### Question 25
 
@@ -471,14 +493,10 @@ will check the repositories and the code to verify your answers.
 > **the load testing did you get. If not, explain how you would do it.**
 >
 > Recommended answer length: 100-200 words.
->
-> Example:
-> *For unit testing we used ... and for load testing we used ... . The results of the load testing showed that ...*
-> *before the service crashed.*
->
-> Answer:
 
---- question 25 fill here ---
+--- Unit tests of the API were performed. Due to the non-optimal performance of the model, simple requirements were tested. The ``test_predict_mod.py`` file contains two tests: `test_predict_1` and `test_predict_2`. Both tests check the `/predict/` endpoint of the FastAPI application. They send a POST request with an image file and verify that the response status code is 200 and that the response JSON is not empty.
+
+For load testing, we used Locust to simulate multiple users sending requests to the API simultaneously. The `locustfile.py` script defines a user behavior where a POST request is sent to the `/predict` endpoint. The load test was run with 10 users, spawning at a rate of 1 user per second, for a duration of 1 minute. The results included metrics like response time, throughput, and error rate, which helped us evaluate the performance of the API under load. This setup allowed us to identify potential bottlenecks and optimize the API for better performance. ---
 
 ### Question 26
 
