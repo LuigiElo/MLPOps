@@ -79,16 +79,16 @@ will check the repositories and the code to verify your answers.
 * [x] Add caching and multi-os/python/pytorch testing to your continuous integration (M17)
 * [ ] Add a linting step to your continuous integration (M17)
 * [x] Add pre-commit hooks to your version control setup (M18)
-* [ ] Add a continues workflow that triggers when data changes (M19)
+* [x] Add a continues workflow that triggers when data changes (M19)
 * [ ] Add a continues workflow that triggers when changes to the model registry is made (M19)
 * [x] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
 * [x] Create a trigger workflow for automatically building your docker images (M21)
-* [ ] Get your model training in GCP using either the Engine or Vertex AI (M21)
-* [ ] Create a FastAPI application that can do inference using your model (M22)
+* [x] Get your model training in GCP using either the Engine or Vertex AI (M21)
+* [x] Create a FastAPI application that can do inference using your model (M22)
 * [ ] Deploy your model in GCP using either Functions or Run as the backend (M23)
-* [ ] Write API tests for your application and setup continues integration for these (M24)
-* [ ] Load test your application (M24) - TODO: Maybe add workflow for Locust
-* [ ] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
+* [x] Write API tests for your application and setup continues integration for these (M24) - TODO: fetch model from w&bs
+* [x] Load test your application (M24) - TODO: Maybe add workflow for Locust
+* [x] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
 * [ ] Create a frontend for your API (M26)
 
 ### Week 3
