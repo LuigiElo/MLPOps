@@ -178,7 +178,7 @@ def main(cfg: DictConfig):
     )
 
     # 3) Initialize Weights & Biases
-    wandb.init(project=cfg.wandb.project_name)
+    wandb_run = wandb.init(project=cfg.wandb.project_name)
 
     # 4) Load or create your model
     model = SegmentationModel(num_classes=cfg.model.num_classes)
@@ -200,7 +200,7 @@ def main(cfg: DictConfig):
         val_loss, val_miou, val_pa, val_dice = evaluate(model, val_loader, criterion, device, cfg.model.num_classes)
 
         # Log metrics to wandb
-        wandb.log({
+        wandb_run.log({
             "epoch": epoch,
             "train_loss": train_loss,
             "val_loss": val_loss,
@@ -219,7 +219,19 @@ def main(cfg: DictConfig):
     save_path = cfg.misc.save_path
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     torch.save(model.state_dict(), save_path)
-    wandb.save(save_path)
+    wandb_run.save(save_path)
+
+    logged_artifact = wandb_run.log_artifact(
+        save_path,
+        "model-staging",
+        type="model"
+    )
+    wandb_run.link_artifact(   
+        artifact=logged_artifact,  
+        target_path="luis-freire-danmarks-tekniske-universitet-dtu-org/wandb-registry-model/football-segmentation-model"
+    )
+    wandb_run.finish()
+
 
     # 8) Evaluate on test set
     test_loss, test_miou, test_pa, test_dice = evaluate(

@@ -1,34 +1,27 @@
 import torch
-import pytest
+import wandb
+import os
+import time
 
-#from my_project.models import MyModel
-#from mlsopsbasic import MyAwesomeModel
-from mlsopsbasic.models.unet import UNet
-from mlsopsbasic.config import NUM_CLASSES
+from mlsopsbasic.models.model import SegmentationModel
 
-@pytest.fixture
-def model():
-    """Fixture to initialize and return the model."""
-    # return MyAwesomeModel()
-    #return UNet(channels=[3, 64, 128, 256, 1024], out_channels=11)
-    return UNet(channels=[3, 64, 128, 256, 512], out_channels=NUM_CLASSES)
 
-def test_model_output_shape(model):
-    """Test that the model produces and output of the expected shape given an input - COCO-style input"""
-    input_shape = (1, 3, 512, 512) # (batch_size, channels, height, width)
-
-    #expected_output_shape = (1, 1000) # (batch_size, number of classes)
-    expected_output_shape = torch.Size((1, NUM_CLASSES, 512, 512)) # (batch_size, num_classes, height, width)
-
-    dummy_input = torch.randn(*input_shape)  # Create a dummy input tensor
-    model_output = model(dummy_input) # Get the model's output
-
-    # Compare shapes, not the tensor itself
-    assert model_output.shape == expected_output_shape, (
-            f"Expected output shape {expected_output_shape}, but got {model_output.shape}"
+def load_model(artifact):
+    api = wandb.Api(
+        api_key=os.getenv("WANDB_API_KEY"),
+        overrides={"entity": os.getenv("WANDB_ENTITY"), "project": os.getenv("WANDB_PROJECT")},
     )
 
-    # Additional check to verify number of classes
-    assert model_output.shape[1] == NUM_CLASSES, (
-        f"Expected {NUM_CLASSES} output channels but got {model_output.shape[1]}"
-    )
+    logdir = "./models"
+    artifact = api.artifact(artifact)
+    artifact.download(root=logdir)
+    file_name = artifact.files()[0].name
+    return SegmentationModel.load_from_checkpoint(f"{logdir}/{file_name}")
+
+def test_model_speed():
+    model = load_model(os.getenv("MODEL_NAME"))
+    start = time.time()
+    for _ in range(100):
+        model(torch.randn(4, 3, 256, 256))
+    end = time.time()
+    assert end - start < 1
