@@ -1,0 +1,17 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Build container image'
+  args: [
+    'build',
+    '.',
+    '-t',
+    'europe-west1-docker.pkg.dev/manifest-sum-440309-t6/containter-train-registry/train',
+    '-f',
+    'dockerfiles/train_model.dockerfile'
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Push container image'
+  args: [
+    'push',
+    'europe-west1-docker.pkg.dev/manifest-sum-440309-t6/containter-train-registry/train'
+  ]

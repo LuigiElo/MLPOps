@@ -1,112 +1,256 @@
 import os
-import click
-import matplotlib.pyplot as plt
+
 import torch
+import torch.nn as nn
+import torch.optim as optim
+import torchvision
+from torchvision import transforms
+from torch.utils.data import DataLoader
 
-from models.model import MyAwesomeModel
+from torchvision.models.segmentation import deeplabv3_resnet50
+from PIL import Image
+import numpy as np
 
+# Hydra imports
+import hydra
+from omegaconf import DictConfig
 
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
+# Progress bar
 
+# Weights & Biases
+import wandb
 
-@click.group()
-def cli():
-    """Command line interface."""
-    pass
+# cProfile for profiling
+import cProfile
+import pstats
 
-from typing import Tuple
+from models.model import SegmentationModel
+from data.footballDataset import FootballSegmentationDataset
 
-import matplotlib.pyplot as plt  # only needed for plotting
-import torch
-from mpl_toolkits.axes_grid1 import ImageGrid  # only needed for plotting
+# Suppress warnings for beta transforms
+torchvision.disable_beta_transforms_warning()
 
-DATA_PATH = "./data/processed"
-
-
-def corrupt_mnist() -> Tuple[torch.utils.data.Dataset, torch.utils.data.Dataset]:
-    """Return train and test dataloaders for corrupt MNIST."""
-    test_images = torch.load(f"{DATA_PATH}/test_images.pt")
-    test_target = torch.load(f"{DATA_PATH}/test_target.pt")
-    train_images = torch.load(f"{DATA_PATH}/train_images.pt")
-    train_target = torch.load(f"{DATA_PATH}/train_target.pt")
-
-    train_set = torch.utils.data.TensorDataset(train_images, train_target)
-    test_set = torch.utils.data.TensorDataset(test_images, test_target)
-
-    return train_set, test_set
-
-
-@click.command()
-@click.option("--lr", default=1e-3, help="learning rate to use for training")
-@click.option("--batch_size", default=32, help="batch size to use for training")
-@click.option("--epochs", default=10, help="number of epochs to train for")
-def train(lr, batch_size, epochs) -> None:
-    """Train a model on MNIST."""
-    print("Training day and night")
-    print(f"{lr=}, {batch_size=}, {epochs=}")
-
-    model = MyAwesomeModel().to(DEVICE)
-    train_set, _ = corrupt_mnist()
-
-    train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=batch_size)
-
-    loss_fn = torch.nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-
-    statistics = {"train_loss": [], "train_accuracy": []}
-    for epoch in range(epochs):
-        model.train()
-        for i, (img, target) in enumerate(train_dataloader):
-            img, target = img.to(DEVICE), target.to(DEVICE)
-            optimizer.zero_grad()
-            y_pred = model(img)
-            loss = loss_fn(y_pred, target)
-            loss.backward()
-            optimizer.step()
-            statistics["train_loss"].append(loss.item())
-
-            accuracy = (y_pred.argmax(dim=1) == target).float().mean().item()
-            statistics["train_accuracy"].append(accuracy)
-
-            if i % 100 == 0:
-                print(f"Epoch {epoch}, iter {i}, loss: {loss.item()}")
-
-    print("Training complete")
-    torch.save(model.state_dict(), "model.pth")
-    fig, axs = plt.subplots(1, 2, figsize=(15, 5))
-    axs[0].plot(statistics["train_loss"])
-    axs[0].set_title("Train loss")
-    axs[1].plot(statistics["train_accuracy"])
-    axs[1].set_title("Train accuracy")
-    fig.savefig("training_statistics.png")
+##############################################
+# Helper Functions
+##############################################
+def mask_transform(mask):
+    """Convert PIL mask to torch tensor of class indices."""
+    mask = np.asarray(mask, dtype=np.int64)
+    return torch.tensor(mask)
 
 
-@click.command()
-@click.argument("model_checkpoint")
-def evaluate(model_checkpoint) -> None:
-    """Evaluate a trained model."""
-    print("Evaluating like my life depended on it")
-    print(model_checkpoint)
+def train_one_epoch(model, loader, optimizer, criterion, device):
+    """One epoch of training."""
+    model.train()
+    total_loss = 0
+    for images, masks in loader:
+        images, masks = images.to(device), masks.to(device)
+        masks = masks.squeeze(1)  # remove channel dimension if needed
 
-    model = MyAwesomeModel().to(DEVICE)
-    model.load_state_dict(torch.load(model_checkpoint))
+        optimizer.zero_grad()
+        outputs = model(images)["out"]
+        loss = criterion(outputs, masks)
+        loss.backward()
+        optimizer.step()
 
-    _, test_set = corrupt_mnist()
-    test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=32)
+        total_loss += loss.item()
 
+    return total_loss / len(loader)
+
+
+def compute_metrics(predictions, targets, num_classes):
+    """Computes mIoU, Pixel Accuracy, and Dice Coefficient."""
+    predictions = torch.argmax(predictions, dim=1)  # Get predicted class per pixel
+    intersection = torch.zeros(num_classes, device=predictions.device)
+    union = torch.zeros(num_classes, device=predictions.device)
+    dice = torch.zeros(num_classes, device=predictions.device)
+    correct_pixels = (predictions == targets).sum().item()
+    total_pixels = targets.numel()
+
+    for cls in range(num_classes):
+        pred_cls = (predictions == cls)
+        true_cls = (targets == cls)
+
+        intersection[cls] = (pred_cls & true_cls).sum().item()
+        union[cls] = (pred_cls | true_cls).sum().item()
+        # dice coefficient for each class
+        dice[cls] = (2 * intersection[cls]) / (2 * intersection[cls] + union[cls] - intersection[cls] + 1e-6)
+
+    miou = (intersection / (union + 1e-6)).mean().item()  # Avoid division by zero
+    pixel_accuracy = correct_pixels / total_pixels
+    dice_score = dice.mean().item()
+
+    return miou, pixel_accuracy, dice_score
+
+
+def evaluate(model, loader, criterion, device, num_classes):
+    """Evaluate model and compute loss and metrics."""
     model.eval()
-    correct, total = 0, 0
-    for img, target in test_dataloader:
-        img, target = img.to(DEVICE), target.to(DEVICE)
-        y_pred = model(img)
-        correct += (y_pred.argmax(dim=1) == target).float().sum().item()
-        total += target.size(0)
-    print(f"Test accuracy: {correct / total}")
+    total_loss = 0
+    total_miou, total_pa, total_dice = 0, 0, 0
+    count = 0
+
+    with torch.no_grad():
+        for images, masks in loader:
+            images, masks = images.to(device), masks.to(device)
+            masks = masks.squeeze(1)  # remove channel dimension
+            outputs = model(images)["out"]
+
+            loss = criterion(outputs, masks)
+            total_loss += loss.item()
+
+            # Compute Metrics
+            miou, pa, dice = compute_metrics(outputs, masks, num_classes)
+            total_miou += miou
+            total_pa += pa
+            total_dice += dice
+            count += 1
+
+    avg_loss = total_loss / len(loader)
+    avg_miou = total_miou / count
+    avg_pa = total_pa / count
+    avg_dice = total_dice / count
+
+    return avg_loss, avg_miou, avg_pa, avg_dice
 
 
-cli.add_command(train)
-cli.add_command(evaluate)
+##############################################
+# Main with Hydra and Profiling
+##############################################
+@hydra.main(version_base=None, config_path="config", config_name="config")
+def main(cfg: DictConfig):
+    """
+    Main training function, parameterized by Hydra config.
+    We optionally enable cProfile if cfg.profiling.enable is True.
+    """
+    # Check if profiling is enabled
+    if cfg.profiling.enable:
+        profiler = cProfile.Profile()
+        profiler.enable()
+
+    # 1) Define transformations
+    image_transform = transforms.Compose([
+        transforms.Resize((cfg.training.image_size, cfg.training.image_size)),
+        transforms.ToTensor(),
+    ])
+
+    #log if data is from mounted fs
+    if cfg.vertex_ai.use_mounted_fs:
+        print(f"Data is loaded from mounted file system at {cfg.vertex_ai.mounted_fs_path}")
+
+    # 2) Create datasets and data loaders
+    train_dataset = FootballSegmentationDataset(
+        root_dir=cfg.data.train_dir if not cfg.vertex_ai.use_mounted_fs else f'{cfg.vertex_ai.mounted_fs_path}/{cfg.data.train_dir}', 
+        use_mask_type=cfg.data.use_mask_type,
+        transform=image_transform,
+        target_transform=mask_transform
+    )
+    val_dataset = FootballSegmentationDataset(
+        root_dir=cfg.data.val_dir if not cfg.vertex_ai.use_mounted_fs else f'{cfg.vertex_ai.mounted_fs_path}/{cfg.data.val_dir}',
+        use_mask_type=cfg.data.use_mask_type,
+        transform=image_transform,
+        target_transform=mask_transform
+    )
+    test_dataset = FootballSegmentationDataset(
+        root_dir=cfg.data.test_dir if not cfg.vertex_ai.use_mounted_fs else f'{cfg.vertex_ai.mounted_fs_path}/{cfg.data.test_dir}',
+        use_mask_type=cfg.data.use_mask_type,
+        transform=image_transform,
+        target_transform=mask_transform
+    )
+
+    train_loader = DataLoader(
+        train_dataset,
+        batch_size=cfg.training.batch_size,
+        shuffle=True,
+        num_workers=cfg.data.num_workers
+    )
+    val_loader = DataLoader(
+        val_dataset,
+        batch_size=cfg.training.batch_size,
+        shuffle=False,
+        num_workers=cfg.data.num_workers
+    )
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=cfg.training.batch_size,
+        shuffle=False,
+        num_workers=cfg.data.num_workers
+    )
+
+    # 3) Initialize Weights & Biases
+    wandb_run = wandb.init(project=cfg.wandb.project_name)
+
+    # 4) Load or create your model
+    model = SegmentationModel(num_classes=cfg.model.num_classes)
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device)
+
+    # 5) Define loss and optimizer
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(
+        model.parameters(),
+        lr=cfg.training.learning_rate,
+        weight_decay=cfg.training.weight_decay
+    )
+
+    # 6) Main training loop
+    for epoch in range(cfg.training.epochs):
+        train_loss = train_one_epoch(model, train_loader, optimizer, criterion, device)
+        val_loss, val_miou, val_pa, val_dice = evaluate(model, val_loader, criterion, device, cfg.model.num_classes)
+
+        # Log metrics to wandb
+        wandb_run.log({
+            "epoch": epoch,
+            "train_loss": train_loss,
+            "val_loss": val_loss,
+            "val_mIoU": val_miou,
+            "val_Pixel_Accuracy": val_pa,
+            "val_Dice_Score": val_dice
+        })
+
+        print(
+            f"Epoch {epoch+1}/{cfg.training.epochs} | "
+            f"Train Loss: {train_loss:.4f} | Val Loss: {val_loss:.4f} | "
+            f"Val mIoU: {val_miou:.4f} | Val Pixel Acc: {val_pa:.4f} | Val Dice: {val_dice:.4f}"
+        )
+
+    # 7) Save the model
+    save_path = cfg.misc.save_path
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    torch.save(model.state_dict(), save_path)
+    wandb_run.save(save_path)
+
+    logged_artifact = wandb_run.log_artifact(
+        save_path,
+        "model-staging",
+        type="model"
+    )
+    wandb_run.link_artifact(   
+        artifact=logged_artifact,  
+        target_path="luis-freire-danmarks-tekniske-universitet-dtu-org/wandb-registry-model/football-segmentation-model"
+    )
+    wandb_run.finish()
+
+
+    # 8) Evaluate on test set
+    test_loss, test_miou, test_pa, test_dice = evaluate(
+        model, test_loader, criterion, device, cfg.model.num_classes
+    )
+    print(
+        f"Test Metrics | Loss: {test_loss:.4f} | mIoU: {test_miou:.4f} | "
+        f"Pixel Accuracy: {test_pa:.4f} | Dice Score: {test_dice:.4f}"
+    )
+
+    # If profiling was enabled, print or save results
+    if cfg.profiling.enable:
+        profiler.disable()
+        stats = pstats.Stats(profiler).sort_stats(cfg.profiling.sort_key)
+        # Print top 30 lines by default
+        stats.print_stats(30)
+        # Optionally, you can dump stats to a file for further analysis:
+        # stats.dump_stats("profile_results.pstat")
 
 
 if __name__ == "__main__":
-    cli()
+    main()

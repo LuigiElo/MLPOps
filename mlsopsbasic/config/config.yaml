@@ -1,0 +1,43 @@
+# config.yaml
+
+defaults:
+  - override hydra/job_logging: disabled
+
+# Data settings
+data:
+  train_dir: "data/processed/train"
+  val_dir: "data/processed/val"
+  test_dir: "data/processed/test"
+  use_mask_type: "fuse"
+  num_workers: 2
+
+# Model settings
+model:
+  num_classes: 11
+  pretrained: true
+
+# Training settings
+training:
+  epochs: 10
+  batch_size: 8
+  learning_rate: 0.0001
+  weight_decay: 1e-4
+  image_size: 256
+
+# WandB settings
+wandb:
+  project_name: "football_segmentation"
+
+# Profiling
+profiling:
+  enable: false     # set to true to enable cProfile
+  sort_key: "time"  # how to sort profiling results
+
+# Misc
+misc:
+  save_path: "models/football_segmentation_model.pth"
+
+# Train on Vertex AI
+vertex_ai:  
+  use_mounted_fs: false
+  mounted_fs_path: "/gcs/mlopsbuckett/dvcstorage"

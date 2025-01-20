@@ -8,10 +8,9 @@ RUN apt update && \
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 COPY mlsopsbasic/ mlsopsbasic/
-COPY data/ data/
 
 WORKDIR /
-RUN --mount=type=cache,target=~/pip/.cache pip install -r requirements.txt --no-cache-dir
-RUN --mount=type=cache,target=~/pip/.cache pip install . --no-deps --no-cache-dir
+RUN pip install -r requirements.txt --no-cache-dir
+RUN pip install . --no-deps --no-cache-dir
 
-ENTRYPOINT ["python", "-u", "mlsopsbasic/train_model.py","train"]
+ENTRYPOINT ["python", "-u", "mlsopsbasic/train_model.py"]

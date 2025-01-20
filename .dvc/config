@@ -2,3 +2,4 @@
     remote = myremote
 ['remote "myremote"']
     url = gs://mlopsbuckett/dvcstorage
+    version_aware = true

@@ -1,5 +1,3 @@
-import click
-import kagglehub
 import os
 import torch
 from PIL import Image
@@ -11,13 +9,6 @@ import wandb
 # Configure logger
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-import os
-import torch
-from PIL import Image
-from torchvision import transforms
-from sklearn.model_selection import train_test_split
-import logging
 
 # Configure logger
 logging.basicConfig(level=logging.INFO)
@@ -102,7 +93,7 @@ def make_data(raw_dir: str, processed_dir: str, train_ratio=0.7, val_ratio=0.15,
             except Exception as e:
                 logger.error("Error processing file %s: %s", file_name, e)
                 wandb.log({"error": str(e)})
-    
+
     # Log processing stats
     logger.info("Total images processed: %d", total_images)
     logger.info("Missing fuse images: %d", missing_fuse)
