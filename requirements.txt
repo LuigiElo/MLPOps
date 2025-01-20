@@ -7,3 +7,5 @@ hydra-core
 
 loguru==0.7.3
 wandb==0.19.1
+
+pytest >= 7.4.3
