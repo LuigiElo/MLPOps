@@ -16,7 +16,9 @@ def load_model(artifact):
     artifact = api.artifact(artifact)
     artifact.download(root=logdir)
     file_name = artifact.files()[0].name
-    return SegmentationModel.load_from_checkpoint(f"{logdir}/{file_name}")
+    
+    model = SegmentationModel()
+    return model._load_from_state_dict(torch.load(f"{logdir}/{file_name}"))
 
 def test_model_speed():
     model = load_model(os.getenv("MODEL_NAME"))
