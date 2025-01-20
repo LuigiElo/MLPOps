@@ -2,7 +2,7 @@ name: Check staged model
 
 on:
     repository_dispatch:
-        types: staged_model
+        types: [staged_model]
 
 jobs:
     identify_event:
@@ -21,6 +21,10 @@ jobs:
                 echo "model_name=${{ github.event.client_payload.artifact_version_string }}" >> $GITHUB_OUTPUT
                 echo "model_entity=${{ github.event.client_payload.entity_name }}" >> $GITHUB_OUTPUT
                 echo "model_project=${{ github.event.client_payload.project_name }}" >> $GITHUB_OUTPUT
+            
+            - name: Log GITHUB_OUTPUT
+              run: cat $GITHUB_OUTPUT
+              
     test_model:
         runs-on: ubuntu-latest
         needs: identify_event
@@ -50,4 +54,4 @@ jobs:
   
         - name: Test model
           run: |
-              pytest tests/performancetests/test_model.py
+              pytest tests/test_model.py
