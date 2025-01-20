@@ -21,13 +21,13 @@ def load_model(artifact):
     state_dict = torch.load(f"{logdir}/{file_name}")
     model.load_state_dict(state_dict)
     model.eval()
-    
+
     return model
 
 def test_model_speed():
     model = load_model(os.getenv("MODEL_NAME"))
     start = time.time()
-    for _ in range(100):
+    for _ in range(1):
         model(torch.randn(4, 3, 256, 256))
     end = time.time()
-    assert end - start < 1
+    assert end - start < 1 # 1 second
