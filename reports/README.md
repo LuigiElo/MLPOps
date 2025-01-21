@@ -138,7 +138,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 3 fill here ---
+--- Our project is built using the PyTorch framework, which has greatly facilitated the entire project lifecycle, including data preparation, model development, training, and predictions. The PyTorch ecosystem provided a solid foundation, allowing us to efficiently implement our models. Specifically, we utilized a pre-trained ResNet-50 model from the PyTorch Image Models package. This choice of framework not only simplified the implementation process but also provided access to extensive community support and a wide range of pre-built models. The flexibility and scalability of PyTorch have been crucial in achieving our project goals, highlighting the framework’s effectiveness in addressing machine learning challenges. ---
 
 ## Coding environment
 
@@ -243,8 +243,7 @@ These tests ensure both the segmentation model and dataset are functioning corre
 >
 > Answer:
 
---- Yes, our workflow included using branches and pull requests (PRs) to manage different tasks efficiently. We created separate branches for specific tasks, such as `hydra`, `api`, and `DVC`. These branches were not dedicated to a single user but were open for anyone working on that particular task. This allowed for collaborative development, where team members could contribute to the same branch without conflicts. Once the task was complete, we used pull requests to review and merge the changes into the main branch (during the project the branch `actions` was used as main branch). This process ensured that code was well-organized, changes were properly reviewed, and the version control system maintained a clean history of the development process. Using branches and PRs also helped in isolating features, making it easier to test and deploy without affecting the main codebase.
- ---
+--- Yes, our workflow included using branches and pull requests (PRs) to manage different tasks efficiently. We created separate branches for specific tasks, such as `hydra`, `api`, and `DVC`. These branches were not dedicated to a single user but were open for anyone working on that particular task. This allowed for collaborative development, where team members could contribute to the same branch without conflicts. Once the task was complete, we used pull requests to review and merge the changes into the main branch (during the project the branch `actions` was used as main branch). This process ensured that code was well-organized, changes were properly reviewed, and the version control system maintained a clean history of the development process. Using branches and PRs also helped in isolating features, making it easier to test and deploy without affecting the main codebase. ---
 
 ### Question 10
 
