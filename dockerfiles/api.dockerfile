@@ -14,8 +14,8 @@ COPY models/ models/
 RUN pip install --no-cache-dir --upgrade pip
 
 WORKDIR /
-RUN --mount=type=cache,target=~/pip/.cache pip install --prefer-binary -r requirements.txt --no-cache-dir
-RUN --mount=type=cache,target=~/pip/.cache pip install . --no-deps --no-cache-dir
+RUN pip install --prefer-binary -r requirements.txt --no-cache-dir
+RUN pip install . --no-deps --no-cache-dir
 
 #CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
 CMD exec uvicorn mlsopsbasic.predict_model:app --port ${PORT:-8000} --host 0.0.0.0 --workers 1
