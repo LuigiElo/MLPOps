@@ -35,7 +35,7 @@ profiling:
 
 # Misc
 misc:
-  save_path: "/home/anpaisgar/MLPOps/models/football_segmentation_model.pth"
+  save_path: "models/model.pth"
 
 # Train on Vertex AI
 vertex_ai:  

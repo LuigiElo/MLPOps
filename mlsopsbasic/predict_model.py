@@ -5,9 +5,10 @@ from omegaconf import DictConfig
 from hydra import compose, initialize
 from PIL import Image
 from torchvision import transforms
-from models.model import SegmentationModel
-from train_model import DEVICE
+from mlsopsbasic.models.model import SegmentationModel
 import uvicorn
+
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # We set up the logging
 logging.basicConfig(
