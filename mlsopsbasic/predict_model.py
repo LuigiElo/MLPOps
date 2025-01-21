@@ -52,6 +52,11 @@ def load_model():
     except Exception as e:
         logger.error(f"Error loading model: {e}")
 
+@app.get("/")
+async def get_root():
+    """Root endpoint"""
+    return {"message": "Hello from backend"}
+
 @app.post("/predict/")
 async def predict_endpoint(file: UploadFile = File(...)):
     """
@@ -78,7 +83,7 @@ async def predict_endpoint(file: UploadFile = File(...)):
             print(predicted_class.shape)
             predicted_classes_list = predicted_class.squeeze().cpu().numpy().tolist()
             print(predicted_classes_list)  # Print the list to debug
-            
+
 
         return {"predicted_class": predicted_classes_list}
     except Exception as e:
