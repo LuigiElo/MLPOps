@@ -1,7 +1,7 @@
 click==8.1.7
 matplotlib==3.9.2
 scikit_learn==1.5.1
-torch==2.0.1
+torch==2.4.0
 
 loguru==0.7.3
 wandb==0.19.1
@@ -12,11 +12,12 @@ pydantic>=2.6
 uvicorn==0.15.0
 #torch==1.10.0
 omegaconf==2.1.1
-hydra-core==1.1.1
+hydra-core
 #pillow==8.4.0
 pillow >= 9.3
 #torchvision==0.11.1
-torchvision==0.15.2
+torchvision
+pyarrow
 
 httpx
 locust
