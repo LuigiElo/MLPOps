@@ -1,6 +1,20 @@
-# mlsopsbasic
+# Segmentation of Football match images.
 
-Simple proh
+### A. Overall goal of the project.
+The goal of the project is to create an automated system to segment pre-selected images from a real football match.
+
+### B. What framework are you going to use and do you intend to include the framework in the project?
+We are using the Pytorch framework, as it was strongly suggested in the course.
+
+### C. What data are you going to run on (initially, may change)
+We are getting the data from the following Kagle dataset: https://www.kaggle.com/datasets/sadhliroomyprime/football-semantic-segmentation/data
+
+From the dataset description -> The dataset was collected from the UEFA Super Cup match between Real Madrid and Manchester United in 2017 (Highlights). It has 11 standard classes and it uses SuperAnnotate’s pixel editor to label and classify the images following instance segmentation principles. Export was made in COCO with fused labels to optimise interoperability and visual understanding.
+
+### D. What models do you expect to use
+For the model, we are using a DeepLabV3 model with a ResNet-50 backbone (https://pytorch.org/vision/main/models/generated/torchvision.models.segmentation.deeplabv3_resnet50.html)
+
+We are using this model since members of the group have experience working with it before. Furthermore, this is a pre-trained model with optimized feature-extraction capabilities (great for segmentation) and pre-trained weights out of the box.
 
 ## Project structure
 
