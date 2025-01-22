@@ -94,7 +94,7 @@ will check the repositories and the code to verify your answers.
 
 * [ ] Check how robust your model is towards data drifting (M27)
 * [ ] Deploy to the cloud a drift detection API (M27)
-* [ ] Instrument your API with a couple of system metrics (M28)
+* [x] Instrument your API with a couple of system metrics (M28)
 * [ ] Setup cloud monitoring of your instrumented application (M28)
 * [ ] Create one or more alert systems in GCP to alert you if your app is not behaving correctly (M28)
 * [ ] If applicable, optimize the performance of your data loading using distributed data loading (M29)
@@ -217,9 +217,9 @@ This command installs all the required dependencies as specified in the `require
 >
 > Answer:
 
---- In total, we implemented **12 tests**, distributed across two files: `test_predict_mod.py` and `test_data.py`. The tests are focused on two main areas:  
-1. **Model Functionality**: In `test_predict_mod.py`, we test the model's initialization and output shape to ensure proper operation.  
-2. **Dataset Integrity**: In `test_data.py`, we verify the dataset is non-empty, contains valid images and masks, and that masks correspond to images.  
+--- In total, we implemented **12 tests**, distributed across two files: `test_predict_mod.py` and `test_data.py`. The tests are focused on two main areas:
+1. **Model Functionality**: In `test_predict_mod.py`, we test the model's initialization and output shape to ensure proper operation.
+2. **Dataset Integrity**: In `test_data.py`, we verify the dataset is non-empty, contains valid images and masks, and that masks correspond to images.
 
 These tests ensure both the segmentation model and dataset are functioning correctly.
  ---
@@ -460,19 +460,19 @@ We developed an API for our model using **FastAPI**. The application, implemente
 
 ## Steps
 
-1. **Set up FastAPI**:  
+1. **Set up FastAPI**:
    A FastAPI application was created, and logging was implemented to monitor performance and debug issues.
 
-2. **Load the Model**:  
+2. **Load the Model**:
    Using **Hydra**, we loaded the configuration and model path. The segmentation model was initialized in evaluation mode during FastAPI's startup event.
 
-3. **Define `/predict/` Endpoint**:  
+3. **Define `/predict/` Endpoint**:
    A POST endpoint was created to accept image files. Images were preprocessed by resizing, converting to tensors, and normalizing to match the model's requirements.
 
-4. **Generate Predictions**:  
+4. **Generate Predictions**:
    The preprocessed image was passed through the model, and predictions were returned as a JSON response.
 
-5. **Run Locally**:  
+5. **Run Locally**:
    **Uvicorn** allowed us to test the API locally before exploring cloud deployment options.
 
 This approach provided a robust and user-friendly API, enabling easy image uploads and prediction retrieval for further processing.
@@ -493,7 +493,7 @@ This approach provided a robust and user-friendly API, enabling easy image uploa
 > Answer:
 
 --- For deployment, we wrapped our model into an application using FastAPI. We first tried locally serving the model, which worked. The FastAPI application was implemented in predict_model.py, where we defined an endpoint /predict/ to handle image uploads and return predictions of the class of each pixel to later perform segmentation. We used Uvicorn to run the FastAPI app locally.
-To invoke the service an user would call: 
+To invoke the service an user would call:
 
 ```bash
 curl -X POST -F "file=@path/to/your/image.jpg" http://127.0.0.1:8000/predict/
