@@ -1,0 +1,33 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Build container image'
+  args: [
+    'build',
+    '.',
+    '-t',
+    'europe-west1-docker.pkg.dev/manifest-sum-440309-t6/containter-train-registry/api',
+    '-f',
+    'dockerfiles/api.dockerfile'
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Push container image'
+  args: [
+    'push',
+    'europe-west1-docker.pkg.dev/manifest-sum-440309-t6/containter-train-registry/api'
+  ]
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'Deploy to Cloud Run'
+  args: [
+    'run',
+    'deploy',
+    'gcp-api',
+    '--image',
+    'europe-west1-docker.pkg.dev/manifest-sum-440309-t6/containter-train-registry/api',
+    '--region',
+    'europe-west1',
+    '--platform',
+    'managed',
+    '--memory',
+    '2Gi',
+    '--allow-unauthenticated'
+  ]

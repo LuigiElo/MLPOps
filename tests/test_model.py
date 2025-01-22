@@ -1,33 +1,37 @@
 import torch
-import wandb
-import os
-import time
+import pytest
 
 from mlsopsbasic.models.model import SegmentationModel
 
+NUM_CLASSES = 11
 
-def load_model(artifact):
-    api = wandb.Api(
-        api_key=os.getenv("WANDB_API_KEY"),
-        overrides={"entity": os.getenv("WANDB_ENTITY"), "project": os.getenv("WANDB_PROJECT")},
-    )
+@pytest.fixture
+def model():
+    """Fixture to initialize and return the model."""
+    return SegmentationModel(pretrained=True, num_classes=NUM_CLASSES)
 
-    logdir = "./models"
-    artifact = api.artifact(artifact)
-    artifact.download(root=logdir)
-    file_name = artifact.files()[0].name
+def test_model_initialization():
+    """Test that the model initializes with different configurations."""
+    model1 = SegmentationModel(pretrained=True, num_classes=NUM_CLASSES)
+    assert isinstance(model1, SegmentationModel)
 
-    model = model = SegmentationModel().to(torch.device("cpu"))
-    state_dict = torch.load(f"{logdir}/{file_name}")
-    model.load_state_dict(state_dict)
-    model.eval()
+    model2 = SegmentationModel(pretrained=False, num_classes=NUM_CLASSES)
+    assert isinstance(model2, SegmentationModel)
 
-    return model
 
-def test_model_speed():
-    model = load_model(os.getenv("MODEL_NAME"))
-    start = time.time()
-    for _ in range(1):
-        model(torch.randn(4, 3, 256, 256))
-    end = time.time()
-    assert end - start < 10 # 10 seconds
+def test_model_output_shape(model):
+    batch_size = 4
+    channels = 3
+    height, width = 512, 512
+    input_shape = (batch_size, channels, height, width)
+    expected_output_shape = (batch_size, NUM_CLASSES, height, width)
+
+    dummy_input = torch.randn(*input_shape)
+    model_output = model(dummy_input)
+
+    assert isinstance(model_output, dict), "Model output should be a dictionary"
+    assert "out" in model_output, "Model output dictionary should contain 'out' key"
+
+    result_shape = model_output['out'].shape
+
+    assert result_shape == expected_output_shape, f"Expected output shape {expected_output_shape}, but got {result_shape}"

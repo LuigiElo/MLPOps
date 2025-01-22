@@ -30,6 +30,8 @@ from data.footballDataset import FootballSegmentationDataset
 # Suppress warnings for beta transforms
 torchvision.disable_beta_transforms_warning()
 
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 ##############################################
 # Helper Functions
 ##############################################

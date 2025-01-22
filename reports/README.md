@@ -53,9 +53,8 @@ will check the repositories and the code to verify your answers.
 * [x] Create a dedicated environment for you project to keep track of your packages (M2)
 * [x] Create the initial file structure using cookiecutter with an appropriate template (M6)
 * [x] Fill out the `data.py` file such that it downloads whatever data you need and preprocesses it (if necessary) (M6)
-* [x] Add a model to `model.py` and a training procedure to `train.py` and get that running (M6) - TODO: Cleanup files
-* [x] Remember to fill out the `requirements.txt` and `requirements_dev.txt` file with whatever dependencies that you - TODO: Check at the end
-    are using (M2+M6)
+* [x] Add a model to `model.py` and a training procedure to `train.py` and get that running (M6)
+* [x] Remember to fill out the `requirements.txt` and `requirements_dev.txt` file with whatever dependencies that you
 * [x] Remember to comply with good coding practices (`pep8`) while doing the project (M7)
 * [x] Do a bit of code typing and remember to document essential parts of your code (M7)
 * [x] Setup version control for your data or part of your data (M8)
@@ -73,23 +72,23 @@ will check the repositories and the code to verify your answers.
 ### Week 2
 
 * [?] Write unit tests related to the data part of your code (M16) - TODO: Update to use DVC
-* [?] Write unit tests related to model construction and or model training (M16) - TODO: Update to use new model
+* [x] Write unit tests related to model construction and or model training (M16)
 * [x] Calculate the code coverage (M16)
 * [ ] Get some continuous integration running on the GitHub repository (M17)
 * [x] Add caching and multi-os/python/pytorch testing to your continuous integration (M17)
 * [ ] Add a linting step to your continuous integration (M17)
 * [x] Add pre-commit hooks to your version control setup (M18)
-* [ ] Add a continues workflow that triggers when data changes (M19)
-* [ ] Add a continues workflow that triggers when changes to the model registry is made (M19)
+* [x] Add a continues workflow that triggers when data changes (M19)
+* [x] Add a continues workflow that triggers when changes to the model registry is made (M19)
 * [x] Create a data storage in GCP Bucket for your data and link this with your data version control setup (M21)
 * [x] Create a trigger workflow for automatically building your docker images (M21)
 * [x] Get your model training in GCP using either the Engine or Vertex AI (M21)
-* [ ] Create a FastAPI application that can do inference using your model (M22)
-* [ ] Deploy your model in GCP using either Functions or Run as the backend (M23)
-* [ ] Write API tests for your application and setup continues integration for these (M24)
-* [ ] Load test your application (M24)
-* [ ] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
-* [ ] Create a frontend for your API (M26)
+* [x] Create a FastAPI application that can do inference using your model (M22)
+* [x] Deploy your model in GCP using either Functions or Run as the backend (M23)
+* [x] Write API tests for your application and setup continues integration for these (M24) - TODO: fetch model from w&bs
+* [x] Load test your application (M24) - TODO: Maybe add workflow for Locust
+* [x] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
+* [x] Create a frontend for your API (M26)
 
 ### Week 3
 
@@ -108,7 +107,7 @@ will check the repositories and the code to verify your answers.
 * [ ] Publish the documentation to GitHub Pages (M32)
 * [ ] Revisit your initial project description. Did the project turn out as you wanted?
 * [ ] Create an architectural diagram over your MLOps pipeline
-* [ ] Make sure all group members have an understanding about all parts of the project
+* [x] Make sure all group members have an understanding about all parts of the project
 * [x] Uploaded all your code to GitHub
 
 ## Group information
@@ -118,18 +117,13 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 1 fill here ---
+--- MLOPS 11 ---
 
 ### Question 2
 > **Enter the study number for each member in the group**
->
-> Example:
->
-> *sXXXXXX, sXXXXXX, sXXXXXX*
->
 > Answer:
 
---- question 2 fill here ---
+--- s232793, s230354, s233483 ---
 
 ### Question 3
 > **A requirement to the project is that you include a third-party package not covered in the course. What framework**
@@ -143,7 +137,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 3 fill here ---
+--- Our project is built using the PyTorch framework, which has greatly facilitated the entire project lifecycle, including data preparation, model development, training, and predictions. The PyTorch ecosystem provided a solid foundation, allowing us to efficiently implement our models. Specifically, we utilized a pre-trained ResNet-50 model from the PyTorch Image Models package. This choice of framework not only simplified the implementation process but also provided access to extensive community support and a wide range of pre-built models. The flexibility and scalability of PyTorch have been crucial in achieving our project goals, highlighting the framework’s effectiveness in addressing machine learning challenges. ---
 
 ## Coding environment
 
@@ -163,7 +157,17 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 4 fill here ---
+--- We managed our project dependencies using a `requirements.txt` file, which lists all the necessary Python packages and their specific versions. This file was auto-generated by running the `pip freeze` command, ensuring that all installed packages and their versions were captured. To replicate our development environment, a new team member would simply need to clone the project repository and run the following command in their terminal:
+
+```bash
+pip install -r requirements.txt
+```
+
+
+This command installs all the required dependencies as specified in the `requirements.txt` file, ensuring an identical setup to the development environment. By using this approach, we ensure consistency across all team members' environments and make the process of setting up the project straightforward for new developers.
+
+
+ ---
 
 ### Question 5
 
@@ -213,7 +217,12 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 7 fill here ---
+--- In total, we implemented **12 tests**, distributed across two files: `test_predict_mod.py` and `test_data.py`. The tests are focused on two main areas:  
+1. **Model Functionality**: In `test_predict_mod.py`, we test the model's initialization and output shape to ensure proper operation.  
+2. **Dataset Integrity**: In `test_data.py`, we verify the dataset is non-empty, contains valid images and masks, and that masks correspond to images.  
+
+These tests ensure both the segmentation model and dataset are functioning correctly.
+ ---
 
 ### Question 8
 
@@ -243,7 +252,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 9 fill here ---
+--- Yes, our workflow included using branches and pull requests (PRs) to manage different tasks efficiently. We created separate branches for specific tasks, such as `hydra`, `api`, and `DVC`. These branches were not dedicated to a single user but were open for anyone working on that particular task. This allowed for collaborative development, where team members could contribute to the same branch without conflicts. Once the task was complete, we used pull requests to review and merge the changes into the main branch (during the project the branch `actions` was used as main branch). This process ensured that code was well-organized, changes were properly reviewed, and the version control system maintained a clean history of the development process. Using branches and PRs also helped in isolating features, making it easier to test and deploy without affecting the main codebase. ---
 
 ### Question 10
 
@@ -258,7 +267,7 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 10 fill here ---
+--- We did make use of DVC in our project. DVC was integrated to manage and version control our datasets, which significantly improved the handling of large data files. By using DVC, we were able to track changes in our data, ensuring that every team member worked with the correct version of the dataset at any given time. This helped maintain consistency throughout the project, especially when experiments required different data versions. Additionally, DVC allowed us to store large datasets remotely in cloud storage, which kept our Git repository clean and focused on code, while still making it easy to share and update data. Thought there was some issues in the implementation because google drive can not longer be used, in the end, DVC helped us streamline collaboration and maintain reproducibility across the entire project pipeline.---
 
 ### Question 11
 
@@ -447,7 +456,27 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 23 fill here ---
+We developed an API for our model using **FastAPI**. The application, implemented in `predict_model.py`, defines a `/predict/` endpoint to handle image uploads and return pixel-level class predictions for segmentation. **Uvicorn** was used to run the app locally.
+
+## Steps
+
+1. **Set up FastAPI**:  
+   A FastAPI application was created, and logging was implemented to monitor performance and debug issues.
+
+2. **Load the Model**:  
+   Using **Hydra**, we loaded the configuration and model path. The segmentation model was initialized in evaluation mode during FastAPI's startup event.
+
+3. **Define `/predict/` Endpoint**:  
+   A POST endpoint was created to accept image files. Images were preprocessed by resizing, converting to tensors, and normalizing to match the model's requirements.
+
+4. **Generate Predictions**:  
+   The preprocessed image was passed through the model, and predictions were returned as a JSON response.
+
+5. **Run Locally**:  
+   **Uvicorn** allowed us to test the API locally before exploring cloud deployment options.
+
+This approach provided a robust and user-friendly API, enabling easy image uploads and prediction retrieval for further processing.
+ ---
 
 ### Question 24
 
@@ -463,7 +492,14 @@ will check the repositories and the code to verify your answers.
 >
 > Answer:
 
---- question 24 fill here ---
+--- For deployment, we wrapped our model into an application using FastAPI. We first tried locally serving the model, which worked. The FastAPI application was implemented in predict_model.py, where we defined an endpoint /predict/ to handle image uploads and return predictions of the class of each pixel to later perform segmentation. We used Uvicorn to run the FastAPI app locally.
+To invoke the service an user would call: 
+
+```bash
+curl -X POST -F "file=@path/to/your/image.jpg" http://127.0.0.1:8000/predict/
+```
+
+This command sends a POST request to the `/predict/` endpoint with the image file, and the API returns the predicted class of each pixel of the image. Additionally, images can also be uploaded directly in the host once the API is deployed ---
 
 ### Question 25
 
@@ -471,14 +507,10 @@ will check the repositories and the code to verify your answers.
 > **the load testing did you get. If not, explain how you would do it.**
 >
 > Recommended answer length: 100-200 words.
->
-> Example:
-> *For unit testing we used ... and for load testing we used ... . The results of the load testing showed that ...*
-> *before the service crashed.*
->
-> Answer:
 
---- question 25 fill here ---
+--- Unit tests of the API were performed. Due to the non-optimal performance of the model, simple requirements were tested. The ``test_predict_mod.py`` file contains two tests: `test_predict_1` and `test_predict_2`. Both tests check the `/predict/` endpoint of the FastAPI application. They send a POST request with an image file and verify that the response status code is 200 and that the response JSON is not empty.
+
+For load testing, we used Locust to simulate multiple users sending requests to the API simultaneously. The `locustfile.py` script defines a user behavior where a POST request is sent to the `/predict` endpoint. The load test was run with 10 users, spawning at a rate of 1 user per second, for a duration of 1 minute. The results included metrics like response time, throughput, and error rate, which helped us evaluate the performance of the API under load. This setup allowed us to identify potential bottlenecks and optimize the API for better performance. ---
 
 ### Question 26
 
