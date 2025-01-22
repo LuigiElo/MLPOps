@@ -29,4 +29,5 @@ steps:
     'managed',
     '--memory',
     '2Gi',
+    '--allow-unauthenticated'
   ]
