@@ -17,5 +17,7 @@ WORKDIR /
 RUN pip install --prefer-binary -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
 
+EXPOSE $PORT
+#CMD exec uvicorn my_application:app --port $PORT --workers 1 main:app
 #CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
-CMD exec uvicorn mlsopsbasic.predict_model:app --port ${PORT:-8000} --host 0.0.0.0 --workers 1
+CMD exec uvicorn mlsopsbasic.predict_model:app --port $PORT --host 0.0.0.0 --workers 1
