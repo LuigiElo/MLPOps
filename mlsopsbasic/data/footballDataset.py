@@ -1,3 +1,4 @@
+import pandas as pd
 import torch
 import os
 import numpy as np
@@ -56,3 +57,14 @@ class FootballSegmentationDataset(torch.utils.data.Dataset):
             mask = torch.tensor(np.array(mask, dtype=np.int64))
 
         return original_image, mask
+    
+    def to_dataframe(self):
+        """
+        Convert dataset into a pandas DataFrame for Evidently compatibility.
+        The DataFrame will have 'filename' and 'mask' columns.
+        """
+        data = []
+        for i in range(len(self)):
+            filename, mask = self[i]
+            data.append({"filename": filename, "mask": mask.numpy()})
+        return pd.DataFrame(data)

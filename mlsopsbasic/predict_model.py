@@ -1,6 +1,9 @@
+from collections.abc import Generator
+import datetime
+import json
 import logging
 import torch
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, BackgroundTasks
 from omegaconf import DictConfig
 from hydra import compose, initialize
 from PIL import Image
@@ -21,7 +24,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = FastAPI()
 
 model = None  # Global variable for the model
 
@@ -32,6 +34,8 @@ def load_config():
     with initialize(version_base=None, config_path="./config"):
         cfg = compose(config_name="config")
     return cfg
+
+app = FastAPI()
 
 @app.on_event("startup")
 def load_model():
@@ -52,14 +56,25 @@ def load_model():
         logger.info("Model loaded successfully.")
     except Exception as e:
         logger.error(f"Error loading model: {e}")
+    
+    # open file for writing prediction results
+    with open("predictions.csv", "w") as f:
+        f.write("timestamp,filename,predicted_matrix\n")
 
-@app.get("/")
-async def get_root():
-    """Root endpoint"""
-    return {"message": "Hello from backend"}
+def add_prediction_to_file(file_name, prediction : list):
+    """
+    Add the prediction to the CSV file.
+    """
+    now = str(datetime.datetime.now())
+    with open("predictions.csv", "a") as f:
+        # Convert the prediction list to a JSON string
+        prediction_json = json.dumps(prediction)
+        f.write(f"{now},{file_name},{prediction_json}\n")
+    
+
 
 @app.post("/predict/")
-async def predict_endpoint(file: UploadFile = File(...)):
+async def predict_endpoint(background_tasks: BackgroundTasks, file: UploadFile = File(...)):
     """
     Predict the class of the uploaded image.
     """
@@ -70,9 +85,8 @@ async def predict_endpoint(file: UploadFile = File(...)):
             image = image.convert("RGB")
 
         preprocess = transforms.Compose([
-            transforms.Resize((224, 224)),  # Adjust size for your model
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            transforms.Resize((224, 224)), 
+            transforms.ToTensor()
         ])
         image_tensor = preprocess(image).unsqueeze(0).to(DEVICE)
 
@@ -85,7 +99,7 @@ async def predict_endpoint(file: UploadFile = File(...)):
             predicted_classes_list = predicted_class.squeeze().cpu().numpy().tolist()
             print(predicted_classes_list)  # Print the list to debug
 
-
+        background_tasks.add_task(add_prediction_to_file, file_name=file.filename, prediction=predicted_classes_list)
         return {"predicted_class": predicted_classes_list}
     except Exception as e:
         logger.error(f"Error during prediction: {e}")
