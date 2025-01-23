@@ -71,5 +71,5 @@ jobs:
         - name: Upload model
           uses: 'google-github-actions/upload-cloud-storage@v2'
           with:
-            path: '/models/${{ needs.identify_event.outputs.model_name }}'
+            path: '/models/football_segmentation_model.pth'
             destination: 'segmentation-model-football'
