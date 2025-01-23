@@ -5,3 +5,4 @@ torchvision>=0.16.2
 hydra-core==1.3.2
 omegaconf==2.3.0
 python-multipart
+prometheus_client
