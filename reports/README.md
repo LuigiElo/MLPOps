@@ -379,7 +379,9 @@ In our project, we used Docker to containerize different stages of the workflow 
 >
 > Answer:
 
---- question 16 fill here ---
+--- Debugging was a consistent part of our workflow, and all team members relied on the VS Code built in debugger to identify and resolve issues. This debugger allowed us to set breakpoints, step through the code, and inspect variables to identify the source of bugs efficiently. We also made extensive use of error logs and print statements for additional clarity during debugging.
+
+To ensure our code was performing properly, we conducted profiling runs on `train_model.py` were we included a profiling mechanism that, employing the `cProfile` module, collects performance statistics during the training and evaluation phases. This helped us identify bottlenecks in specific sections, such as slow loops or inefficient data handling. Based on the profiling results, different areas of the code were optimize, resulting in performance improvements. While we don't consider the code "perfect," methods like profiling allowed us to improve it ---
 
 ## Working in the cloud
 
@@ -629,6 +631,8 @@ We ran through different challenges in these project. At the beginning we focuse
 The course covers a lot of content with different tools, so it is easy to get things messy if you are not very organized from the beginning. It is a struggle to integrate various tools between a group. For example, we spend a lot of time fixing errors in the `requirements.txt` file, because different tools had problems with each other depending on the version. Furthermore, we used a lot of time on fixing the continuous integration (CI/CD) pipelines to ensure that all these components worked together. Sadly, not all of our workflows in Github Actions are running properly.
 
 Lastly, we didn't get the results that we wanted from our model. And due to time constrictions we were not able to fix this issue. This is a pity because a lot of metrics we can not analyze with the results that we have goten.
+
+ For instance, some of the issues regarding the model can be seen when deploying the api, were the prediction class for each pixel is the same, not allowing for proper image segmentation. (This issue lead, for example, to the not implentation of the data drifting)
 
 ### Question 31
 
