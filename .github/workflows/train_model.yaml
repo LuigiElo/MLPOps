@@ -1,0 +1,38 @@
+name: Deploy image and train model
+
+on:
+    push:
+        branches:
+            - train
+
+jobs:              
+    build_image_and_deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: 3.12
+                  cache: 'pip'
+                  cache-dependency-path: setup.py
+
+            - name: Install dependencies
+              run: |
+                  pip install -r requirements.txt
+                  pip list
+
+            - name: Authenticate in GCP
+              uses: google-github-actions/auth@v2
+              with:
+                  credentials_json: ${{ secrets.GOOGLE_CLOUD_SERVICE_KEY }}
+            
+            - name: Deploy image to Google Artifact Registry 
+              run: |
+                  gcloud builds submit --config=cloudbuild.yaml 
+            
+            - name: Train on Vertex AI
+              run: |
+                gcloud builds submit . --config=mlsopsbasic/config/vertex_ai/vertex_ai.yaml
