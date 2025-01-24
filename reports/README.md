@@ -624,7 +624,11 @@ graph TD
 >
 > Answer:
 
---- question 30 fill here ---
+We ran through different challenges in these project. At the beginning we focused too much on a complicated model that we ended up not using it. We understood that the focus of the course was more on the tools and processes around the model and not the model itself, but we lost a lot of time on this.
+
+The course covers a lot of content with different tools, so it is easy to get things messy if you are not very organized from the beginning. It is a struggle to integrate various tools between a group. For example, we spend a lot of time fixing errors in the `requirements.txt` file, because different tools had problems with each other depending on the version. Furthermore, we used a lot of time on fixing the continuous integration (CI/CD) pipelines to ensure that all these components worked together. Sadly, not all of our workflows in Github Actions are running properly.
+
+Lastly, we didn't get the results that we wanted from our model. And due to time constrictions we were not able to fix this issue. This is a pity because a lot of metrics we can not analyze with the results that we have goten.
 
 ### Question 31
 
