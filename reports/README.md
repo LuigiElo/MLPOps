@@ -72,7 +72,7 @@ will check the repositories and the code to verify your answers.
 
 ### Week 2
 
-- [?] Write unit tests related to the data part of your code (M16) - TODO: Update to use DVC
+- [x] Write unit tests related to the data part of your code (M16)
 - [x] Write unit tests related to model construction and or model training (M16)
 - [x] Calculate the code coverage (M16)
 - [x] Get some continuous integration running on the GitHub repository (M17)
@@ -86,8 +86,8 @@ will check the repositories and the code to verify your answers.
 - [x] Get your model training in GCP using either the Engine or Vertex AI (M21)
 - [x] Create a FastAPI application that can do inference using your model (M22)
 - [x] Deploy your model in GCP using either Functions or Run as the backend (M23)
-- [x] Write API tests for your application and setup continues integration for these (M24) - TODO: fetch model from w&bs
-- [x] Load test your application (M24) - TODO: Maybe add workflow for Locust
+- [x] Write API tests for your application and setup continues integration for these (M24)
+- [x] Load test your application (M24)
 - [x] Create a more specialized ML-deployment API using either ONNX or BentoML, or both (M25)
 - [x] Create a frontend for your API (M26)
 
@@ -106,7 +106,7 @@ will check the repositories and the code to verify your answers.
 
 - [ ] Write some documentation for your application (M32)
 - [ ] Publish the documentation to GitHub Pages (M32)
-- [ ] Revisit your initial project description. Did the project turn out as you wanted?
+- [x] Revisit your initial project description. Did the project turn out as you wanted?
 - [ ] Create an architectural diagram over your MLOps pipeline
 - [x] Make sure all group members have an understanding about all parts of the project
 - [x] Uploaded all your code to GitHub
@@ -653,6 +653,7 @@ We implemented a Streamlit frontend for our image segmentation service that allo
 >
 > Answer:
 
+
 The figure is here ![figures/mermaid-diagram-2025-01-24-232338.png](figures/mermaid-diagram-2025-01-24-232656.svg)
 
 
@@ -682,7 +683,7 @@ The course covers a lot of content with different tools, so it is easy to get th
 
 Lastly, we didn't get the results that we wanted from our model. The current model contais a bug with the transformation of the mask that classify all the pixels as 0 and thus the model only predicts zeros, we could not solve this problem due to time constraints as it required some research on how to avoid losing information by resizing the mask or the alternate solution would be not to resize at all but that would be too expensive in terms of cloud resources and we understood that the focus of the course was more on the tools and processes around the model and not the model itself, so we decided to focus on the other parts of the project. This of course affects the results of the model and the metrics that we can analyze.
 
- For instance, some of the issues regarding the model can be seen when deploying the api, were the prediction class for each pixel is the same, not allowing for proper image segmentation. (This issue lead, for example, to the not implentation of the data drifting)
+For instance, some of the issues regarding the model can be seen when deploying the api, were the prediction class for each pixel is the same, not allowing for proper image segmentation. (This issue lead, for example, to the not implentation of the data drifting)
 
 ### Question 31
 
@@ -700,4 +701,9 @@ Lastly, we didn't get the results that we wanted from our model. The current mod
 > *We have used ChatGPT to help debug our code. Additionally, we used GitHub Copilot to help write some of our code.*
 > Answer:
 
-The student s233483 was in charge of creating the cookiecuter project, create the dockerfiles and workflows related to the model training and deployment  and other tasks related to it, such as logging with W&B and the deployment of the model to Vertex AI.
+The student s233483 was in charge of creating the cookiecuter project, create the dockerfiles and workflows related to the model training and deployment and other tasks related to it, such as logging with W&B and the deployment of the model to Vertex AI.
+
+The student s232793 was in charge of the development of the API, as well the testing of it. Furthermore, setting up the hydra files, pep8 requirements and logging. Finally, creating the ML-deployment API using ONNX.
+
+The student s230354 was in charge of creating the tests regarding the data and the model, also the workflows for the code format and tests, setting up the continuous integration with Github Actions. Lastly, setting up some system metrics in the api and the alert system in Google Cloud for requests to the API.
+
