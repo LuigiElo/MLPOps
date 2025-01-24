@@ -39,5 +39,5 @@ misc:
 
 # Train on Vertex AI
 vertex_ai:  
-  use_mounted_fs: false
+  use_mounted_fs: true
   mounted_fs_path: "/gcs/mlopsbuckett/dvcstorage"

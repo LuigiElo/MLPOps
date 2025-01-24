@@ -183,7 +183,8 @@ Furthermore, we have divided the packages in several requirement files. The goal
 
 We tried to follow the structure inherited from the MLOps cookiecuter template, provided by this course.
 
-The project structure is designed to be modular and organized. It includes automated configurations in .github/ and key files such as pyproject.toml to manage dependencies. Data is separated into data/raw and data/processed, while trained models are stored in models/. The template suggests using a src/ folder as the source for the model, api, etc. Our code instead, is organized under the mlsopsbasic/, with specific modules such as predic_model.py, which also contains the api. This is complemented by tests in tests/. In addition, docs/ centralizes documentation, notebooks/ contains exploratory analysis, and Dockerfiles are included for reproducible environments.
+The project structure is designed to be modular and organized. It includes automated configurations in `.github/` and key files such as `pyproject.toml` to manage dependencies. Data is separated into data/raw and data/processed, while trained models are stored in `models/`. The template suggests using a `src/` folder as the source for the model, api, etc. Our code instead, is organized under the `mlsopsbasic/`, with specific modules such as `predict_model.py`, which also contains the api. This is complemented by tests in `tests/`. In addition, `docs/` centralizes documentation, `notebooks/`contains exploratory analysis, and Dockerfiles are included for reproducible environments.
+We deviated from the template by creating a few files and folders around the repository - for instance the folder `config/` in the source folder which contains configurations for Hydra and Vertex AI - but tried to keep the structure as close as possible to the template.
 
 ### Question 6
 
@@ -209,7 +210,7 @@ The hooks that we use are:
 - check-added-large-files: prevents large files from being added to the repository accidentally
 - check-toml: makes sure that TML file are properly formatted.
 
-These practices are crucial in larger projects, because they set the tone of high quality code. In a project with hundreds of files, it is important to be consistent. People have different styles of coding,but this makes it easy for new people to read the code and implement new code.
+These practices are crucial in larger projects, because they set the tone of high quality code. In a project with hundreds of files, it is important to be consistent. People have different styles of coding, but this makes it easy for new people to read the code and implement new code.
 
 ## Version control
 
@@ -251,7 +252,7 @@ The total coverage is 93%. We have a total of 136 statements. You can see the da
 
 If our code had 100% or close to it, we would still not fully trust. There are many different types of testing. We have not implemented tests on everything due to time limitation. There is a lot of integration testing that should be made to see if the different parts of the project are well connected and are reliable.
 
-So havinga coverage close to 100% wouldn't necessarily mean that the code is error free. Code coverage just measures how much of the code is executed during testing, but it doesn't guarantee that all the edge cases and potential error are covered.
+So having a coverage close to 100% wouldn't necessarily mean that the code is error free. Code coverage just measures how much of the code is executed during testing, but it doesn't guarantee that all the edge cases and potential error are covered.
 
 ### Question 9
 
@@ -277,7 +278,7 @@ So havinga coverage close to 100% wouldn't necessarily mean that the code is err
 >
 > Answer:
 
---- We did make use of DVC in our project. DVC was integrated to manage and version control our datasets, which significantly improved the handling of large data files. By using DVC, we were able to track changes in our data, ensuring that every team member worked with the correct version of the dataset at any given time. This helped maintain consistency throughout the project, especially when experiments required different data versions. Additionally, DVC allowed us to store large datasets remotely in cloud storage, which kept our Git repository clean and focused on code, while still making it easy to share and update data. Thought there was some issues in the implementation because google drive can not longer be used, in the end, DVC helped us streamline collaboration and maintain reproducibility across the entire project pipeline. It was also a crucial part of training the model in the cloud, since the data was stored in a bucket and could be accessed from the container. ---
+--- We did make use of DVC in our project. DVC was integrated to manage and version control our datasets, which significantly improved the handling of large data files. By using DVC, we were able to track changes in our data, ensuring that every team member worked with the correct version of the dataset at any given time. This helped maintain consistency throughout the project, especially when experiments required different data versions. Additionally, DVC allowed us to store large datasets remotely in cloud storage, which kept our Git repository clean and focused on code, while still making it easy to share and update data. Thought there was some issues in the implementation because google drive can not longer be used, in the end, DVC helped us streamline collaboration and maintain reproducibility across the entire project pipeline. It was also a crucial part of training the model in the cloud, since the data was stored in a bucket and could be accessed from the container, and so was the model which then was used for the API. ---
 
 ### Question 11
 
@@ -290,11 +291,17 @@ So havinga coverage close to 100% wouldn't necessarily mean that the code is err
 >
 > Answer:
 
-Yes, our continuous integration is divided in 2 workflows:
+Yes, our continuous integration is divided in 5 workflows:
 
 - one for linting and code quality. This file is called `codecheck.yaml`. It install, `ruff`, runs it to check if the code follows the correct rules, and lastly, it automatically formats the code that diverges from the rules.
 
 - one that runs all the 12 tests that we have created. It is called `tests.yaml`. It doesn't run all the tests that we have. It just runs the unittests for the model (`test_model.py`), and the tests concerning the data used (`tests_data.py`)
+
+- one for data changes in DVC, this one is called `dvc_workflow.yaml`. It checks if the data has changed, and if it has, it runs some static analysis on the data and post the results in the PR.
+
+- one is a triggered workflow that test the model for performance and if it is working as expected, deploys the model to GCP, ready to be used in the API. This is called `staged_model.yaml`.
+
+- one for training called `train_model.yaml`. This workflow deploys the model to Vertex AI and trains it in the cloud when pushed to the `train` branch, as we did not want to train every time we pushed to the main branch, as some changes are not related to the model.
 
 One example of how a successful triggered workflow looks in Github Actions is the following:
 [this figure](figures/workflow_example_q11.png)
@@ -336,7 +343,8 @@ TODO: Explain with coding examples of how you would run a experiment.
 >
 > Answer:
 > TODO:
-> We used config files and logging. Everything is tracked in Weights&Biases (W&B). Whenever an experiment would run, we would log it and save it in W&B to make sure that we can later reproduce the results of specific experiments.
+
+We used config files and logging. Everything is tracked in Weights&Biases (W&B). Whenever an experiment would run, we would log it and save it in W&B to make sure that we can later reproduce the results of specific experiments.
 
 By doing this, we were able to log all relevant details about each experiment, including hyperparameters, training and validation metrics, model configurations and system settings. We can see the logs in the dashboard in real time and compare results across multiple experiments. Lastly, we saved model checkpoints, to make sure that each experiment could be reproduced by reloading the recorded parameters and code.
 
@@ -351,8 +359,7 @@ By doing this, we were able to log all relevant details about each experiment, i
 >
 > Answer:
 
-[this figure](figures/wandb_q14.png)
-TODO: NOT SURE IF THIS IS CORRECT!!
+[This figure](figures/Wand.png) shows the loss and other metrics such as IoU and Dice Coefficient during training and validation. These metrics are important for evaluating the performance of the segmentation model. The loss curve indicates the convergence of the model during training, while the IoU and Dice Coefficient provide insights into the model's accuracy and segmentation quality. By tracking these metrics, we can monitor the model's progress, identify potential issues, and make informed decisions to improve the model's performance. Additionally, we used W&B to log hyperparameters, system metrics, ensuring that each experiment was well-documented and reproducible.
 
 ### Question 15
 
@@ -403,11 +410,10 @@ To ensure our code was performing properly, we conducted profiling runs on `trai
 1. **Bucket**: Google Cloud Storage (GCS) was used to store and manage our datasets.
 2. **Artifact Registry**: Google Artifact Registry was used to store and manage Docker images for deployment.
 3. **Cloud Build**: Google Cloud Build was used to automate the building and testing of our Docker images.
-4. **Compute Engine**: Google Compute Engine was used to run our training experiments and deploy our API.
-5. **Cloud Logging**: Google Cloud Logging was used to monitor and log application events and errors.
-6. **Vertex AI**: Google Vertex AI was used to train our model in the cloud, providing a managed ML platform for scalable and efficient model development.
-7. **Cloud Run**: Google Cloud Run was used to deploy our FastAPI application for serving predictions via an API endpoint.
-8. **Credentials**: Google Cloud IAM was used to manage access control and permissions for different team members and services. ---
+4. **Cloud Logging**: Google Cloud Logging was used to monitor and log application events and errors.
+5. **Vertex AI**: Google Vertex AI was used to train our model in the cloud, providing a managed ML platform for scalable and efficient model development.
+6. **Cloud Run**: Google Cloud Run was used to deploy our FastAPI application for serving predictions via an API endpoint.
+7. **Credentials**: Google Cloud IAM was used to manage access control and permissions for different team members and services. ---
 
 ### Question 18
 
@@ -420,10 +426,10 @@ To ensure our code was performing properly, we conducted profiling runs on `trai
 >
 > Answer:
 
-Instead of using the compute engine to run our training experiments and deploy our API, we used VertexAI.
-We could have used compute engine. It offers instances of CPUs to run the training experiments while having a good balance of performance and cost, so it would be useful to process large datasets and complex models.
+Instead of using the compute engine to run our training experiments and deploy our API, we used VertexAI as we found in the module that this was also an option.
+We could have used compute engine, specially to develop and quickly test the model taking advantage of the ssh connection to the VM as it offers instances of CPUs and GPUs which would have been quise useful during to run the training experiments while having a good balance of performance and cost, so it would be useful to process large datasets and complex models.
 
-Furthermore, we could have used it to deply our API. With Compute engine you can use e2 instances that come with vCPUs and 4GB of memory, which would be sufficient to handle all our API requests. It also has some networking features like load balancing and virtual private clouds that we could have taken advantage of to ensure that our service is always available and secure.
+Furthermore, we could have used it to deploy our API. With Compute engine you can use e2 instances that come with vCPUs and 4GB of memory, which would be sufficient to handle all our API requests. It also has some networking features like load balancing and virtual private clouds that we could have taken advantage of to ensure that our service is always available and secure.
 
 ### Question 19
 
@@ -463,6 +469,10 @@ Furthermore, we could have used it to deply our API. With Compute engine you can
 > Answer:
 
 --- question 22 fill here ---
+
+He is a picture of our runs in [Vertex AI.](figures/Vertex.png)
+
+We managed to train our model in the cloud using Vertex AI. We did this by pusing a docker image to the Artifact Registry and then creating a custom job in Vertex AI. The reason we choose Vertex AI was because it is a managed ML platform that provides a scalable and efficient environment for training machine learning models and allow for easily integrating the deployment of the model in a Github Actions workflow. Vertex AI also provides a variety of tools and services to streamline the machine learning workflow, including hyperparameter tuning, distributed training, and model monitoring.
 
 ## Deployment
 
@@ -600,19 +610,27 @@ We implemented a Streamlit frontend for our image segmentation service that allo
 
 ```mermaid
 graph TD
-    subgraph Training Pipeline
-        A[GitHub Repository] -->|Docker Container| B[Google Cloud Artifact Registry]
-        B -->|Training Outputs and Model| C[Weights & Biases]
+        I[Local machine] -->|PR to main triggers|J 
+        I --> |PR to main triggers| L
+    subgraph Github
+        J[Test workflow] -->|if Push to main|A[GitHub Repository: Main]
+        L[Linting workflow] -->|if Push to main|A
+        A --> |PR to train  triggers| Z[Workflow: Deploy Train Model] --> |deploys to| B
     end
-
+    subgraph Training Pipeline
+         B[Google Cloud Artifact Registry]
+        B --> K[Vetex AI: Train Model]
+        K -->|Training Outputs and Model| C[Weights & Biases]
+    end
         C -->|Trigger Webhook| D[GitHub Actions: Test Model Performance]
-        D -->|If Passes| E[Update W&B Registry: Production Tag]
+        D -->|If Passes| E[GitHub Actions: Push Model to GCP bucket]
 
     subgraph Deployment Pipeline
-        E -->|Trigger Webhook| F[GitHub Actions: Build FastAPI Image]
-        F -->|Build & Publish| G[Google Cloud Artifact Registry]
+        E --> F[GitHub Actions: Build FastAPI Image]
+        F -->|Publish| G[Google Cloud Artifact Registry]
         G -->|Deploy| H[Cloud Run: Prediction Service]
     end
+
 ```
 
 ### Question 30
@@ -630,7 +648,7 @@ We ran through different challenges in these project. At the beginning we focuse
 
 The course covers a lot of content with different tools, so it is easy to get things messy if you are not very organized from the beginning. It is a struggle to integrate various tools between a group. For example, we spend a lot of time fixing errors in the `requirements.txt` file, because different tools had problems with each other depending on the version. Furthermore, we used a lot of time on fixing the continuous integration (CI/CD) pipelines to ensure that all these components worked together. Sadly, not all of our workflows in Github Actions are running properly.
 
-Lastly, we didn't get the results that we wanted from our model. And due to time constrictions we were not able to fix this issue. This is a pity because a lot of metrics we can not analyze with the results that we have goten.
+Lastly, we didn't get the results that we wanted from our model. The current model contais a bug with the transformation of the mask that classify all the pixels as 0 and thus the model only predicts zeros, we could not solve this problem due to time constraints as it required some research on how to avoid losing information by resizing the mask or the alternate solution would be not to resize at all but that would be too expensive in terms of cloud resources and we understood that the focus of the course was more on the tools and processes around the model and not the model itself, so we decided to focus on the other parts of the project. This of course affects the results of the model and the metrics that we can analyze.
 
  For instance, some of the issues regarding the model can be seen when deploying the api, were the prediction class for each pixel is the same, not allowing for proper image segmentation. (This issue lead, for example, to the not implentation of the data drifting)
 
