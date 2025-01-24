@@ -518,7 +518,13 @@ For load testing, we used Locust to simulate multiple users sending requests to 
 >
 > Answer:
 
---- question 26 fill here ---
+We managed to implement monitoring. We measure some metrics in the API application by using `prometheus_client`. These metrics are `Counter` and `Histogram`.
+
+The `Counter`we use to calculate the number of prediction error and the number of prediction requests. The `Histogram` we use to calculate the prediction latency in seconds. All these metrics we store in a registry that we created to not cluttered the output and be able to analyze only the metrics that we are interested in.
+
+Furthermore, we have implemented an alert policy in Google cloud that sends an email to each member of the group when the number of requests to the endpoint is above a threshold.
+
+In [this image](figures/alert_email_q26.png), you can see an example of an email received when the alert policy is fired.
 
 ## Overall discussion of project
 
@@ -535,7 +541,12 @@ For load testing, we used Locust to simulate multiple users sending requests to 
 >
 > Answer:
 
---- question 27 fill here ---
+We spent 7.94kr of credits. This was the cost of each service:
+
+- Cloud Run: 0.13kr
+- Cloud storage 2.20kr
+- VertexAI: 4.34kr
+- Artifact Registry: 1.27kr
 
 ### Question 28
 
@@ -548,7 +559,7 @@ For load testing, we used Locust to simulate multiple users sending requests to 
 >
 > Answer:
 
---- question 28 fill here ---
+We implemented a Streamlit frontend for our image segmentation service that allows users to upload images and receive segmentation results. The frontend communicates with a Google Cloud Run backend API at "https://gcp-api-464642206755.europe-west1.run.app", handling image upload, sending requests, and displaying both the original and segmented images with error handling.
 
 ### Question 29
 
