@@ -2,8 +2,10 @@ import pytest
 from pathlib import Path
 import cv2
 import numpy as np
-from mlsopsbasic.config import DATA_DIR
+import subprocess
+#from mlsopsbasic.config import DATA_DIR
 
+DATA_DIR = "data/raw"
 class FootballDataset:
     def __init__(self, root_dir: str):
         self.root_dir = Path(root_dir)
@@ -49,6 +51,9 @@ class FootballDataset:
 
         return image, mask
 
+@pytest.fixture(scope="session", autouse=True)
+def pull_data():
+    subprocess.run(["dvc", "pull"], check=True)
 
 @pytest.fixture
 def dataset():
