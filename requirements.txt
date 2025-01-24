@@ -16,3 +16,5 @@ locust
 pytest >= 7.4.3
 
 typer
+
+google-cloud-run

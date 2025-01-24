@@ -59,3 +59,17 @@ jobs:
         - name: Add production alias
           run: |
             python utils/link_model.py $MODEL_NAME -a production
+
+        - name: Check folder models
+          run: ls models
+        
+        - name: Authenticate with GCP
+          uses: google-github-actions/auth@v2
+          with:
+              credentials_json: ${{ secrets.GOOGLE_CLOUD_SERVICE_KEY }}
+
+        - name: Upload model
+          uses: 'google-github-actions/upload-cloud-storage@v2'
+          with:
+            path: 'models/football_segmentation_model.pth'
+            destination: 'segmentation-model-football'
