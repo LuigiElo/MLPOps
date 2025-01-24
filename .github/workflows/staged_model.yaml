@@ -73,3 +73,7 @@ jobs:
           with:
             path: '/models/football_segmentation_model.pth'
             destination: 'segmentation-model-football'
+
+        - name: Deploy API 
+          run: |
+            gcloud builds submit --config=cloudbuild_api.yaml
