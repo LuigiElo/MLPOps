@@ -1,17 +1,8 @@
-import sys
 import os
 from fastapi.testclient import TestClient
+from fastapi import FastAPI
 
-# Add the parent directory of mlsopsbasic to the Python path
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
-print(f"Adding {parent_dir} to PYTHONPATH")
-sys.path.append(parent_dir)
-
-print("Current PYTHONPATH:")
-for path in sys.path:
-    print(path)
-
-from mlsopsbasic.predict_model import app
+app = FastAPI()
 
 client = TestClient(app)
 
