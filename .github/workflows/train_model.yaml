@@ -29,6 +29,10 @@ jobs:
               with:
                   credentials_json: ${{ secrets.GOOGLE_CLOUD_SERVICE_KEY }}
             
-            - name: Run gcloud builds submit
+            - name: Deploy image to Google Artifact Registry 
               run: |
                   gcloud builds submit --config=cloudbuild.yaml 
+            
+            - name: Train on Vertex AI
+              run: |
+                gcloud builds submit . --config=mlsopsbasic/config/vertex_ai/vertex_ai.yaml
