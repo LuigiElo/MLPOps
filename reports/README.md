@@ -418,7 +418,10 @@ In our project, we used Docker to containerize different stages of the workflow 
 >
 > Answer:
 
---- question 18 fill here ---
+Instead of using the compute engine to run our training experiments and deploy our API, we used VertexAI.
+We could have used compute engine. It offers instances of CPUs to run the training experiments while having a good balance of performance and cost, so it would be useful to process large datasets and complex models.
+
+Furthermore, we could have used it to deply our API. With Compute engine you can use e2 instances that come with vCPUs and 4GB of memory, which would be sufficient to handle all our API requests. It also has some networking features like load balancing and virtual private clouds that we could have taken advantage of to ensure that our service is always available and secure.
 
 ### Question 19
 
