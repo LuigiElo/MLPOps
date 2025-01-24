@@ -663,4 +663,4 @@ Lastly, we didn't get the results that we wanted from our model. The current mod
 >
 > Answer:
 
---- question 31 fill here ---
+The student s233483 was in charge of creating the cookiecuter project, create the dockerfiles and workflows related to the model training and deployment  and other tasks related to it, such as logging with W&B and the deployment of the model to Vertex AI.
