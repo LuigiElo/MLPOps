@@ -410,7 +410,7 @@ In our project, we used Docker to containerize different stages of the workflow 
 >
 > Answer:
 
---- question 19 fill here ---
+[This figure](figures/gcp_bucket_q19.png) shows the bucket with our data, which is divided in `processed` and `raw`. Inside of `processed`, it is divided in `test`, `train` and `val`.
 
 ### Question 20
 
@@ -418,7 +418,9 @@ In our project, we used Docker to containerize different stages of the workflow 
 >
 > Answer:
 
---- question 20 fill here ---
+[This figure](figures/gcp_artifact_registry_q20.png) shows the overview of the docker images that we have stored in Google Cloud.
+
+[This figure](figures/gcp_artifact_registry_2_q20.png) displays, in more detailed, one of the containers inside of the `container-train-registry`>`api`.
 
 ### Question 21
 
@@ -426,7 +428,7 @@ In our project, we used Docker to containerize different stages of the workflow 
 >
 > Answer:
 
---- question 21 fill here ---
+[This image](figures/gcp_build_history_q21.png) shows all the history builds, as well as the time that it took each one of them, and if they failed or succeeded.
 
 ### Question 22
 
