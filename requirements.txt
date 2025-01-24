@@ -5,9 +5,16 @@ torch==2.4.0
 torchvision
 hydra-core
 
+omegaconf
+
 loguru==0.7.3
 wandb==0.19.1
+
+httpx
+locust
 
 pytest >= 7.4.3
 
 typer
+
+google-cloud-run
